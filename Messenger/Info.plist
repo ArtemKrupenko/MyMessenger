@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>Russia</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -65,6 +65,8 @@
 	<string>Пожалуйста, разрешите доступ, чтобы выбрать изображение профиля</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Пожалуйста, разрешите доступ к отправке аудио- и видеосообщений</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Пожалуйста, разрешите доступ к вашему местоположению </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -84,8 +86,8 @@
 			</array>
 		</dict>
 	</dict>
-    <key>UIApplicationSupportsIndirectInputEvents</key>
-    <true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

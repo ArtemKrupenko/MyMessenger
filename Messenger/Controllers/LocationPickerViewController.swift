@@ -38,11 +38,21 @@ final class LocationPickerViewController: UIViewController {
                                                                 style: .done,
                                                                 target: self,
                                                                 action: #selector(sendButtonTapped))
+            print("1")
             mapView.isUserInteractionEnabled = true
             let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapMap(_:)))
             gesture.numberOfTouchesRequired = 1
             gesture.numberOfTapsRequired = 1
             mapView.addGestureRecognizer(gesture)
+            print("2")
+            LocationManager.shared.getUserLocation { [weak self] location in
+                DispatchQueue.main.async {
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.7, longitudeDelta: 0.7)), animated: true)
+                }
+            }
         }
         else {
             // показываем местоположение
@@ -51,12 +61,15 @@ final class LocationPickerViewController: UIViewController {
             }
             let viewRegion = MKCoordinateRegion(center: coordinates, latitudinalMeters: 500, longitudinalMeters: 500)
             mapView.setRegion(viewRegion, animated: false)
+            print("3")
             // ставим метку в указанном местоположении
             let pin = MKPointAnnotation()
             pin.coordinate = coordinates
             mapView.addAnnotation(pin)
+            print("4")
         }
         view.addSubview(mapView)
+        print("5")
     }
     
     @objc func sendButtonTapped() {
@@ -65,6 +78,7 @@ final class LocationPickerViewController: UIViewController {
         }
         navigationController?.popViewController(animated: true)
         completion?(coordinates)
+        print("6")
     }
     
     @objc func didTapMap(_ gesture: UITapGestureRecognizer) {
@@ -74,10 +88,12 @@ final class LocationPickerViewController: UIViewController {
         for annotation in mapView.annotations {
             mapView.removeAnnotation(annotation)
         }
+        print("7")
         // ставим метку в указанном местоположении
         let pin = MKPointAnnotation()
         pin.coordinate = coordinates
         mapView.addAnnotation(pin)
+        print("8")
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,4 +102,37 @@ final class LocationPickerViewController: UIViewController {
     }
 }
 
+class LocationManager: NSObject, CLLocationManagerDelegate {
 
+    static let shared = LocationManager()
+    let manager = CLLocationManager()
+    public var completion: ((CLLocation) -> Void)?
+
+    public func getUserLocation(completion: @escaping ((CLLocation) -> Void)) {
+        self.completion = completion
+        manager.requestWhenInUseAuthorization()
+        manager.delegate = self
+        manager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+        completion?(location)
+        manager.stopUpdatingLocation()
+    }
+}
+
+
+//LocationManager.shared.getUserLocation { [weak self] location in
+//    DispatchQueue.main.async {
+//        guard let strongSelf = self else {
+//            return
+//        }
+//        let pin = MKPointAnnotation()
+//        pin.coordinate = location.coordinate
+//        strongSelf.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.7, longitudeDelta: 0.7)), animated: true)
+//        strongSelf.mapView.addAnnotation(pin)
+//    }
+//}

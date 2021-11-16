@@ -294,13 +294,12 @@ extension DatabaseManager {
                     kind = .photo(media)
                 }
                 else if type == "video" {
-                    guard let videoUrl = URL(string: content),
-                          let placeholder = UIImage(systemName: "plus") else {
+                    guard let videoUrl = URL(string: content) else {
                         return nil
                     }
                     let media = Media(url: videoUrl,
                                       image: nil,
-                                      placeholderImage: placeholder,
+                                      placeholderImage: UIImage(),
                                       size: CGSize(width: 300, height: 300))
                     // TODO: - заменить placeholder с "plus" на нормальное отображение видео
                     kind = .video(media)

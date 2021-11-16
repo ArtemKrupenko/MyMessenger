@@ -80,11 +80,8 @@ final class ChatViewController: MessagesViewController {
     
     private func presentInputActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Фото", style: .default, handler: { [weak self] _ in
-            self?.presentPhotoInputActionSheet()
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Видео", style: .default, handler: { [weak self] _ in
-            self?.presentVideoInputActionSheet()
+        actionSheet.addAction(UIAlertAction(title: "Фото или видео", style: .default, handler: { [weak self] _ in
+            self?.presentPhotoVideoInputActionSheet()
         }))
         actionSheet.addAction(UIAlertAction(title: "Местоположение", style: .default, handler: { [weak self]  _ in
             self?.presentLocationPicker()
@@ -127,7 +124,7 @@ final class ChatViewController: MessagesViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func presentPhotoInputActionSheet() {
+    private func presentPhotoVideoInputActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] _ in
             self?.presentCamera()
@@ -139,22 +136,14 @@ final class ChatViewController: MessagesViewController {
             picker.allowsEditing = true
             self?.present(picker, animated: true)
         }))
-        actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        present(actionSheet, animated: true)
-    }
-    
-    private func presentVideoInputActionSheet() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] _ in
-            self?.presentCamera()
-        }))
         actionSheet.addAction(UIAlertAction(title: "Видео", style: .default, handler: { [weak self] _ in
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
             picker.delegate = self
             picker.allowsEditing = true
             picker.mediaTypes = ["public.movie"]
-            picker.videoQuality = .typeMedium
+            picker.videoExportPreset = AVAssetExportPresetHEVCHighestQuality
+//            picker.videoQuality = .typeMedium
             self?.present(picker, animated: true)
         }))
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -165,6 +154,8 @@ final class ChatViewController: MessagesViewController {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let picker = UIImagePickerController()
             picker.sourceType = .camera
+            picker.mediaTypes = ["public.image", "public.movie"]
+            picker.videoQuality = .typeMedium
             picker.delegate = self
             picker.allowsEditing = true
             present(picker, animated: true)
@@ -257,13 +248,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 switch result {
                 case let .success(urlString):
                     // Отправка видеосообщения
-                    guard let url = URL(string: urlString),
-                          let placeholder = UIImage(systemName: "plus") else {   // TODO: - изменить placeholder на отображение видео
+                    guard let url = URL(string: urlString) else {   // TODO: - изменить placeholder на отображение видео
                         return
                     }
                     let media = Media(url: url,
                                       image: nil,
-                                      placeholderImage: placeholder,
+                                      placeholderImage: UIImage(),
                                       size: .zero)
                     let message = Message(sender: selfSender,
                                           messageId: messageId,
@@ -347,6 +337,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
     
+    /// Тип отправителя новых сообщений в MessagesCollectionView (необходимая функция)
     func currentSender() -> SenderType {
         if let sender = selfSender {
             return sender
@@ -354,14 +345,17 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         fatalError("Если Sender равен nil, письмо должно быть кэшировано")
     }
     
+    /// Сообщение, которое будет использоваться для MessageCollectionViewCell  (необходимая функция)
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
     
+    /// Количество секций, которые будут отображаться в MessagesCollectionView (необходимая функция)
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
     
+    /// Используется для настройки UIImageView ячейки MediaMessageCell
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         guard let message = message as? Message else {
             return
@@ -394,7 +388,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                 avatarView.sd_setImage(with: currentUserImageURL, completed: nil)
             }
             else {
-                // images/safeEmail_profile_picture.png
                 guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
                     return
                 }
