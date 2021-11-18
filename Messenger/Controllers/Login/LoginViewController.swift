@@ -13,7 +13,11 @@ import JGProgressHUD
 
 final class LoginViewController: UIViewController {
     
-    private let spinner = JGProgressHUD(style: .dark)
+    private let spinner: JGProgressHUD = {
+        let spinner = JGProgressHUD(style: .dark)
+        spinner.interactionType = .blockAllTouches
+        return spinner
+    }()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -75,6 +79,7 @@ final class LoginViewController: UIViewController {
         button.permissions = ["email", "public_profile"]
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
+        button.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -111,8 +116,9 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
-        scrollView.addSubview(loginButtonFacebook)
-        scrollView.addSubview(googleLogInButton)
+        // Временно скрыл кнопки авторизации через Facebook и Google (имеются недоработки)
+//        scrollView.addSubview(loginButtonFacebook)
+//        scrollView.addSubview(googleLogInButton)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
     }
