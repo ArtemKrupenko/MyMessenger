@@ -102,7 +102,6 @@ final class LoginViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(didTabRegister))
         navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "ColorLogo")
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         emailField.delegate = self
         passwordField.delegate = self
         loginButtonFacebook.delegate = self
@@ -114,6 +113,7 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(loginButton)
         scrollView.addSubview(loginButtonFacebook)
         scrollView.addSubview(googleLogInButton)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
     }
     

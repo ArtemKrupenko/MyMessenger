@@ -25,34 +25,19 @@
             </objects>
             <point key="canvasLocation" x="96" y="756"/>
         </scene>
-        <!--Настройки-->
+        <!--Profile View Controller-->
         <scene sceneID="Uld-4k-vaP">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lyn-3X-PW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="vgG-vx-sQ9" customClass="ProfileViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tw6-vf-Te5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oNq-I6-5lI">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="U4Y-ze-l8K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="U4Y-ze-l8K" firstAttribute="trailing" secondItem="oNq-I6-5lI" secondAttribute="trailing" id="TxZ-vf-e6o"/>
-                            <constraint firstItem="oNq-I6-5lI" firstAttribute="top" secondItem="U4Y-ze-l8K" secondAttribute="top" id="UKL-SG-A2H"/>
-                            <constraint firstItem="oNq-I6-5lI" firstAttribute="leading" secondItem="U4Y-ze-l8K" secondAttribute="leading" id="WUz-gf-dhy"/>
-                            <constraint firstItem="U4Y-ze-l8K" firstAttribute="bottom" secondItem="oNq-I6-5lI" secondAttribute="bottom" id="Xav-8c-pUL"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Настройки" id="ZGX-bY-ZHj"/>
-                    <connections>
-                        <outlet property="tableView" destination="oNq-I6-5lI" id="WYF-LJ-Dlb"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="ZGX-bY-ZHj"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lyn-3X-PW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1080" y="755"/>
         </scene>

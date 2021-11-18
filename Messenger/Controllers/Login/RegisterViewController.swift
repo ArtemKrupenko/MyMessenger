@@ -106,8 +106,7 @@ final class RegisterViewController: UIViewController {
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         emailField.delegate = self
         passwordField.delegate = self
-        
-        // Добавление subviews
+        // добавление subviews
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(firstNameField)
@@ -199,20 +198,36 @@ final class RegisterViewController: UIViewController {
                                            emailAddress: email)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                     if success {
-                        // Загрузка изображения
-                        guard let image = strongSelf.imageView.image, let data = image.pngData() else {
-                            return
-                        }
-                        let filename = chatUser.profilePictureFileName
-                        StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
-                            switch result {
-                            case let .success(downloadUrl):
-                                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
-                                print(downloadUrl)
-                            case let .failure(error):
-                                print("Ошибка StorageManager: \(error)")
+                        if self?.imageView.image != UIImage(systemName: "person.crop.circle.badge.plus") {
+                            guard let image = strongSelf.imageView.image, let data = image.pngData() else {
+                                return
                             }
-                        })
+                            let filename = chatUser.profilePictureFileName
+                            StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
+                                switch result {
+                                case let .success(downloadUrl):
+                                    UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                    print(downloadUrl)
+                                case let .failure(error):
+                                    print("Ошибка StorageManager: \(error)")
+                                }
+                            })
+                        }
+                        else {
+                            guard let image = UIImage(named: "profile_picture"), let data = image.pngData() else {
+                                return
+                            }
+                            let filename = chatUser.profilePictureFileName
+                            StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
+                                switch result {
+                                case let .success(downloadUrl):
+                                    UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                    print(downloadUrl)
+                                case let .failure(error):
+                                    print("Ошибка StorageManager: \(error)")
+                                }
+                            })
+                        }
                     }
                 })
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
@@ -295,6 +310,9 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         self.imageView.image = selectedImage
+        self.imageView.layer.masksToBounds = true
+        self.imageView.layer.borderWidth = 2
+        self.imageView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

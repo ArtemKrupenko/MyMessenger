@@ -83,7 +83,7 @@ final class ChatViewController: MessagesViewController {
         actionSheet.addAction(UIAlertAction(title: "Фото или видео", style: .default, handler: { [weak self] _ in
             self?.presentPhotoVideoInputActionSheet()
         }))
-        actionSheet.addAction(UIAlertAction(title: "Местоположение", style: .default, handler: { [weak self]  _ in
+        actionSheet.addAction(UIAlertAction(title: "Местоположение", style: .default, handler: { [weak self] _ in
             self?.presentLocationPicker()
         }))
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -432,7 +432,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
     }
 }
-
 
 extension ChatViewController: MessageCellDelegate {
     

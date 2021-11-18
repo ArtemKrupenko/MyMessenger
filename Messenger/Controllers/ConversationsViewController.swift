@@ -94,7 +94,6 @@ final class ConversationsViewController: UIViewController {
             }) {
                 let viewController = ChatViewController(with: targetConversation.otherUserEmail, id: targetConversation.id)
                 viewController.isNewConversation = false
-                print("4")
                 viewController.title = targetConversation.name
                 viewController.navigationItem.largeTitleDisplayMode = .never
                 strongSelf.navigationController?.pushViewController(viewController, animated: true)
@@ -121,14 +120,12 @@ final class ConversationsViewController: UIViewController {
             case let .success(conversationId):
                 let viewController = ChatViewController(with: email, id: conversationId)
                 viewController.isNewConversation = false
-                print("1")
                 viewController.title = name
                 viewController.navigationItem.largeTitleDisplayMode = .never
                 strongSelf.navigationController?.pushViewController(viewController, animated: true)
             case .failure(_):
                 let viewController = ChatViewController(with: email, id: nil)
                 viewController.isNewConversation = true
-                print("2")
                 viewController.title = name
                 viewController.navigationItem.largeTitleDisplayMode = .never
                 strongSelf.navigationController?.pushViewController(viewController, animated: true)
@@ -140,9 +137,9 @@ final class ConversationsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
         noConversationsLabel.frame = CGRect(x: 10,
-                                                y: (view.height-100)/2,
-                                                width: view.width-20,
-                                                height: 100)
+                                            y: (view.height-100)/2,
+                                            width: view.width-20,
+                                            height: 100)
     }
     
     override func viewDidAppear(_ animated: Bool) {
