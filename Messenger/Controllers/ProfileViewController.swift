@@ -12,14 +12,14 @@ import GoogleSignIn
 import SDWebImage
 
 final class ProfileViewController: UIViewController {
-    
+
     @IBOutlet var tableView: UITableView! = UITableView(frame: .zero, style: .insetGrouped)
-    
+
     private var headerView: UIView = {
         let headerView = UIView()
         return headerView
     }()
-    
+
     private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -29,7 +29,7 @@ final class ProfileViewController: UIViewController {
         imageView.layer.borderWidth = 2
         return imageView
     }()
-    
+
     private var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
@@ -37,7 +37,7 @@ final class ProfileViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     private var userEmailLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .thin)
@@ -45,7 +45,7 @@ final class ProfileViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     var data = [Section]()
 
     override func viewDidLoad() {
@@ -85,24 +85,24 @@ final class ProfileViewController: UIViewController {
                                      width: tableView.width,
                                      height: 20)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // удаление NavigationBar
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
+
     public func settingsSections() {
         data.append(Section(title: "", options: [
             ProfileViewModel(viewModelType: .info, title: "Учетная запись", icon: UIImage(systemName: "key.fill"), iconBackgroundColor: .systemBlue, handler: nil),
             ProfileViewModel(viewModelType: .info, title: "Избранное", icon: UIImage(systemName: "star.fill"), iconBackgroundColor: .systemPink, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Чаты", icon: UIImage(systemName: "ellipsis.bubble.fill"), iconBackgroundColor: .systemTeal, handler: nil),
+            ProfileViewModel(viewModelType: .info, title: "Чаты", icon: UIImage(systemName: "ellipsis.bubble.fill"), iconBackgroundColor: .systemTeal, handler: nil)
         ]))
         data.append(Section(title: "", options: [
             ProfileViewModel(viewModelType: .info, title: "Уведомления и звуки", icon: UIImage(systemName: "bell.badge.fill"), iconBackgroundColor: .systemRed, handler: nil),
             ProfileViewModel(viewModelType: .info, title: "Данные и память", icon: UIImage(systemName: "folder.fill"), iconBackgroundColor: .systemGreen, handler: nil),
             ProfileViewModel(viewModelType: .info, title: "Оформление", icon: UIImage(systemName: "paintpalette.fill"), iconBackgroundColor: .systemIndigo, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Стикеры", icon: UIImage(systemName: "face.smiling.fill"), iconBackgroundColor: .systemYellow, handler: nil),
+            ProfileViewModel(viewModelType: .info, title: "Стикеры", icon: UIImage(systemName: "face.smiling.fill"), iconBackgroundColor: .systemYellow, handler: nil)
         ]))
         data.append(Section(title: "", options: [
             ProfileViewModel(viewModelType: .info, title: "Помощь", icon: UIImage(systemName: "questionmark.circle.fill"), iconBackgroundColor: .systemOrange, handler: nil),
@@ -112,7 +112,7 @@ final class ProfileViewController: UIViewController {
             ProfileViewModel(viewModelType: .logout, title: "Выход из учетной записи", icon: nil, iconBackgroundColor: .clear, handler: logout)
         ]))
     }
-    
+
     public func createTableHeader() -> UIView? {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return nil
@@ -130,7 +130,7 @@ final class ProfileViewController: UIViewController {
         })
         return headerView
     }
-    
+
     public func logout() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Выход из учетной записи", style: .destructive, handler: { [weak self] _ in
@@ -149,8 +149,7 @@ final class ProfileViewController: UIViewController {
                 let navigationController = UINavigationController(rootViewController: viewController)
                 navigationController.modalPresentationStyle = .fullScreen
                 strongSelf.present(navigationController, animated: true)
-            }
-            catch {
+            } catch {
                 print("Не удалось выйти из системы")
             }
         }))
@@ -160,20 +159,20 @@ final class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = data[section]
         return section.title
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data[section].options.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = data[indexPath.section].options[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as? ProfileTableViewCell else {
@@ -182,7 +181,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: viewModel)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let viewModel = data[indexPath.section].options[indexPath.row]
@@ -193,14 +192,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 class ProfileTableViewCell: UITableViewCell {
 
     static let identifier = "ProfileTableViewCell"
-    
+
     private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
         label.textAlignment = .natural
         return label
     }()
-    
+
     private let iconContainer: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -208,14 +207,14 @@ class ProfileTableViewCell: UITableViewCell {
         view.layer.masksToBounds = true
         return view
     }()
-    
+
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
@@ -224,11 +223,11 @@ class ProfileTableViewCell: UITableViewCell {
         contentView.clipsToBounds = true
         accessoryType = .disclosureIndicator
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
     // уточнить зачем нужна функция ниже
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -236,7 +235,7 @@ class ProfileTableViewCell: UITableViewCell {
         iconContainer.backgroundColor = nil
         iconImageView.image = nil
     }
-    
+
     public func configure(with model: ProfileViewModel) {
         switch model.viewModelType {
         case .info:

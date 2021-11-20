@@ -12,12 +12,12 @@ import CoreLocation
 
 /// Объект менеджера для чтения и записи данных в базу данных firebase в реальном времени
 final class DatabaseManager {
-    
+
     /// Общий экземпляр класса DatabaseManager
     public static let shared = DatabaseManager()
-    
+
     private let database: DatabaseReference! = Database.database().reference()
-        
+
     static func safeEmail(emailAddress: String) -> String {
         let safeEmail = emailAddress.makeFirebaseString()
         return safeEmail
@@ -25,7 +25,7 @@ final class DatabaseManager {
 }
 
 extension DatabaseManager {
-    
+
     /// Возвращает адрес словаря в дочернем пути
     public func getDataFor(path: String, completion: @escaping (Result<Any, Error>) -> Void) {
         database.child(path.makeFirebaseString()).observeSingleEvent(of: .value) { snapshot in
@@ -41,7 +41,7 @@ extension DatabaseManager {
 // MARK: - Управление учетными записями
 
 extension DatabaseManager {
-    
+
     /// Проверяет, существует ли пользователь для данного email
     public func userExists(with email: String, completion: @escaping ((Bool) -> Void)) {
         database.child(email.makeFirebaseString()).observeSingleEvent(of: .value, with: { snapshot in
@@ -53,7 +53,7 @@ extension DatabaseManager {
             completion(true)
         })
     }
-    
+
     /// Добавление нового пользователя в базу данных 
     public func insertUser(with user: ChatAppUser, completion: @escaping (Bool) -> Void) {
         database.child(user.safeEmail.makeFirebaseString()).setValue(["first_name": user.firstName, "last_name": user.lastName], withCompletionBlock: { [weak self] error, _ in
@@ -78,8 +78,7 @@ extension DatabaseManager {
                         }
                         completion(true)
                     })
-                }
-                else {
+                } else {
                     // Создание этого массива
                     let newCollection: [[String: String]] = [["name": user.firstName + " " + user.lastName,
                                                               "email": user.safeEmail]]
@@ -94,7 +93,7 @@ extension DatabaseManager {
             })
         })
     }
-    
+
     /// Получает всех пользователей из базы данных
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         database.child("users").observeSingleEvent(of: .value, with: { snapshot in
@@ -105,7 +104,7 @@ extension DatabaseManager {
             completion(.success(value))
         })
     }
-    
+
     public enum DatabaseError: Error {
         case failedToFetch
         public var localizedDescription: String {
@@ -120,7 +119,7 @@ extension DatabaseManager {
 // MARK: - Отправка сообщений / диалогов
 
 extension DatabaseManager {
-    
+
     /// Создает новую беседу с электронной почтой выбранного пользователя и первым отправленным сообщением
     public func createNewConversation(with otherUserEmail: String, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
         guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String,
@@ -140,7 +139,7 @@ extension DatabaseManager {
             switch firstMessage.kind {
             case let .text(messageText):
                 message = messageText
-            case .attributedText(_), .photo(_), .video(_), .location(_), .emoji(_), .audio(_), .contact(_), .linkPreview(_), .custom(_):
+            case .attributedText, .photo, .video, .location, .emoji, .audio, .contact, .linkPreview, .custom:
                 break
             }
             let conversationId = "conversation_\(firstMessage.messageId)"
@@ -163,8 +162,7 @@ extension DatabaseManager {
                     // Добавление
                     conversations.append(recipientNewConversationData)
                     self?.database.child("\(otherUserEmail)/conversations").setValue(conversations)
-                }
-                else {
+                } else {
                     // Создание
                     self?.database.child("\(otherUserEmail)/conversations").setValue([recipientNewConversationData])
                 }
@@ -184,8 +182,7 @@ extension DatabaseManager {
                                                      firstMessage: firstMessage,
                                                      completion: completion)
                 })
-            }
-            else {
+            } else {
                 // Массив диалога НЕ существует
                 userNode["conversations"] = [newConversationData]
                 ref.setValue(userNode, withCompletionBlock: { [weak self] error, _ in
@@ -201,7 +198,7 @@ extension DatabaseManager {
             }
         })
     }
-    
+
     private func finishCreatingConversation(name: String, conversationId: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
         let messageDate = firstMessage.sentDate
         let dateString = ChatViewController.dateFormatter.string(from: messageDate).makeFirebaseString()
@@ -209,7 +206,7 @@ extension DatabaseManager {
         switch firstMessage.kind {
         case let .text(messageText):
             message = messageText
-        case .attributedText(_), .photo(_), .video(_), .location(_), .emoji(_), .audio(_), .contact(_), .linkPreview(_), .custom(_):
+        case .attributedText, .photo, .video, .location, .emoji, .audio, .contact, .linkPreview, .custom:
             break
         }
         guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -233,7 +230,7 @@ extension DatabaseManager {
             completion(true)
         })
     }
-    
+
     /// Извлекает и возвращает все диалоги для пользователя с переданным электронным адресом
     public func getAllConversations(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
         database.child("\(email)/conversations").observe(.value, with: { snapshot in // здесь точно observe
@@ -262,7 +259,7 @@ extension DatabaseManager {
             completion(.success(conversations))
         })
     }
-    
+
     /// Получить все сообщения для данного диалога
     public func getAllMessagesForConversation(with id: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         database.child("\(id.makeFirebaseString())/messages").observe(.value, with: { snapshot in // здесь точно observe
@@ -292,8 +289,7 @@ extension DatabaseManager {
                                       placeholderImage: placeholder,
                                       size: CGSize(width: 300, height: 300))
                     kind = .photo(media)
-                }
-                else if type == "video" {
+                } else if type == "video" {
                     guard let videoUrl = URL(string: content) else {
                         return nil
                     }
@@ -301,10 +297,9 @@ extension DatabaseManager {
                                       image: nil,
                                       placeholderImage: UIImage(),
                                       size: CGSize(width: 300, height: 300))
-                    // TODO: - заменить placeholder с "plus" на нормальное отображение видео
+                    // - TODO: заменить placeholder с "plus" на нормальное отображение видео
                     kind = .video(media)
-                }
-                else if type == "location" {
+                } else if type == "location" {
                     let locationComponents = content.components(separatedBy: ",")
                     guard let longitude = Double(locationComponents[0]),
                         let latitude = Double(locationComponents[1]) else {
@@ -314,8 +309,7 @@ extension DatabaseManager {
                     let location = Location(location: CLLocation(latitude: latitude, longitude: longitude),
                                             size: CGSize(width: 300, height: 300))
                     kind = .location(location)
-                }
-                else {
+                } else {
                     kind = .text(content)
                 }
                 guard let finalKind = kind else {
@@ -332,7 +326,7 @@ extension DatabaseManager {
             completion(.success(messages))
         })
     }
-    
+
     /// Отправка сообщения с конкретным диалогом и сообщением
     public func sendMessage(to conversation: String, otherUserEmail: String, name: String, newMessage: Message, completion: @escaping (Bool) -> Void) {
         // Добавление нового сообщения в диалоги
@@ -364,7 +358,7 @@ extension DatabaseManager {
             case let .location(locationData):
                 let location = locationData.location
                 message = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
-            case .attributedText(_), .emoji(_), .audio(_), .contact(_), .linkPreview(_), .custom(_):
+            case .attributedText, .emoji, .audio, .contact, .linkPreview, .custom:
                 message = ""
             }
             guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -402,8 +396,7 @@ extension DatabaseManager {
                             targetConversation["latest_message"] = updatedValue
                             currentUserConversations[position] = targetConversation
                             databaseEntryConversations = currentUserConversations
-                        }
-                        else {
+                        } else {
                             let newConversationData: [String: Any] = [
                                  "id": conversation,
                                  "other_user_email": DatabaseManager.safeEmail(emailAddress: otherUserEmail),
@@ -413,8 +406,7 @@ extension DatabaseManager {
                             currentUserConversations.append(newConversationData)
                             databaseEntryConversations = currentUserConversations
                         }
-                    }
-                    else {
+                    } else {
                         let newConversationData: [String: Any] = [
                              "id": conversation,
                              "other_user_email": DatabaseManager.safeEmail(emailAddress: otherUserEmail),
@@ -445,12 +437,11 @@ extension DatabaseManager {
                                     }
                                     position += 1
                                 }
-                                if var targetConversation = targetConversation{
+                                if var targetConversation = targetConversation {
                                     targetConversation["latest_message"] = updatedValue
                                     otherUserConversations[position] = targetConversation
                                     databaseEntryConversations = otherUserConversations
-                                }
-                                else {
+                                } else {
                                     // Не удалось найти в текущей коллекции
                                     let newConversationData: [String: Any] = [
                                          "id": conversation,
@@ -461,8 +452,7 @@ extension DatabaseManager {
                                     otherUserConversations.append(newConversationData)
                                     databaseEntryConversations = otherUserConversations
                                 }
-                            }
-                            else {
+                            } else {
                                 // Текущая коллекция не существует
                                 let newConversationData: [String: Any] = [
                                      "id": conversation,
@@ -485,7 +475,7 @@ extension DatabaseManager {
             }
         })
     }
-    
+
     /// Удаление диалога
     public func deleteConversation(conversationId: String, completion: @escaping (Bool) -> Void) {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -520,7 +510,7 @@ extension DatabaseManager {
             }
         }
     }
-    
+
     /// Появление (обновление) диалога после первого созданного сообщения
     public func conversationExists(with targetRecipientEmail: String, completion: @escaping (Result<String, Error>) -> Void) {
         let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)

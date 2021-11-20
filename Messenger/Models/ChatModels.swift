@@ -37,25 +37,25 @@ struct Location: LocationItem {
 extension MessageKind {
     var messageKindString: String {
         switch self {
-        case .text(_):
+        case .text:
             return "text"
-        case .attributedText(_):
+        case .attributedText:
             return "attributed_text"
-        case .photo(_):
+        case .photo:
             return "photo"
-        case .video(_):
+        case .video:
             return "video"
-        case .location(_):
+        case .location:
             return "location"
-        case .emoji(_):
+        case .emoji:
             return "emoji"
-        case .audio(_):
+        case .audio:
             return "audio"
-        case .contact(_):
+        case .contact:
             return "contact"
-        case .linkPreview(_):
+        case .linkPreview:
             return "linkPreview"
-        case .custom(_):
+        case .custom:
             return "custom"
         }
     }

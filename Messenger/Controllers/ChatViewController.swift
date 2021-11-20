@@ -14,10 +14,10 @@ import AVKit
 import CoreLocation
 
 final class ChatViewController: MessagesViewController {
-    
+
     private var senderPhotoURL: URL?
     private var otherUserPhotoURL: URL?
-    
+
     public static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -25,7 +25,7 @@ final class ChatViewController: MessagesViewController {
         formatter.locale = Locale.init(identifier: "en_US")
         return formatter
     }()
-    
+
     public let otherUserEmail: String
     public var isNewConversation = false
     private var conversationId: String?
@@ -37,17 +37,17 @@ final class ChatViewController: MessagesViewController {
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         return Sender(photoURL: "", senderId: safeEmail, displayName: "Я")
     }
-    
+
     init(with email: String, id: String?) {
         self.conversationId = id
         self.otherUserEmail = email
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) не был выполнен")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
@@ -58,7 +58,7 @@ final class ChatViewController: MessagesViewController {
         messageInputBar.delegate = self
         setupInputButton()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
@@ -66,7 +66,7 @@ final class ChatViewController: MessagesViewController {
             listenForMessages(id: conversationId, shouldScrollToBottom: true)
         }
     }
-    
+
     private func setupInputButton() {
         let button = InputBarButtonItem()
         button.setSize(CGSize(width: 35, height: 35), animated: false)
@@ -77,7 +77,7 @@ final class ChatViewController: MessagesViewController {
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
     }
-    
+
     private func presentInputActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Фото или видео", style: .default, handler: { [weak self] _ in
@@ -89,7 +89,7 @@ final class ChatViewController: MessagesViewController {
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         present(actionSheet, animated: true)
     }
-    
+
     private func presentLocationPicker() {
         let viewController = LocationPickerViewController(coordinates: nil)
         viewController.title = "Выберите местоположение"
@@ -115,15 +115,14 @@ final class ChatViewController: MessagesViewController {
             DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message, completion: { success in
                 if success {
                     print("Отправлено сообщение о местоположении")
-                }
-                else {
+                } else {
                     print("Не удалось отправить сообщение о местоположении")
                 }
             })
         }
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
+
     private func presentPhotoVideoInputActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler: { [weak self] _ in
@@ -149,7 +148,7 @@ final class ChatViewController: MessagesViewController {
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         present(actionSheet, animated: true)
     }
-    
+
     private func presentCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let picker = UIImagePickerController()
@@ -159,14 +158,13 @@ final class ChatViewController: MessagesViewController {
             picker.delegate = self
             picker.allowsEditing = true
             present(picker, animated: true)
-        }
-        else {
+        } else {
             let alert = UIAlertController(title: "Внимание", message: "У вас нет камеры", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
             present(alert, animated: true)
         }
     }
-    
+
     private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
         DatabaseManager.shared.getAllMessagesForConversation(with: id, completion: { [weak self] result in
             switch result {
@@ -189,12 +187,12 @@ final class ChatViewController: MessagesViewController {
 }
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let messageId = createMessageId(),
               let conversationId = conversationId,
@@ -227,8 +225,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message, completion: { success in
                         if success {
                             print("Отправлено фотосообщение")
-                        }
-                        else {
+                        } else {
                             print("Не удалось отправить фотосообщение")
                         }
                     })
@@ -237,8 +234,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     print("Не удалось загрузить изображение: \(error)")
                 }
             })
-        }
-        else if let videoUrl = info[.mediaURL] as? URL {
+        } else if let videoUrl = info[.mediaURL] as? URL {
             let fileName = "video_message_" + messageId.replacingOccurrences(of: " ", with: "-") + ".mov"
             // Загрузка видео
             StorageManager.shared.uploadMessageVideo(with: videoUrl, fileName: fileName, completion: { [weak self] result in
@@ -248,7 +244,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 switch result {
                 case let .success(urlString):
                     // Отправка видеосообщения
-                    guard let url = URL(string: urlString) else {   // TODO: - изменить placeholder на отображение видео
+                    guard let url = URL(string: urlString) else {   // - TODO: изменить placeholder на отображение видео
                         return
                     }
                     let media = Media(url: url,
@@ -262,8 +258,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message, completion: { success in
                         if success {
                             print("Отправлено видеосообщение")
-                        }
-                        else {
+                        } else {
                             print("Не удалось отправить видеосообщение")
                         }
                     })
@@ -277,7 +272,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 }
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
-    
+
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
               let selfSender = self.selfSender,
@@ -300,13 +295,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                     self?.conversationId = newConversationId
                     self?.listenForMessages(id: newConversationId, shouldScrollToBottom: true)
                     self?.messageInputBar.inputTextView.text = nil
-                }
-                else {
+                } else {
                     print("Не удалось отправить")
                 }
             })
-        }
-        else {
+        } else {
             guard let conversationId = conversationId, let name = self.title else {
                 return
             }
@@ -315,14 +308,13 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 if success {
                     self?.messageInputBar.inputTextView.text = nil
                     print("Сообщение отправлено")
-                }
-                else {
+                } else {
                     print("Не удалось отправить")
                 }
             })
         }
     }
-    
+
     private func createMessageId() -> String? {
         // date, otherUserEmail, senderEmail, randomInt
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -336,7 +328,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 }
 
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
-    
+
     /// Тип отправителя новых сообщений в MessagesCollectionView (необходимая функция)
     func currentSender() -> SenderType {
         if let sender = selfSender {
@@ -344,17 +336,17 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
         fatalError("Если Sender равен nil, письмо должно быть кэшировано")
     }
-    
+
     /// Сообщение, которое будет использоваться для MessageCollectionViewCell  (необходимая функция)
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
-    
+
     /// Количество секций, которые будут отображаться в MessagesCollectionView (необходимая функция)
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-    
+
     /// Используется для настройки UIImageView ячейки MediaMessageCell
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         guard let message = message as? Message else {
@@ -370,7 +362,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             break
         }
     }
-    
+
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         let sender = message.sender
         if sender.senderId == selfSender?.senderId {
@@ -379,15 +371,14 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         }
         return .secondarySystemBackground
     }
-    
+
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let sender = message.sender
         if sender.senderId == selfSender?.senderId {
             // показывает изображение пользователя
             if let currentUserImageURL = self.senderPhotoURL {
                 avatarView.sd_setImage(with: currentUserImageURL, completed: nil)
-            }
-            else {
+            } else {
                 guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
                     return
                 }
@@ -406,13 +397,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                     }
                 })
             }
-        }
-        else {
+        } else {
             // изображение другого пользователя
             if let otherUserPhotoURL = self.otherUserPhotoURL {
                 avatarView.sd_setImage(with: otherUserPhotoURL, completed: nil)
-            }
-            else {
+            } else {
                 let email = self.otherUserEmail
                 let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
                 let path = "images/\(safeEmail)_profile_picture.png"
@@ -434,7 +423,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 }
 
 extension ChatViewController: MessageCellDelegate {
-    
+
     func didTapMessage(in cell: MessageCollectionViewCell) {
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else {
             return
@@ -450,7 +439,7 @@ extension ChatViewController: MessageCellDelegate {
             break
         }
     }
-    
+
     func didTapImage(in cell: MessageCollectionViewCell) {
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else {
             return

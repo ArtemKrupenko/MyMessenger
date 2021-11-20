@@ -9,9 +9,9 @@ import UIKit
 import SDWebImage
 
 final class ConversationTableViewCell: UITableViewCell {
-    
+
     static let identifier = "ConversationTableViewCell"
-    
+
     private let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -21,18 +21,18 @@ final class ConversationTableViewCell: UITableViewCell {
         imageView.layer.borderWidth = 2
         return imageView
     }()
-    
+
     private let userNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         return label
     }()
-    
+
     private let userMessageLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .thin)
-        label.numberOfLines = 0  
+        label.numberOfLines = 0
         return label
     }()
 
@@ -42,11 +42,11 @@ final class ConversationTableViewCell: UITableViewCell {
         contentView.addSubview(userNameLabel)
         contentView.addSubview(userMessageLabel)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) не был выполнен")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         userImageView.frame = CGRect(x: 10,
@@ -62,7 +62,7 @@ final class ConversationTableViewCell: UITableViewCell {
                                         width: contentView.width - 20 - userImageView.width,
                                         height: (contentView.height - 20) / 2)
     }
-    
+
     public func configure(with model: Conversation) {
         userMessageLabel.text = model.latestMessage.text
         userNameLabel.text = model.name

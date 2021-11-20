@@ -11,18 +11,18 @@ import JGProgressHUD
 
 /// Контроллер, отображающий список диалогов
 final class ConversationsViewController: UIViewController {
-    
+
     private let spinner = JGProgressHUD(style: .dark)
-    
+
     private var conversations = [Conversation]()
-    
+
     private let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
         table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
         return table
     }()
-    
+
     private let noConversationsLabel: UILabel = {
         let label = UILabel()
         label.text = "Нет диалогов"
@@ -32,7 +32,7 @@ final class ConversationsViewController: UIViewController {
         label.isHidden = true
         return label
     }()
-    
+
     private var loginObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ final class ConversationsViewController: UIViewController {
             strongSelf.startListeningForConversations()
         })
     }
-    
+
     private func startListeningForConversations() {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return
@@ -81,7 +81,7 @@ final class ConversationsViewController: UIViewController {
             }
         })
     }
-    
+
     @objc private func didTapComposeButton() {
         let viewController = NewConversationViewController()
         viewController.completion = { [weak self] result in
@@ -97,15 +97,14 @@ final class ConversationsViewController: UIViewController {
                 viewController.title = targetConversation.name
                 viewController.navigationItem.largeTitleDisplayMode = .never
                 strongSelf.navigationController?.pushViewController(viewController, animated: true)
-            }
-            else {
+            } else {
                 strongSelf.createNewConversation(result: result)
             }
         }
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
-    
+
     private func createNewConversation(result: SearchResult) {
         let name = result.name
         let email = DatabaseManager.safeEmail(emailAddress: result.email)
@@ -123,7 +122,7 @@ final class ConversationsViewController: UIViewController {
                 viewController.title = name
                 viewController.navigationItem.largeTitleDisplayMode = .never
                 strongSelf.navigationController?.pushViewController(viewController, animated: true)
-            case .failure(_):
+            case .failure:
                 let viewController = ChatViewController(with: email, id: nil)
                 viewController.isNewConversation = true
                 viewController.title = name
@@ -132,7 +131,7 @@ final class ConversationsViewController: UIViewController {
             }
         })
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
@@ -141,7 +140,7 @@ final class ConversationsViewController: UIViewController {
                                             width: view.width-20,
                                             height: 100)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         validateAuth()
@@ -155,7 +154,7 @@ final class ConversationsViewController: UIViewController {
             present(navigationController, animated: false)
         }
     }
-    
+
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -163,40 +162,39 @@ final class ConversationsViewController: UIViewController {
 }
 
 extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return conversations.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = conversations[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier,
-                                                 for: indexPath) as! ConversationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier, for: indexPath) as! ConversationTableViewCell
         cell.configure(with: model)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = conversations[indexPath.row]
         openConversation(model)
     }
-    
+
     func openConversation(_ model: Conversation) {
         let viewController = ChatViewController(with: model.otherUserEmail, id: model.id)
         viewController.title = model.name
         viewController.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
+
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // удаление диалога

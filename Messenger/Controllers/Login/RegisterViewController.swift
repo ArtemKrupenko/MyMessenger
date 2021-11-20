@@ -10,15 +10,15 @@ import FirebaseAuth
 import JGProgressHUD
 
 final class RegisterViewController: UIViewController {
-    
+
     private let spinner = JGProgressHUD(style: .dark)
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.clipsToBounds = true
         return scrollView
     }()
-    
+
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.crop.circle.badge.plus")
@@ -26,7 +26,7 @@ final class RegisterViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     private let firstNameField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
@@ -41,7 +41,7 @@ final class RegisterViewController: UIViewController {
         field.backgroundColor = .secondarySystemBackground
         return field
     }()
-    
+
     private let lastNameField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
@@ -56,7 +56,7 @@ final class RegisterViewController: UIViewController {
         field.backgroundColor = .secondarySystemBackground
         return field
     }()
-    
+
     private let emailField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
@@ -71,7 +71,7 @@ final class RegisterViewController: UIViewController {
         field.backgroundColor = .secondarySystemBackground
         return field
     }()
-    
+
     private let passwordField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
@@ -87,7 +87,7 @@ final class RegisterViewController: UIViewController {
         field.isSecureTextEntry = true
         return field
     }()
-    
+
     private let registerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Регистрация", for: .normal)
@@ -98,7 +98,7 @@ final class RegisterViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Создание учетной записи"
@@ -118,7 +118,7 @@ final class RegisterViewController: UIViewController {
         scrollView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTabChangeProfilePic)))
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
@@ -149,11 +149,11 @@ final class RegisterViewController: UIViewController {
                                       width: scrollView.width-60,
                                       height: 52)
     }
-    
+
     @objc private func didTabChangeProfilePic() {
         presentPhotoActionSheet()
     }
-    
+
     @objc private func registerButtonTapped() {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
@@ -212,8 +212,7 @@ final class RegisterViewController: UIViewController {
                                     print("Ошибка StorageManager: \(error)")
                                 }
                             })
-                        }
-                        else {
+                        } else {
                             guard let image = UIImage(named: "profile_picture"), let data = image.pngData() else {
                                 return
                             }
@@ -234,13 +233,13 @@ final class RegisterViewController: UIViewController {
             })
         })
     }
-    
+
     func alertUserLoginError(message: String = "Пожалуйста, заполните все поля") {
         let alert = UIAlertController(title: "Упс!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
-    
+
     func alertPasswordLoginError(message: String = "Ваш пароль должен состоять как минимум из 8 символов") {
         let alert = UIAlertController(title: "Упс!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
@@ -255,12 +254,11 @@ final class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailField {
             passwordField.becomeFirstResponder()
-        }
-        else if textField == passwordField {
+        } else if textField == passwordField {
             registerButtonTapped()
         }
         return true
@@ -268,7 +266,7 @@ extension RegisterViewController: UITextFieldDelegate {
 }
 
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     func presentPhotoActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Cделать фото", style: .default, handler: { [weak self] _ in
@@ -280,7 +278,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .destructive, handler: nil))
         present(actionSheet, animated: true)
     }
-    
+
     func presentCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let picker = UIImagePickerController()
@@ -288,14 +286,13 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             picker.delegate = self
             picker.allowsEditing = true
             present(picker, animated: true)
-        }
-        else {
+        } else {
             let alert = UIAlertController(title: "Внимание!", message: "Камера отсутствует", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
             present(alert, animated: true)
         }
     }
-    
+
     func presentPhotoPicker() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -303,8 +300,8 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         picker.allowsEditing = true
         present(picker, animated: true)
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
@@ -314,9 +311,8 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         self.imageView.layer.borderWidth = 2
         self.imageView.layer.borderColor = UIColor.lightGray.cgColor
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
 }
-

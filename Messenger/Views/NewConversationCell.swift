@@ -9,9 +9,9 @@ import Foundation
 import SDWebImage
 
 final class NewConversationCell: UITableViewCell {
-    
+
     static let identifier = "NewConversationCell"
-    
+
     private let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -21,7 +21,7 @@ final class NewConversationCell: UITableViewCell {
         imageView.layer.borderWidth = 2
         return imageView
     }()
-    
+
     private let userNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
@@ -33,11 +33,11 @@ final class NewConversationCell: UITableViewCell {
         contentView.addSubview(userImageView)
         contentView.addSubview(userNameLabel)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) не был выполнен")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         userImageView.frame = CGRect(x: 10,
@@ -49,7 +49,7 @@ final class NewConversationCell: UITableViewCell {
                                      width: contentView.width - 20 - userImageView.width,
                                      height: 50)
     }
-    
+
     public func configure(with model: SearchResult) {
         userNameLabel.text = model.name
         let path = "images/\(model.email)_profile_picture.png"

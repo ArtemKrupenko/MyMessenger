@@ -12,10 +12,11 @@ import GoogleSignIn
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     public var signInConfig: GIDConfiguration?
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -> Bool {
+
         FirebaseApp.configure()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
@@ -28,8 +29,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
-          
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         var handled: Bool
         handled = GIDSignIn.sharedInstance.handle(url)
         if handled {
@@ -98,12 +99,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationCenter.default.post(name: .didLogInNotification, object: nil)
         })
     }
-    
+
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
-    
+
 }

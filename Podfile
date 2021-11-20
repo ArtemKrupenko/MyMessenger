@@ -17,11 +17,12 @@ pod 'Firebase/Messaging'
 pod 'FBSDKLoginKit'
 
 # Google Sign IN
-pod 'GoogleSignIn'
+pod 'GoogleSignIn', '6.0.2'
 
 pod 'MessageKit'
 pod 'JGProgressHUD'
 pod 'SDWebImage'
 pod 'InputBarAccessoryView'
+pod 'SwiftLint'
 
 end

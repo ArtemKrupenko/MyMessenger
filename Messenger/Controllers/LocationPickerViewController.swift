@@ -10,26 +10,26 @@ import CoreLocation
 import MapKit
 
 final class LocationPickerViewController: UIViewController {
-    
+
     public var completion: ((CLLocationCoordinate2D) -> Void)?
     private var coordinates: CLLocationCoordinate2D?
     private var isPickable = true
-    
+
     private let mapView: MKMapView = {
         let mapView = MKMapView()
         return mapView
     }()
-    
+
     init(coordinates: CLLocationCoordinate2D?) {
         self.coordinates = coordinates
         self.isPickable = coordinates == nil
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) не был выполнен")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -52,8 +52,7 @@ final class LocationPickerViewController: UIViewController {
                     strongSelf.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.7, longitudeDelta: 0.7)), animated: true)
                 }
             }
-        }
-        else {
+        } else {
             // показываем местоположение
             guard let coordinates = self.coordinates else {
                 return
@@ -67,7 +66,7 @@ final class LocationPickerViewController: UIViewController {
         }
         view.addSubview(mapView)
     }
-    
+
     @objc func sendButtonTapped() {
         guard let coordinates = coordinates else {
             return
@@ -75,7 +74,7 @@ final class LocationPickerViewController: UIViewController {
         navigationController?.popViewController(animated: true)
         completion?(coordinates)
     }
-    
+
     @objc func didTapMap(_ gesture: UITapGestureRecognizer) {
         let locationInView = gesture.location(in: mapView)
         let coordinates = mapView.convert(locationInView, toCoordinateFrom: mapView)
@@ -88,7 +87,7 @@ final class LocationPickerViewController: UIViewController {
         pin.coordinate = coordinates
         mapView.addAnnotation(pin)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds

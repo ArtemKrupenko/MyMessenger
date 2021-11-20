@@ -8,30 +8,31 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import FBSDKCoreKit
 import GoogleSignIn
 import JGProgressHUD
 
 final class LoginViewController: UIViewController {
-    
+
     private let spinner: JGProgressHUD = {
         let spinner = JGProgressHUD(style: .dark)
         spinner.interactionType = .blockAllTouches
         return spinner
     }()
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.clipsToBounds = true
         return scrollView
     }()
-    
+
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Logo")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     private let emailField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
@@ -46,7 +47,7 @@ final class LoginViewController: UIViewController {
         field.backgroundColor = .secondarySystemBackground
         return field
     }()
-    
+
     private let passwordField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
@@ -62,7 +63,7 @@ final class LoginViewController: UIViewController {
         field.isSecureTextEntry = true
         return field
     }()
-    
+
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Войти", for: .normal)
@@ -70,28 +71,35 @@ final class LoginViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
+        button.contentMode = .scaleAspectFit
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
-    
+
     private let loginButtonFacebook: FBLoginButton = {
         let button = FBLoginButton()
         button.permissions = ["email", "public_profile"]
+        button.setTitle("Войти с помощью Facebook", for: .normal)
+        button.backgroundColor = UIColor(named: "ColorLogo")
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 12
+        button.layer.masksToBounds = true
+        button.contentMode = .scaleAspectFit
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
+
+    private let googleLogInButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.backgroundColor = UIColor(named: "ColorLogo")
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
         button.contentMode = .scaleAspectFit
         return button
     }()
-    
-    private let googleLogInButton: GIDSignInButton = {
-        let button = GIDSignInButton()
-        button.layer.cornerRadius = 12
-        button.layer.masksToBounds = true
-        return button
-    }()
 
     private var loginObserver: NSObjectProtocol?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
@@ -116,29 +124,28 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
-        // Временно скрыл кнопки авторизации через Facebook и Google (имеются недоработки)
-//        scrollView.addSubview(loginButtonFacebook)
-//        scrollView.addSubview(googleLogInButton)
+        scrollView.addSubview(loginButtonFacebook)
+        scrollView.addSubview(googleLogInButton)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
     }
-    
+
     deinit {
         if let observer = loginObserver {
             NotificationCenter.default.removeObserver(observer)
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         let size = scrollView.width/3
         imageView.frame = CGRect(x: (scrollView.width-size)/2,
-                                 y: 20,
+                                 y: 50,
                                  width: size,
                                  height: size)
         emailField.frame = CGRect(x: 30,
-                                  y: imageView.bottom+15,
+                                  y: imageView.bottom+50,
                                   width: scrollView.width-60,
                                   height: 52)
         passwordField.frame = CGRect(x: 30,
@@ -158,7 +165,7 @@ final class LoginViewController: UIViewController {
                                    width: scrollView.width-60,
                                    height: 52)
     }
-    
+
     @objc private func googleSignInButtonTapped() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
               let signInConfig = appDelegate.signInConfig else {
@@ -169,7 +176,7 @@ final class LoginViewController: UIViewController {
             appDelegate.handleSessionRestore(user: user)
         }
     }
-    
+
     @objc private func loginButtonTapped() {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
@@ -210,28 +217,26 @@ final class LoginViewController: UIViewController {
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         })
     }
-    
+
     func alertUserLoginError() {
         let alert = UIAlertController(title: "Ошибка", message: "Пожалуйста, введите корректные данные для входа в систему", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
-    
+
     @objc private func didTabRegister() {
         let viewController = RegisterViewController()
         viewController.title = "Создать учетную запись"
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
 }
 
 extension LoginViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailField {
             passwordField.becomeFirstResponder()
-        }
-        else if textField == passwordField {
+        } else if textField == passwordField {
             loginButtonTapped()
         }
         return true
@@ -239,11 +244,8 @@ extension LoginViewController: UITextFieldDelegate {
 }
 
 extension LoginViewController: LoginButtonDelegate {
-    
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-    }
-    
-    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+
+    func loginButtonFB(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         guard let token = result?.token?.tokenString else {
             print("Пользователю не удалось войти в систему с помощью Facebook")
             return
@@ -315,5 +317,8 @@ extension LoginViewController: LoginButtonDelegate {
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             })
         })
+    }
+
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
     }
 }
