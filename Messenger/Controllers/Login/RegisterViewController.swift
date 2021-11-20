@@ -85,7 +85,16 @@ final class RegisterViewController: UIViewController {
         field.leftViewMode = .always
         field.backgroundColor = .secondarySystemBackground
         field.isSecureTextEntry = true
+        field.rightViewMode = .always
         return field
+    }()
+    
+    let passwordSecureButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        button.tintColor = UIColor.lightGray
+        return button
     }()
 
     private let registerButton: UIButton = {
@@ -113,6 +122,8 @@ final class RegisterViewController: UIViewController {
         scrollView.addSubview(lastNameField)
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
+        passwordField.rightView = passwordSecureButton
+        passwordSecureButton.addTarget(self, action: #selector(togglePassword), for: .touchUpInside)
         scrollView.addSubview(registerButton)
         imageView.isUserInteractionEnabled = true
         scrollView.isUserInteractionEnabled = true
@@ -144,10 +155,25 @@ final class RegisterViewController: UIViewController {
                                      y: emailField.bottom+15,
                                      width: scrollView.width-60,
                                      height: 52)
+        passwordSecureButton.frame = CGRect(x: passwordField.frame.size.width - 25,
+                                            y: 5,
+                                            width: 25,
+                                            height: 25)
         registerButton.frame = CGRect(x: 30,
                                       y: passwordField.bottom+15,
                                       width: scrollView.width-60,
                                       height: 52)
+    }
+    
+    @objc private func togglePassword(sender: UIButton) {
+        switch passwordField.isSecureTextEntry {
+        case true:
+            passwordField.isSecureTextEntry = false
+            passwordSecureButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        case false:
+            passwordField.isSecureTextEntry = true
+            passwordSecureButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        }
     }
 
     @objc private func didTabChangeProfilePic() {
