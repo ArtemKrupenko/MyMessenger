@@ -33,6 +33,7 @@ final class LoginViewController: UIViewController {
         return imageView
     }()
 
+    
     private let emailField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
