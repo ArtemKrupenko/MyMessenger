@@ -149,7 +149,6 @@ extension DatabaseManager {
                                                       "latest_message": ["date": dateString,
                                                                          "message": message,
                                                                          "is_read": false]]
-
             let recipientNewConversationData: [String: Any] = ["id": conversationId,
                                                       "other_user_email": safeEmail,
                                                       "name": currentName,

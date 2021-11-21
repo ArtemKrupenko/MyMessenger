@@ -65,7 +65,7 @@ final class LoginViewController: UIViewController {
         return field
     }()
     
-    let passwordSecureButton: UIButton = {
+    private let passwordSecureButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
@@ -104,6 +104,19 @@ final class LoginViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
         button.contentMode = .scaleAspectFit
+        button.contentHorizontalAlignment = .center
+        return button
+    }()
+    
+    private let registrationButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Регистрация", for: .normal)
+        button.backgroundColor = .systemBackground
+        button.setTitleColor(UIColor(named: "ColorLogo"), for: .normal)
+        button.layer.cornerRadius = 12
+        button.layer.masksToBounds = true
+        button.contentMode = .scaleAspectFit
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
         return button
     }()
 
@@ -111,33 +124,30 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+//        navigationController?.setNavigationBarHidden(true, animated: false)
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         })
-        title = "Вход"
-        view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Регистрация",
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(didTabRegister))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "ColorLogo")
         emailField.delegate = self
         passwordField.delegate = self
         loginButtonFacebook.delegate = self
         // Добавление subviews
         view.addSubview(scrollView)
+        scrollView.addSubview(registrationButton)
+        registrationButton.addTarget(self, action: #selector(didTabRegister), for: .touchUpInside)
         scrollView.addSubview(imageView)
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         passwordField.rightView = passwordSecureButton
         passwordSecureButton.addTarget(self, action: #selector(togglePassword), for: .touchUpInside)
         scrollView.addSubview(loginButton)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         scrollView.addSubview(loginButtonFacebook)
         scrollView.addSubview(googleLogInButton)
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
     }
 
@@ -151,8 +161,12 @@ final class LoginViewController: UIViewController {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         let size = scrollView.width/3
+        registrationButton.frame = CGRect(x: 250,
+                                          y: 20,
+                                          width: scrollView.width/3,
+                                          height: 52)
         imageView.frame = CGRect(x: (scrollView.width-size)/2,
-                                 y: 50,
+                                 y: 95,
                                  width: size,
                                  height: size)
         emailField.frame = CGRect(x: 30,
@@ -181,6 +195,24 @@ final class LoginViewController: UIViewController {
                                    height: 52)
     }
     
+    private func goToChat() {
+        let tabBarViewController = UITabBarController()
+        let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
+        viewController1.title = "Чаты"
+        let viewController2 = UINavigationController(rootViewController: ProfileViewController())
+        viewController2.title = "Настройки"
+        tabBarViewController.setViewControllers([viewController1, viewController2], animated: false)
+        guard let items = tabBarViewController.tabBar.items else {
+            return
+        }
+        let images = ["message", "gearshape.2"]
+        for x in 0..<items.count {
+            items[x].image = UIImage(systemName: images[x])
+        }
+        tabBarViewController.modalPresentationStyle = .fullScreen
+        present(tabBarViewController, animated: false)
+    }
+    
     @objc private func togglePassword(sender: UIButton) {
         switch passwordField.isSecureTextEntry {
         case true:
@@ -200,6 +232,7 @@ final class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard let user = user, error == nil else { return }
             appDelegate.handleSessionRestore(user: user)
+            self.goToChat()
         }
     }
 
@@ -241,10 +274,11 @@ final class LoginViewController: UIViewController {
             UserDefaults.standard.set(email, forKey: "email")
             print("Зарегистрированный пользователь: \(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            strongSelf.goToChat()
         })
     }
 
-    func alertUserLoginError() {
+    private func alertUserLoginError() {
         let alert = UIAlertController(title: "Ошибка", message: "Пожалуйста, введите корректные данные для входа в систему", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
         present(alert, animated: true)
@@ -252,8 +286,9 @@ final class LoginViewController: UIViewController {
 
     @objc private func didTabRegister() {
         let viewController = RegisterViewController()
-        viewController.title = "Создать учетную запись"
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController.title = "Создание учетной записи"
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
     }
 }
 
@@ -341,6 +376,7 @@ extension LoginViewController: LoginButtonDelegate {
                 }
                 print("Успешный вход пользователя в систему")
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+                self?.goToChat()
             })
         })
     }

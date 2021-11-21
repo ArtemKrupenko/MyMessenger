@@ -12,11 +12,35 @@ import GoogleSignIn
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     public var signInConfig: GIDConfiguration?
+    
+    var window: UIWindow?
+//    var navController: UINavigationController?
+//    var viewController: LoginViewController?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -> Bool {
-
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        viewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
+//        navController = UINavigationController(rootViewController: viewController!)
+//        window?.rootViewController = navController
+//        window?.makeKeyAndVisible()
+        
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window!.backgroundColor = UIColor.white
+//        let nav = UINavigationController()
+//        let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+//        nav.pushViewController(vc, animated: false)
+//        self.window!.rootViewController = nav
+//        self.window!.makeKeyAndVisible()
+        
+//        if let window = window {
+//            window.backgroundColor = UIColor.white
+//            window.rootViewController = LoginViewController()
+//            window.makeKeyAndVisible()
+//        }
+        
         FirebaseApp.configure()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in

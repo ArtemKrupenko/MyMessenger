@@ -37,6 +37,8 @@ final class ConversationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Чаты"
+        view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
                                                             target: self,
                                                             action: #selector(didTapComposeButton))
@@ -119,9 +121,6 @@ final class ConversationsViewController: UIViewController {
             case let .success(conversationId):
                 let viewController = ChatViewController(with: email, id: conversationId)
                 viewController.isNewConversation = false
-                viewController.title = name
-                viewController.navigationItem.largeTitleDisplayMode = .never
-                strongSelf.navigationController?.pushViewController(viewController, animated: true)
             case .failure:
                 let viewController = ChatViewController(with: email, id: nil)
                 viewController.isNewConversation = true

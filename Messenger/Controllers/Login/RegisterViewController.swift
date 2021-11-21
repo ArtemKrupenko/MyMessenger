@@ -256,6 +256,7 @@ final class RegisterViewController: UIViewController {
                     }
                 })
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+                self?.goToChat()
             })
         })
     }
@@ -271,11 +272,23 @@ final class RegisterViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
-
-    @objc private func didTapRegister() {
-        let viewController = RegisterViewController()
-        viewController.title = "Создать учетную запись"
-        navigationController?.pushViewController(viewController, animated: true)
+    
+    private func goToChat() {
+        let tabBarViewController = UITabBarController()
+        let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
+        viewController1.title = "Чаты"
+        let viewController2 = UINavigationController(rootViewController: ProfileViewController())
+        viewController2.title = "Настройки"
+        tabBarViewController.setViewControllers([viewController1, viewController2], animated: false)
+        guard let items = tabBarViewController.tabBar.items else {
+            return
+        }
+        let images = ["message", "gearshape.2"]
+        for x in 0..<items.count {
+            items[x].image = UIImage(systemName: images[x])
+        }
+        tabBarViewController.modalPresentationStyle = .fullScreen
+        present(tabBarViewController, animated: false)
     }
 }
 

@@ -33,7 +33,7 @@ final class ProfileViewController: UIViewController {
     private var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
-        label.text = "\(UserDefaults.standard.value(forKey: "name") as? String ?? "Нет результатов")"
+        label.text = "\(UserDefaults.standard.value(forKey: "name") as? String ?? "Нет имени пользователя")"
         label.textAlignment = .center
         return label
     }()
@@ -41,7 +41,7 @@ final class ProfileViewController: UIViewController {
     private var userEmailLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .thin)
-        label.text = "\(UserDefaults.standard.value(forKey: "email") as? String ?? "Нет результатов")"
+        label.text = "\(UserDefaults.standard.value(forKey: "email") as? String ?? "Нет email-адреса")"
         label.textAlignment = .center
         return label
     }()
@@ -60,8 +60,8 @@ final class ProfileViewController: UIViewController {
         headerView.addSubview(imageView)
         headerView.addSubview(userNameLabel)
         headerView.addSubview(userEmailLabel)
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
         tableView.tableHeaderView = createTableHeader()
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
         settingsSections()
     }
 
@@ -84,12 +84,6 @@ final class ProfileViewController: UIViewController {
                                      y: userNameLabel.bottom+10,
                                      width: tableView.width,
                                      height: 20)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // удаление NavigationBar
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     public func settingsSections() {
@@ -115,6 +109,9 @@ final class ProfileViewController: UIViewController {
 
     public func createTableHeader() -> UIView? {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return nil
+        }
+        guard (UserDefaults.standard.value(forKey: "name") as? String) != nil else {
             return nil
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
@@ -147,6 +144,7 @@ final class ProfileViewController: UIViewController {
                 try FirebaseAuth.Auth.auth().signOut()
                 let viewController = LoginViewController()
                 let navigationController = UINavigationController(rootViewController: viewController)
+                navigationController.setNavigationBarHidden(true, animated: false)
                 navigationController.modalPresentationStyle = .fullScreen
                 strongSelf.present(navigationController, animated: true)
             } catch {
@@ -229,12 +227,12 @@ class ProfileTableViewCell: UITableViewCell {
     }
 
     // уточнить зачем нужна функция ниже
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        label.text = nil
-        iconContainer.backgroundColor = nil
-        iconImageView.image = nil
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        label.text = nil
+//        iconContainer.backgroundColor = nil
+//        iconImageView.image = nil
+//    }
 
     public func configure(with model: ProfileViewModel) {
         switch model.viewModelType {
@@ -253,9 +251,9 @@ class ProfileTableViewCell: UITableViewCell {
         case .logout:
             label.text = model.title
             label.textColor = .red
-            // label.textAlignment = .center
+            label.textAlignment = .center
             // не знаю почему не работает сразу .center, а срабатывает после скролла
-            label.frame = CGRect(x: 80, y: 0, width: contentView.width, height: contentView.height)
+            label.frame = CGRect(x: 0, y: 0, width: contentView.width, height: contentView.height)
             accessoryType = .none
         }
     }

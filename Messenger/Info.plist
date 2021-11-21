@@ -61,12 +61,12 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Пожалуйста, разрешите доступ, чтобы сделать изображение профиля</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Пожалуйста, разрешите доступ, чтобы выбрать изображение профиля</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Пожалуйста, разрешите доступ к отправке аудио- и видеосообщений</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Пожалуйста, разрешите доступ к вашему местоположению </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Пожалуйста, разрешите доступ к отправке аудио- и видеосообщений</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Пожалуйста, разрешите доступ, чтобы выбрать изображение профиля</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
