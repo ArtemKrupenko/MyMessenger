@@ -270,7 +270,7 @@ extension DatabaseManager {
                 guard let content = dictionary["content"] as? String,
                       let dateString = dictionary["date"] as? String,
                       let messageId = dictionary["id"] as? String,
-                      let _ = dictionary["is_read"] as? Bool, // не используется
+                      let _ = dictionary["is_read"] as? Bool, // пока не используется
                       let name = dictionary["name"] as? String,
                       let senderEmail = dictionary["sender_email"] as? String,
                       let type = dictionary["type"] as? String,

@@ -125,7 +125,6 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        navigationController?.setNavigationBarHidden(true, animated: false)
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
             guard let strongSelf = self else {
                 return
@@ -149,6 +148,9 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(loginButtonFacebook)
         scrollView.addSubview(googleLogInButton)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
+        // скрывает экран клавиатуры при касании
+        let gesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(gesture)
     }
 
     deinit {
@@ -194,6 +196,22 @@ final class LoginViewController: UIViewController {
                                    width: scrollView.width-60,
                                    height: 52)
     }
+    
+    // ЭТОГО НЕ БЫЛО, УБРАТЬ ПОТОМ
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        validateAuth()
+//    }
+//
+//    private func validateAuth() {
+//        if FirebaseAuth.Auth.auth().currentUser != nil {
+//            let viewController = ConversationsViewController()
+//            let navigationController = UINavigationController(rootViewController: viewController)
+//            navigationController.modalPresentationStyle = .fullScreen
+//            present(viewController, animated: false)
+//        }
+//    }
     
     private func goToChat() {
         let tabBarViewController = UITabBarController()

@@ -13,7 +13,7 @@ import SDWebImage
 
 final class ProfileViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView! = UITableView(frame: .zero, style: .insetGrouped)
+    private var tableView: UITableView! = UITableView(frame: .zero, style: .insetGrouped)
 
     private var headerView: UIView = {
         let headerView = UIView()
@@ -45,6 +45,18 @@ final class ProfileViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
+    
+    private let buttonOut: UIButton = {
+        let button = UIButton()
+        button.setTitle("Выйти", for: .normal)
+        button.backgroundColor = .systemGroupedBackground
+        button.setTitleColor(.systemRed, for: .normal)
+        button.layer.cornerRadius = 12
+        button.layer.masksToBounds = true
+        button.contentMode = .scaleAspectFit
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
+        return button
+    }()
 
     var data = [Section]()
 
@@ -52,11 +64,13 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        // удаление NavigationBar
+        // удаление NavigationBar в ProfileViewController
         navigationController?.setNavigationBarHidden(true, animated: false)
         // добавление subviews
         view.addSubview(tableView)
         tableView.addSubview(headerView)
+        headerView.addSubview(buttonOut)
+        buttonOut.addTarget(self, action: #selector(logout), for: .touchUpInside)
         headerView.addSubview(imageView)
         headerView.addSubview(userNameLabel)
         headerView.addSubview(userEmailLabel)
@@ -71,9 +85,13 @@ final class ProfileViewController: UIViewController {
         headerView.frame = CGRect(x: 0,
                                   y: 0,
                                   width: self.view.width,
-                                  height: 200)
-        imageView.frame = CGRect(x: (headerView.width-100) / 2,
+                                  height: 220)
+        buttonOut.frame = CGRect(x: 320,
                                  y: 20,
+                                 width: tableView.width/5,
+                                 height: 52)
+        imageView.frame = CGRect(x: (headerView.width-100) / 2,
+                                 y: 40,
                                  width: 100,
                                  height: 100)
         userNameLabel.frame = CGRect(x: 0,
@@ -102,9 +120,6 @@ final class ProfileViewController: UIViewController {
             ProfileViewModel(viewModelType: .info, title: "Помощь", icon: UIImage(systemName: "questionmark.circle.fill"), iconBackgroundColor: .systemOrange, handler: nil),
             ProfileViewModel(viewModelType: .info, title: "О программе", icon: UIImage(systemName: "info"), iconBackgroundColor: .systemGray2, handler: nil)
         ]))
-        data.append(Section(title: "", options: [
-            ProfileViewModel(viewModelType: .logout, title: "Выход из учетной записи", icon: nil, iconBackgroundColor: .clear, handler: logout)
-        ]))
     }
 
     public func createTableHeader() -> UIView? {
@@ -128,7 +143,7 @@ final class ProfileViewController: UIViewController {
         return headerView
     }
 
-    public func logout() {
+    @objc public func logout() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Выход из учетной записи", style: .destructive, handler: { [weak self] _ in
             guard let strongSelf = self else {
@@ -144,6 +159,7 @@ final class ProfileViewController: UIViewController {
                 try FirebaseAuth.Auth.auth().signOut()
                 let viewController = LoginViewController()
                 let navigationController = UINavigationController(rootViewController: viewController)
+                // удаление NavigationBar в LoginViewController
                 navigationController.setNavigationBarHidden(true, animated: false)
                 navigationController.modalPresentationStyle = .fullScreen
                 strongSelf.present(navigationController, animated: true)
@@ -194,10 +210,9 @@ class ProfileTableViewCell: UITableViewCell {
     private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textAlignment = .natural
         return label
     }()
-
+    
     private let iconContainer: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -219,7 +234,6 @@ class ProfileTableViewCell: UITableViewCell {
         contentView.addSubview(iconContainer)
         iconContainer.addSubview(iconImageView)
         contentView.clipsToBounds = true
-        accessoryType = .disclosureIndicator
     }
 
     required init?(coder: NSCoder) {
@@ -227,12 +241,12 @@ class ProfileTableViewCell: UITableViewCell {
     }
 
     // уточнить зачем нужна функция ниже
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        label.text = nil
-//        iconContainer.backgroundColor = nil
-//        iconImageView.image = nil
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        label.text = nil
+        iconContainer.backgroundColor = nil
+        iconImageView.image = nil
+    }
 
     public func configure(with model: ProfileViewModel) {
         switch model.viewModelType {
@@ -248,12 +262,8 @@ class ProfileTableViewCell: UITableViewCell {
                                  y: 0,
                                  width: contentView.frame.size.width - 20 - iconContainer.frame.size.width - 10,
                                  height: contentView.frame.size.height)
+            accessoryType = .disclosureIndicator
         case .logout:
-            label.text = model.title
-            label.textColor = .red
-            label.textAlignment = .center
-            // не знаю почему не работает сразу .center, а срабатывает после скролла
-            label.frame = CGRect(x: 0, y: 0, width: contentView.width, height: contentView.height)
             accessoryType = .none
         }
     }

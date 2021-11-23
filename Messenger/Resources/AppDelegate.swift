@@ -16,32 +16,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     public var signInConfig: GIDConfiguration?
     
     var window: UIWindow?
-//    var navController: UINavigationController?
-//    var viewController: LoginViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        viewController = LoginViewController(nibName: "LoginViewController", bundle: nil)
-//        navController = UINavigationController(rootViewController: viewController!)
-//        window?.rootViewController = navController
-//        window?.makeKeyAndVisible()
-        
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window!.backgroundColor = UIColor.white
-//        let nav = UINavigationController()
-//        let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
-//        nav.pushViewController(vc, animated: false)
-//        self.window!.rootViewController = nav
-//        self.window!.makeKeyAndVisible()
-        
-//        if let window = window {
-//            window.backgroundColor = UIColor.white
-//            window.rootViewController = LoginViewController()
-//            window.makeKeyAndVisible()
-//        }
-        
+        window = UIWindow(frame: UIScreen.main.bounds)
         FirebaseApp.configure()
+//        if FirebaseAuth.Auth.auth().currentUser != nil {
+//            window?.rootViewController = ConversationsViewController()
+//            window?.makeKeyAndVisible()
+//        } else {
+//            window?.rootViewController = LoginViewController()
+//            window?.makeKeyAndVisible()
+//        }
+        window?.rootViewController = LoginViewController()
+        window?.makeKeyAndVisible()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
             if let user = user, error == nil {
@@ -123,12 +110,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationCenter.default.post(name: .didLogInNotification, object: nil)
         })
     }
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-    }
-
 }
+
+    // Зачем нужны следующие функции?
+//    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+//        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+//    }
+//
+//    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+//    }

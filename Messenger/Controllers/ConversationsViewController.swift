@@ -19,6 +19,7 @@ final class ConversationsViewController: UIViewController {
     private let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
+        table.tableFooterView = UIView(frame: .zero)
         table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
         return table
     }()
@@ -54,7 +55,7 @@ final class ConversationsViewController: UIViewController {
         })
     }
 
-    private func startListeningForConversations() {
+    public func startListeningForConversations() {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return
         }
@@ -140,19 +141,19 @@ final class ConversationsViewController: UIViewController {
                                             height: 100)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        validateAuth()
-    }
-
-    private func validateAuth() {
-        if FirebaseAuth.Auth.auth().currentUser == nil {
-            let viewController = LoginViewController()
-            let navigationController = UINavigationController(rootViewController: viewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: false)
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        validateAuth()
+//    }
+//
+//    private func validateAuth() {
+//        if FirebaseAuth.Auth.auth().currentUser == nil {
+//            let viewController = LoginViewController()
+//            let navigationController = UINavigationController(rootViewController: viewController)
+//            navigationController.modalPresentationStyle = .fullScreen
+//            present(viewController, animated: false)
+//        }
+//    }
 
     private func setupTableView() {
         tableView.delegate = self

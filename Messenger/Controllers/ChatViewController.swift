@@ -57,6 +57,9 @@ final class ChatViewController: MessagesViewController {
         messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         setupInputButton()
+        // скрывает экран клавиатуры при касании
+        let gesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(gesture)
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -89,7 +89,7 @@ final class RegisterViewController: UIViewController {
         return field
     }()
     
-    let passwordSecureButton: UIButton = {
+    private let passwordSecureButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
@@ -128,6 +128,9 @@ final class RegisterViewController: UIViewController {
         imageView.isUserInteractionEnabled = true
         scrollView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTabChangeProfilePic)))
+        // скрывает экран клавиатуры при касании
+        let gesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(gesture)
     }
 
     override func viewDidLayoutSubviews() {

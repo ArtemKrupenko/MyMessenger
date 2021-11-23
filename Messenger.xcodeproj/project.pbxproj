@@ -22,7 +22,6 @@
 		AC3A10F72708D872000B01ED /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A10F62708D872000B01ED /* DatabaseManager.swift */; };
 		AC3A10F92708E9AB000B01ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC3A10F82708E9AB000B01ED /* GoogleService-Info.plist */; };
 		AC3A10FB2719C437000B01ED /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A10FA2719C437000B01ED /* ChatViewController.swift */; };
-		ACB1828F274AECF800FCDCEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACB1828D274AECF800FCDCEC /* Main.storyboard */; };
 		ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC05110271F4A8D002AA9B3 /* StorageManager.swift */; };
 		ACC051132727F387002AA9B3 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */; };
 		ACE31EE22735994700245B9E /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE12735994700245B9E /* NewConversationCell.swift */; };
@@ -54,7 +53,6 @@
 		AC3A10F62708D872000B01ED /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AC3A10F82708E9AB000B01ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC3A10FA2719C437000B01ED /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		ACB1828E274AECF800FCDCEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ACC05110271F4A8D002AA9B3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		ACE31EE12735994700245B9E /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 		AC28AC4A2702449900FEF75C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				ACB1828D274AECF800FCDCEC /* Main.storyboard */,
 				AC28AC3C2702403A00FEF75C /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -257,7 +254,6 @@
 				AC28AC3E2702403A00FEF75C /* LaunchScreen.storyboard in Resources */,
 				AC3A10F92708E9AB000B01ED /* GoogleService-Info.plist in Resources */,
 				AC28AC3B2702403A00FEF75C /* Assets.xcassets in Resources */,
-				ACB1828F274AECF800FCDCEC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,14 +372,6 @@
 				AC28AC3D2702403A00FEF75C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		ACB1828D274AECF800FCDCEC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ACB1828E274AECF800FCDCEC /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
