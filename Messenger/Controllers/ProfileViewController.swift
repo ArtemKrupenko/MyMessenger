@@ -153,6 +153,7 @@ final class ProfileViewController: UIViewController {
             UserDefaults.standard.setValue(nil, forKey: "name")
             // Выход из Facebook
             FBSDKLoginKit.LoginManager().logOut()
+            self?.loginButtonDidLogOut(FBLoginButton.init())
             // Выход из Google
             GIDSignIn.sharedInstance.signOut()
             do {
@@ -169,6 +170,9 @@ final class ProfileViewController: UIViewController {
         }))
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         present(actionSheet, animated: true)
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
     }
 }
 

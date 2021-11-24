@@ -149,8 +149,8 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(googleLogInButton)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
         // скрывает экран клавиатуры при касании
-        let gesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
-        view.addGestureRecognizer(gesture)
+//        let gesture = UITapGestureRecognizer(target: scrollView, action: #selector(UIScrollView.endEditing(_:)))
+//        scrollView.addGestureRecognizer(gesture)
     }
 
     deinit {
@@ -197,22 +197,7 @@ final class LoginViewController: UIViewController {
                                    height: 52)
     }
     
-    // ЭТОГО НЕ БЫЛО, УБРАТЬ ПОТОМ
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        validateAuth()
-//    }
-//
-//    private func validateAuth() {
-//        if FirebaseAuth.Auth.auth().currentUser != nil {
-//            let viewController = ConversationsViewController()
-//            let navigationController = UINavigationController(rootViewController: viewController)
-//            navigationController.modalPresentationStyle = .fullScreen
-//            present(viewController, animated: false)
-//        }
-//    }
-    
+    /// Переход на экран списков диалогов  (ConversationsViewController)
     private func goToChat() {
         let tabBarViewController = UITabBarController()
         let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
@@ -231,6 +216,7 @@ final class LoginViewController: UIViewController {
         present(tabBarViewController, animated: false)
     }
     
+    /// Отображение "глазика" в поле ввода пароля
     @objc private func togglePassword(sender: UIButton) {
         switch passwordField.isSecureTextEntry {
         case true:
@@ -302,6 +288,7 @@ final class LoginViewController: UIViewController {
         present(alert, animated: true)
     }
 
+    /// Переход на экран регистрации (RegisterViewController)
     @objc private func didTabRegister() {
         let viewController = RegisterViewController()
         viewController.title = "Создание учетной записи"
@@ -323,7 +310,10 @@ extension LoginViewController: UITextFieldDelegate {
 }
 
 extension LoginViewController: LoginButtonDelegate {
-
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+    }
+    
     func loginButtonFB(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         guard let token = result?.token?.tokenString else {
             print("Пользователю не удалось войти в систему с помощью Facebook")
@@ -397,8 +387,5 @@ extension LoginViewController: LoginButtonDelegate {
                 self?.goToChat()
             })
         })
-    }
-
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
     }
 }

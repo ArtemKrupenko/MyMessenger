@@ -168,6 +168,7 @@ final class RegisterViewController: UIViewController {
                                       height: 52)
     }
     
+    /// Отображение "глазика" в поле ввода пароля
     @objc private func togglePassword(sender: UIButton) {
         switch passwordField.isSecureTextEntry {
         case true:

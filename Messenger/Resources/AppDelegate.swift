@@ -20,15 +20,26 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         FirebaseApp.configure()
-//        if FirebaseAuth.Auth.auth().currentUser != nil {
-//            window?.rootViewController = ConversationsViewController()
-//            window?.makeKeyAndVisible()
-//        } else {
-//            window?.rootViewController = LoginViewController()
-//            window?.makeKeyAndVisible()
-//        }
-        window?.rootViewController = LoginViewController()
-        window?.makeKeyAndVisible()
+        // проверяет, есть ли пользователь в системе и переходит на соответствующий экран (если есть то при запуске приложения вход сразу в экран списка диалогов ConversationsViewController, в остальном случае переходит на экран входа LoginViewController)
+        if FirebaseAuth.Auth.auth().currentUser != nil {
+            let tabBarViewController = UITabBarController()
+            let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
+            viewController1.title = "Чаты"
+            let viewController2 = UINavigationController(rootViewController: ProfileViewController())
+            viewController2.title = "Настройки"
+            tabBarViewController.setViewControllers([viewController1, viewController2], animated: false)
+            let items = tabBarViewController.tabBar.items
+            let images = ["message", "gearshape.2"]
+            for x in 0..<items!.count {
+                items![x].image = UIImage(systemName: images[x])
+            }
+            tabBarViewController.modalPresentationStyle = .fullScreen
+            window?.rootViewController = tabBarViewController
+            window?.makeKeyAndVisible()
+        } else if FirebaseAuth.Auth.auth().currentUser == nil {
+            window?.rootViewController = LoginViewController()
+            window?.makeKeyAndVisible()
+        }
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
             if let user = user, error == nil {
@@ -111,11 +122,3 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
 }
-
-    // Зачем нужны следующие функции?
-//    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-//        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-//    }
-//
-//    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-//    }
