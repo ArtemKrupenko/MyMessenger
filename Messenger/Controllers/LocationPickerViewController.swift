@@ -66,6 +66,11 @@ final class LocationPickerViewController: UIViewController {
         }
         view.addSubview(mapView)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mapView.frame = view.bounds
+    }
 
     @objc func sendButtonTapped() {
         guard let coordinates = coordinates else {
@@ -86,11 +91,6 @@ final class LocationPickerViewController: UIViewController {
         let pin = MKPointAnnotation()
         pin.coordinate = coordinates
         mapView.addAnnotation(pin)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        mapView.frame = view.bounds
     }
 }
 

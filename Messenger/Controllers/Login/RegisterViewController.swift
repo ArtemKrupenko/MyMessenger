@@ -136,35 +136,34 @@ final class RegisterViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
-        let size = scrollView.width/3
-        imageView.frame = CGRect(x: (scrollView.width-size)/2,
+        imageView.frame = CGRect(x: (scrollView.frame.size.width - (scrollView.frame.size.width / 3)) / 2,
                                  y: 20,
-                                 width: size,
-                                 height: size)
-        imageView.layer.cornerRadius = imageView.width/2
+                                 width: scrollView.frame.size.width / 3,
+                                 height: scrollView.frame.size.width / 3)
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
         firstNameField.frame = CGRect(x: 30,
-                                      y: imageView.bottom+15,
-                                      width: scrollView.width-60,
+                                      y: (imageView.frame.size.height + imageView.frame.origin.y) + 15,
+                                      width: scrollView.frame.size.width - 60,
                                       height: 52)
         lastNameField.frame = CGRect(x: 30,
-                                     y: firstNameField.bottom+15,
-                                     width: scrollView.width-60,
+                                     y: (firstNameField.frame.size.height + firstNameField.frame.origin.y) + 15,
+                                     width: scrollView.frame.size.width - 60,
                                      height: 52)
         emailField.frame = CGRect(x: 30,
-                                  y: lastNameField.bottom+15,
-                                  width: scrollView.width-60,
+                                  y: (lastNameField.frame.size.height + lastNameField.frame.origin.y) + 15,
+                                  width: scrollView.frame.size.width - 60,
                                   height: 52)
         passwordField.frame = CGRect(x: 30,
-                                     y: emailField.bottom+15,
-                                     width: scrollView.width-60,
+                                     y: (emailField.frame.size.height + emailField.frame.origin.y) + 15,
+                                     width: scrollView.frame.size.width - 60,
                                      height: 52)
         passwordSecureButton.frame = CGRect(x: passwordField.frame.size.width - 25,
                                             y: 5,
                                             width: 25,
                                             height: 25)
         registerButton.frame = CGRect(x: 30,
-                                      y: passwordField.bottom+15,
-                                      width: scrollView.width-60,
+                                      y: (passwordField.frame.size.height + passwordField.frame.origin.y) + 15,
+                                      width: scrollView.frame.size.width - 60,
                                       height: 52)
     }
     
@@ -281,7 +280,7 @@ final class RegisterViewController: UIViewController {
         let tabBarViewController = UITabBarController()
         let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
         viewController1.title = "Чаты"
-        let viewController2 = UINavigationController(rootViewController: ProfileViewController())
+        let viewController2 = UINavigationController(rootViewController: SettingsViewController())
         viewController2.title = "Настройки"
         tabBarViewController.setViewControllers([viewController1, viewController2], animated: false)
         guard let items = tabBarViewController.tabBar.items else {

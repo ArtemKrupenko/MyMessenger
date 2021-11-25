@@ -43,6 +43,8 @@ final class ConversationsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
                                                             target: self,
                                                             action: #selector(didTapComposeButton))
+//        tabBarController?.tabBar.isHidden = false
+        navigationItem.backBarButtonItem  = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         setupTableView()
@@ -136,24 +138,10 @@ final class ConversationsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
         noConversationsLabel.frame = CGRect(x: 10,
-                                            y: (view.height-100)/2,
-                                            width: view.width-20,
+                                            y: (view.frame.size.height - 100) / 2,
+                                            width: view.frame.size.width - 20,
                                             height: 100)
     }
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        validateAuth()
-//    }
-//
-//    private func validateAuth() {
-//        if FirebaseAuth.Auth.auth().currentUser == nil {
-//            let viewController = LoginViewController()
-//            let navigationController = UINavigationController(rootViewController: viewController)
-//            navigationController.modalPresentationStyle = .fullScreen
-//            present(viewController, animated: false)
-//        }
-//    }
 
     private func setupTableView() {
         tableView.delegate = self

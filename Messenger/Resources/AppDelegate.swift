@@ -25,7 +25,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarViewController = UITabBarController()
             let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
             viewController1.title = "Чаты"
-            let viewController2 = UINavigationController(rootViewController: ProfileViewController())
+            let viewController2 = UINavigationController(rootViewController: SettingsViewController())
             viewController2.title = "Настройки"
             tabBarViewController.setViewControllers([viewController1, viewController2], animated: false)
             let items = tabBarViewController.tabBar.items

@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  SettingsViewController.swift
 //  Messenger
 //
 //  Created by Артем on 27.09.2021.
@@ -7,11 +7,12 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 import FBSDKLoginKit
 import GoogleSignIn
 import SDWebImage
 
-final class ProfileViewController: UIViewController {
+final class SettingsViewController: UIViewController {
 
     private var tableView: UITableView! = UITableView(frame: .zero, style: .insetGrouped)
 
@@ -58,13 +59,13 @@ final class ProfileViewController: UIViewController {
         return button
     }()
 
-    var data = [Section]()
+    private var data = [Section]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        // удаление NavigationBar в ProfileViewController
+        // удаление NavigationBar в SettingsViewController
         navigationController?.setNavigationBarHidden(true, animated: false)
         // добавление subviews
         view.addSubview(tableView)
@@ -75,7 +76,7 @@ final class ProfileViewController: UIViewController {
         headerView.addSubview(userNameLabel)
         headerView.addSubview(userEmailLabel)
         tableView.tableHeaderView = createTableHeader()
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
         settingsSections()
     }
 
@@ -84,41 +85,41 @@ final class ProfileViewController: UIViewController {
         tableView.frame = view.bounds
         headerView.frame = CGRect(x: 0,
                                   y: 0,
-                                  width: self.view.width,
+                                  width: self.view.frame.size.width,
                                   height: 220)
         buttonOut.frame = CGRect(x: 320,
                                  y: 20,
-                                 width: tableView.width/5,
+                                 width: tableView.frame.size.width / 5,
                                  height: 52)
-        imageView.frame = CGRect(x: (headerView.width-100) / 2,
+        imageView.frame = CGRect(x: (headerView.frame.size.width - 100) / 2,
                                  y: 40,
                                  width: 100,
                                  height: 100)
         userNameLabel.frame = CGRect(x: 0,
-                                  y: imageView.bottom+10,
-                                  width: tableView.width,
+                                     y: (imageView.frame.size.height + imageView.frame.origin.y) + 10,
+                                  width: tableView.frame.size.width,
                                   height: 30)
         userEmailLabel.frame = CGRect(x: 0,
-                                     y: userNameLabel.bottom+10,
-                                     width: tableView.width,
+                                     y: (userNameLabel.frame.size.height + userNameLabel.frame.origin.y) + 10,
+                                     width: tableView.frame.size.width,
                                      height: 20)
     }
 
     public func settingsSections() {
         data.append(Section(title: "", options: [
-            ProfileViewModel(viewModelType: .info, title: "Учетная запись", icon: UIImage(systemName: "key.fill"), iconBackgroundColor: .systemBlue, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Избранное", icon: UIImage(systemName: "star.fill"), iconBackgroundColor: .systemPink, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Чаты", icon: UIImage(systemName: "ellipsis.bubble.fill"), iconBackgroundColor: .systemTeal, handler: nil)
+            SettingViewModel(viewModelType: .info, title: "Учетная запись", icon: UIImage(systemName: "key.fill"), iconBackgroundColor: .systemBlue, handler: nil),
+            SettingViewModel(viewModelType: .info, title: "Избранное", icon: UIImage(systemName: "star.fill"), iconBackgroundColor: .systemPink, handler: nil),
+            SettingViewModel(viewModelType: .info, title: "Чаты", icon: UIImage(systemName: "ellipsis.bubble.fill"), iconBackgroundColor: .systemTeal, handler: nil)
         ]))
         data.append(Section(title: "", options: [
-            ProfileViewModel(viewModelType: .info, title: "Уведомления и звуки", icon: UIImage(systemName: "bell.badge.fill"), iconBackgroundColor: .systemRed, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Данные и память", icon: UIImage(systemName: "folder.fill"), iconBackgroundColor: .systemGreen, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Оформление", icon: UIImage(systemName: "paintpalette.fill"), iconBackgroundColor: .systemIndigo, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "Стикеры", icon: UIImage(systemName: "face.smiling.fill"), iconBackgroundColor: .systemYellow, handler: nil)
+            SettingViewModel(viewModelType: .info, title: "Уведомления и звуки", icon: UIImage(systemName: "bell.badge.fill"), iconBackgroundColor: .systemRed, handler: nil),
+            SettingViewModel(viewModelType: .info, title: "Данные и память", icon: UIImage(systemName: "folder.fill"), iconBackgroundColor: .systemGreen, handler: nil),
+            SettingViewModel(viewModelType: .info, title: "Оформление", icon: UIImage(systemName: "paintpalette.fill"), iconBackgroundColor: .systemIndigo, handler: nil),
+            SettingViewModel(viewModelType: .info, title: "Стикеры", icon: UIImage(systemName: "face.smiling.fill"), iconBackgroundColor: .systemYellow, handler: nil)
         ]))
         data.append(Section(title: "", options: [
-            ProfileViewModel(viewModelType: .info, title: "Помощь", icon: UIImage(systemName: "questionmark.circle.fill"), iconBackgroundColor: .systemOrange, handler: nil),
-            ProfileViewModel(viewModelType: .info, title: "О программе", icon: UIImage(systemName: "info"), iconBackgroundColor: .systemGray2, handler: nil)
+            SettingViewModel(viewModelType: .info, title: "Помощь", icon: UIImage(systemName: "questionmark.circle.fill"), iconBackgroundColor: .systemOrange, handler: nil),
+            SettingViewModel(viewModelType: .info, title: "О программе", icon: UIImage(systemName: "info"), iconBackgroundColor: .systemGray2, handler: nil)
         ]))
     }
 
@@ -156,16 +157,26 @@ final class ProfileViewController: UIViewController {
             self?.loginButtonDidLogOut(FBLoginButton.init())
             // Выход из Google
             GIDSignIn.sharedInstance.signOut()
-            do {
-                try FirebaseAuth.Auth.auth().signOut()
-                let viewController = LoginViewController()
-                let navigationController = UINavigationController(rootViewController: viewController)
-                // удаление NavigationBar в LoginViewController
-                navigationController.setNavigationBarHidden(true, animated: false)
-                navigationController.modalPresentationStyle = .fullScreen
-                strongSelf.present(navigationController, animated: true)
-            } catch {
-                print("Не удалось выйти из системы")
+            
+            // TODO: - Код в вразработке
+            guard let user = FirebaseAuth.Auth.auth().currentUser else { return }
+            let onlineRef = Database.database().reference(withPath: "\(user.uid)")
+            onlineRef.removeValue { error, _ in
+                do {
+                    try FirebaseAuth.Auth.auth().signOut()
+                    onlineRef.onDisconnectRemoveValue()
+                    let defaults = UserDefaults.standard
+                    defaults.removeObject(forKey: "email")
+                    defaults.removeObject(forKey: "name")
+                    let viewController = LoginViewController()
+                    let navigationController = UINavigationController(rootViewController: viewController)
+                    // удаление NavigationBar в LoginViewController
+                    navigationController.setNavigationBarHidden(true, animated: false)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    strongSelf.present(navigationController, animated: true)
+                } catch let error {
+                    print("Не удалось выйти из системы авторизации: \(error)")
+                }
             }
         }))
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -176,7 +187,7 @@ final class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = data[section]
@@ -193,7 +204,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = data[indexPath.section].options[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as? ProfileTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath) as? SettingsTableViewCell else {
             return UITableViewCell()
         }
         cell.configure(with: viewModel)
@@ -204,71 +215,5 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let viewModel = data[indexPath.section].options[indexPath.row]
         viewModel.handler?()
-    }
-}
-
-class ProfileTableViewCell: UITableViewCell {
-
-    static let identifier = "ProfileTableViewCell"
-
-    private let label: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        return label
-    }()
-    
-    private let iconContainer: UIView = {
-        let view = UIView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 8
-        view.layer.masksToBounds = true
-        return view
-    }()
-
-    private let iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.tintColor = .white
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(label)
-        contentView.addSubview(iconContainer)
-        iconContainer.addSubview(iconImageView)
-        contentView.clipsToBounds = true
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-
-    // уточнить зачем нужна функция ниже
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        label.text = nil
-        iconContainer.backgroundColor = nil
-        iconImageView.image = nil
-    }
-
-    public func configure(with model: ProfileViewModel) {
-        switch model.viewModelType {
-        case .info:
-            label.text = model.title
-            iconImageView.image = model.icon
-            iconContainer.backgroundColor = model.iconBackgroundColor
-            let size: CGFloat = contentView.frame.size.height - 12
-            iconContainer.frame = CGRect(x: 15, y: 6, width: size, height: size)
-            let imageSize: CGFloat = size/1.5
-            iconImageView.frame = CGRect(x: (size-imageSize)/2, y: (size-imageSize)/2, width: imageSize, height: imageSize)
-            label.frame = CGRect(x: 25 + iconContainer.frame.size.width,
-                                 y: 0,
-                                 width: contentView.frame.size.width - 20 - iconContainer.frame.size.width - 10,
-                                 height: contentView.frame.size.height)
-            accessoryType = .disclosureIndicator
-        case .logout:
-            accessoryType = .none
-        }
     }
 }

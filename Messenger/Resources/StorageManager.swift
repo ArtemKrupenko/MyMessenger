@@ -16,18 +16,15 @@ public enum StorageErrors: Error {
 
 /// Позволяет получать, извлекать и загружать файлы в хранилище firebase.
 final class StorageManager {
-
+    
     static let shared = StorageManager()
-
-    private init() {}
-
     private let metadata = StorageMetadata()
-
     private let storage = Storage.storage().reference()
-
+    private init() {}
+    
     /// Создаем typealias возвращаемого типа (для удобства). Используется ниже
     public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
-
+    
     /// Загружает фото профиля в Firebase и возвращает строку с URL-адресом для загрузки
     public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
         storage.child("images/\(fileName)").putData(data, metadata: nil, completion: { [weak self] _, error in
@@ -51,7 +48,7 @@ final class StorageManager {
             })
         })
     }
-
+    
     /// Загружает фото, которое будет отправлено сообщением в диалог
     public func uploadMessagePhoto(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
         storage.child("message_images/\(fileName)").putData(data, metadata: nil, completion: { [weak self] _, error in
@@ -72,7 +69,7 @@ final class StorageManager {
             })
         })
     }
-
+    
     /// Загружает видео, которое будет отправлено сообщением в диалог
     public func uploadMessageVideo(with fileURL: URL, fileName: String, completion: @escaping UploadPictureCompletion) {
         if let videoData = NSData(contentsOf: fileURL) as Data? {
@@ -96,7 +93,7 @@ final class StorageManager {
             }
         }
     }
-
+    
     /// Загрузка URL-адреса
     public func downloadURL(for path: String, completion: @escaping (Result<URL, Error>) -> Void) {
         let reference = storage.child(path)

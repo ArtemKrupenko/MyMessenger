@@ -1,5 +1,5 @@
 //
-//  ProfileViewModels.swift
+//  SettingViewModels.swift
 //  Messenger
 //
 //  Created by Артем on 12.11.2021.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-enum ProfileViewModelType {
+enum SettingViewModelType {
     case info
     case logout
 }
 
 struct Section {
     public let title: String
-    public let options: [ProfileViewModel]
+    public let options: [SettingViewModel]
 }
 
-struct ProfileViewModel {
-    public let viewModelType: ProfileViewModelType
+struct SettingViewModel {
+    public let viewModelType: SettingViewModelType
     public let title: String
     public let icon: UIImage?
     public let iconBackgroundColor: UIColor
