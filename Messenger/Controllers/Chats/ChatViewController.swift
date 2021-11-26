@@ -57,8 +57,6 @@ final class ChatViewController: MessagesViewController {
         messageInputBar.delegate = self
         setupInputButton()
         navigationItem.backBarButtonItem  = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
-        tabBarController?.tabBar.isHidden = true
-        // скрывает экран клавиатуры при касании
         let gesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(gesture)
     }
@@ -69,14 +67,6 @@ final class ChatViewController: MessagesViewController {
         if let conversationId = conversationId {
             listenForMessages(id: conversationId, shouldScrollToBottom: true)
         }
-//        self.tabBarController?.tabBar.isHidden = true
-//        self.tabBarController?.tabBar.frame = .zero
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.tabBarController?.tabBar.frame = .zero
     }
 
     private func setupInputButton() {
@@ -105,6 +95,7 @@ final class ChatViewController: MessagesViewController {
     private func presentLocationPicker() {
         let viewController = LocationPickerViewController(coordinates: nil)
         viewController.title = "Выберите местоположение"
+        viewController.hidesBottomBarWhenPushed = true
         viewController.navigationItem.largeTitleDisplayMode = .never
         viewController.completion = { [weak self] selectedCoordinates in
             guard let strongSelf = self else {
@@ -154,7 +145,6 @@ final class ChatViewController: MessagesViewController {
             picker.allowsEditing = true
             picker.mediaTypes = ["public.movie"]
             picker.videoExportPreset = AVAssetExportPresetHEVCHighestQuality
-//            picker.videoQuality = .typeMedium
             self?.present(picker, animated: true)
         }))
         actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -166,7 +156,7 @@ final class ChatViewController: MessagesViewController {
             let picker = UIImagePickerController()
             picker.sourceType = .camera
             picker.mediaTypes = ["public.image", "public.movie"]
-            picker.videoQuality = .typeMedium
+            picker.videoExportPreset = AVAssetExportPresetHEVCHighestQuality
             picker.delegate = self
             picker.allowsEditing = true
             present(picker, animated: true)
@@ -222,13 +212,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 switch result {
                 case let .success(urlString):
                     // Отправка фотосообщения
-                    guard let url = URL(string: urlString),
-                          let placeholder = UIImage(systemName: "plus") else {
+                    guard let url = URL(string: urlString) else {
                         return
                     }
                     let media = Media(url: url,
                                       image: nil,
-                                      placeholderImage: placeholder,
+                                      placeholderImage: UIImage(),
                                       size: .zero)
                     let message = Message(sender: selfSender,
                                           messageId: messageId,
@@ -256,12 +245,13 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 switch result {
                 case let .success(urlString):
                     // Отправка видеосообщения
-                    guard let url = URL(string: urlString) else {   // - TODO: изменить placeholder на отображение видео
+                    guard let url = URL(string: urlString),
+                          let placeholder = UIImage(systemName: "placeholder.png") else {   // - TODO: изменить placeholder на отображение видео
                         return
                     }
                     let media = Media(url: url,
                                       image: nil,
-                                      placeholderImage: UIImage(),
+                                      placeholderImage: placeholder,
                                       size: .zero)
                     let message = Message(sender: selfSender,
                                           messageId: messageId,
@@ -370,6 +360,12 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                 return
             }
             imageView.sd_setImage(with: imageUrl, completed: nil)
+        // - TODO: изменить placeholder на отображение видео
+        case let .video(media):
+            guard let imageUrl = media.url else {
+                return
+            }
+            imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder.png"))
         default:
             break
         }
@@ -446,12 +442,14 @@ extension ChatViewController: MessageCellDelegate {
             let coordinates = locationData.location.coordinate
             let viewController = LocationPickerViewController(coordinates: coordinates)
             viewController.title = "Местоположение"
+            viewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(viewController, animated: true)
         default:
             break
         }
     }
 
+    /// Переход на экран фото или видео
     func didTapImage(in cell: MessageCollectionViewCell) {
         guard let indexPath = messagesCollectionView.indexPath(for: cell) else {
             return
@@ -463,6 +461,7 @@ extension ChatViewController: MessageCellDelegate {
                 return
             }
             let viewController = PhotoViewerViewController(with: imageUrl)
+            viewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(viewController, animated: true)
         case let .video(media):
             guard let videoUrl = media.url else {

@@ -279,13 +279,13 @@ extension DatabaseManager {
                 }
                 var kind: MessageKind?
                 if type == "photo" {
-                    guard let imageUrl = URL(string: content),
-                          let placeholder = UIImage(systemName: "plus") else {
+                    guard let imageUrl = URL(string: content) else {
+//                          let placeholder = UIImage(systemName: "plus") else {
                         return nil
                     }
                     let media = Media(url: imageUrl,
                                       image: nil,
-                                      placeholderImage: placeholder,
+                                      placeholderImage: UIImage(),
                                       size: CGSize(width: 300, height: 300))
                     kind = .photo(media)
                 } else if type == "video" {

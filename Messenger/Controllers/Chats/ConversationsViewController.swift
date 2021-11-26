@@ -43,7 +43,6 @@ final class ConversationsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
                                                             target: self,
                                                             action: #selector(didTapComposeButton))
-//        tabBarController?.tabBar.isHidden = false
         navigationItem.backBarButtonItem  = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
