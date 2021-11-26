@@ -43,6 +43,10 @@ final class ConversationsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
                                                             target: self,
                                                             action: #selector(didTapComposeButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Изм.",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didTapEditButton))
         navigationItem.backBarButtonItem  = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
@@ -108,7 +112,11 @@ final class ConversationsViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
-
+    
+    @objc private func didTapEditButton() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+    
     private func createNewConversation(result: SearchResult) {
         let name = result.name
         let email = DatabaseManager.safeEmail(emailAddress: result.email)
@@ -123,6 +131,9 @@ final class ConversationsViewController: UIViewController {
             case let .success(conversationId):
                 let viewController = ChatViewController(with: email, id: conversationId)
                 viewController.isNewConversation = false
+                viewController.title = name
+                viewController.navigationItem.largeTitleDisplayMode = .never
+                strongSelf.navigationController?.pushViewController(viewController, animated: true)
             case .failure:
                 let viewController = ChatViewController(with: email, id: nil)
                 viewController.isNewConversation = true
@@ -195,5 +206,17 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
             })
             tableView.endUpdates()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+        moveConversations(indexPath: fromIndexPath, toIndex: to.row)
+        tableView.reloadData()
+    }
+
+    /// Перемещение диалогов
+    func moveConversations(indexPath: IndexPath, toIndex: Int) {
+        let from = conversations[indexPath.row]
+        self.conversations.remove(at: indexPath.row)
+        self.conversations.insert(from, at: toIndex)
     }
 }
