@@ -25,7 +25,7 @@ final class NewConversationViewController: UIViewController {
     private let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
-        table.register(NewConversationCell.self, forCellReuseIdentifier: NewConversationCell.identifier)
+        table.register(NewConversationCell.self, forCellReuseIdentifier: Identifiers.newConversationCell)
         return table
     }()
 
@@ -77,7 +77,7 @@ extension NewConversationViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = results[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewConversationCell.identifier, for: indexPath) as! NewConversationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.newConversationCell, for: indexPath) as! NewConversationCell
         cell.configure(with: model)
         return cell
     }

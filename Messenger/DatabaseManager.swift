@@ -1,10 +1,3 @@
-//
-//  DatabaseManager.swift
-//  Messenger
-//
-//  Created by Артем on 02.10.2021.
-//
-
 import Foundation
 import FirebaseDatabase
 import MessageKit
@@ -280,12 +273,11 @@ extension DatabaseManager {
                 var kind: MessageKind?
                 if type == "photo" {
                     guard let imageUrl = URL(string: content) else {
-//                          let placeholder = UIImage(systemName: "plus") else {
                         return nil
                     }
                     let media = Media(url: imageUrl,
                                       image: nil,
-                                      placeholderImage: UIImage(),
+                                      placeholderImage: Images.imagePlaceHolder,
                                       size: CGSize(width: 300, height: 300))
                     kind = .photo(media)
                 } else if type == "video" {
@@ -294,7 +286,7 @@ extension DatabaseManager {
                     }
                     let media = Media(url: videoUrl,
                                       image: nil,
-                                      placeholderImage: UIImage(),
+                                      placeholderImage: Images.imagePlaceHolder,
                                       size: CGSize(width: 300, height: 300))
                     // - TODO: заменить placeholder с "plus" на нормальное отображение видео
                     kind = .video(media)

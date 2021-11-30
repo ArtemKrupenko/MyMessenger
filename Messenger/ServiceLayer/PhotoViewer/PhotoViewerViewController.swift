@@ -1,15 +1,16 @@
-//
-//  PhotoViewerViewController.swift
-//  Messenger
-//
-//  Created by Артем on 27.09.2021.
-//
-
 import UIKit
 import SDWebImage
 
 final class PhotoViewerViewController: UIViewController {
-
+    
+    // MARK: - Properties
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    // MARK: - Dependencies
     private let url: URL
 
     init(with url: URL) {
@@ -21,12 +22,7 @@ final class PhotoViewerViewController: UIViewController {
         fatalError("init(coder:) не был выполнен")
     }
 
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-
+    // MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
@@ -38,6 +34,5 @@ final class PhotoViewerViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageView.frame = view.bounds
-
     }
 }

@@ -1,24 +1,20 @@
-//
-//  LocationPickerViewController.swift
-//  Messenger
-//
-//  Created by Артем on 10.11.2021.
-//
-
 import UIKit
 import CoreLocation
 import MapKit
 
 final class LocationPickerViewController: UIViewController {
 
+    // MARK: - Properties
     public var completion: ((CLLocationCoordinate2D) -> Void)?
-    private var coordinates: CLLocationCoordinate2D?
-    private var isPickable = true
 
     private let mapView: MKMapView = {
         let mapView = MKMapView()
         return mapView
     }()
+    
+    // MARK: - Dependencies
+    private var coordinates: CLLocationCoordinate2D?
+    private var isPickable = true
 
     init(coordinates: CLLocationCoordinate2D?) {
         self.coordinates = coordinates
@@ -29,7 +25,8 @@ final class LocationPickerViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) не был выполнен")
     }
-
+    
+    // MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -72,6 +69,7 @@ final class LocationPickerViewController: UIViewController {
         mapView.frame = view.bounds
     }
 
+    // MARK: - Functions
     @objc func sendButtonTapped() {
         guard let coordinates = coordinates else {
             return
@@ -91,28 +89,5 @@ final class LocationPickerViewController: UIViewController {
         let pin = MKPointAnnotation()
         pin.coordinate = coordinates
         mapView.addAnnotation(pin)
-    }
-}
-
-// определение локации пользователя
-class LocationManager: NSObject, CLLocationManagerDelegate {
-
-    static let shared = LocationManager()
-    let manager = CLLocationManager()
-    public var completion: ((CLLocation) -> Void)?
-
-    public func getUserLocation(completion: @escaping ((CLLocation) -> Void)) {
-        self.completion = completion
-        manager.requestWhenInUseAuthorization()
-        manager.delegate = self
-        manager.startUpdatingLocation()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            return
-        }
-        completion?(location)
-        manager.stopUpdatingLocation()
     }
 }

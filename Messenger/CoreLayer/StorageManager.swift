@@ -1,11 +1,4 @@
-//
-//  StorageManager.swift
-//  Messenger
-//
-//  Created by Артем on 19.10.2021.
-//
-
-import Foundation
+import UIKit
 import FirebaseStorage
 
 /// Перечисление с протоколом Error
@@ -17,14 +10,15 @@ public enum StorageErrors: Error {
 /// Позволяет получать, извлекать и загружать файлы в хранилище firebase.
 final class StorageManager {
     
-    static let shared = StorageManager()
-    private let metadata = StorageMetadata()
-    private let storage = Storage.storage().reference()
-    private init() {}
-    
     /// Создаем typealias возвращаемого типа (для удобства). Используется ниже
     public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
     
+    // MARK: - Properties
+    static let shared = StorageManager()
+    private let metadata = StorageMetadata()
+    private let storage = Storage.storage().reference()
+    
+    // MARK: - Functions
     /// Загружает фото профиля в Firebase и возвращает строку с URL-адресом для загрузки
     public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
         storage.child("images/\(fileName)").putData(data, metadata: nil, completion: { [weak self] _, error in

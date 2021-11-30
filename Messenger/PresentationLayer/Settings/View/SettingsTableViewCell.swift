@@ -1,24 +1,16 @@
-//
-//  SettingsTableViewCell.swift
-//  Messenger
-//
-//  Created by Артем on 25.11.2021.
-//
-
-import Foundation
+import UIKit
 import SDWebImage
 
-final class SettingsTableViewCell: UITableViewCell {
+class SettingsTableViewCell: UITableViewCell {
 
-    static let identifier = "SettingsTableViewCell"
-
-    private let label: UILabel = {
+    // MARK: - UI
+    lazy var label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
         return label
     }()
     
-    private let iconContainer: UIView = {
+    lazy var iconContainer: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
@@ -26,23 +18,31 @@ final class SettingsTableViewCell: UITableViewCell {
         return view
     }()
 
-    private let iconImageView: UIImageView = {
+    lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
+    // MARK: - Dependencies
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUIElements()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    private func setupUIElements() {
+//        accessoryType = .disclosureIndicator
+//        selectionStyle = .none
+//        backgroundColor = .clear
         contentView.addSubview(label)
         contentView.addSubview(iconContainer)
         iconContainer.addSubview(iconImageView)
         contentView.clipsToBounds = true
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError()
     }
 
     // уточнить зачем нужна функция ниже

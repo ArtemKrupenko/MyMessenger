@@ -72,7 +72,7 @@ final class ChatViewController: MessagesViewController {
     private func setupInputButton() {
         let button = InputBarButtonItem()
         button.setSize(CGSize(width: 35, height: 35), animated: false)
-        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.setImage(ImagesSystem.paperclip, for: .normal)
         button.onTouchUpInside { [weak self] _ in
             self?.presentInputActionSheet()
         }
@@ -161,9 +161,12 @@ final class ChatViewController: MessagesViewController {
             picker.allowsEditing = true
             present(picker, animated: true)
         } else {
-            let alert = UIAlertController(title: "Внимание", message: "У вас нет камеры", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
-            present(alert, animated: true)
+            let alertController = UIAlertController(title: "Внимание",
+                                                    message: "У вас нет камеры",
+                                                    preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ОК", style: .cancel)
+            alertController.addAction(okAction)
+            present(alertController, animated: true)
         }
     }
 
@@ -217,7 +220,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     }
                     let media = Media(url: url,
                                       image: nil,
-                                      placeholderImage: UIImage(),
+                                      placeholderImage: Images.imagePlaceHolder,
                                       size: .zero)
                     let message = Message(sender: selfSender,
                                           messageId: messageId,
@@ -245,13 +248,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 switch result {
                 case let .success(urlString):
                     // Отправка видеосообщения
-                    guard let url = URL(string: urlString),
-                          let placeholder = UIImage(systemName: "placeholder.png") else {   // - TODO: изменить placeholder на отображение видео
+                    guard let url = URL(string: urlString) else {   // - TODO: изменить placeholder на отображение видео
                         return
                     }
                     let media = Media(url: url,
                                       image: nil,
-                                      placeholderImage: placeholder,
+                                      placeholderImage: Images.imagePlaceHolder,
                                       size: .zero)
                     let message = Message(sender: selfSender,
                                           messageId: messageId,
@@ -365,7 +367,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             guard let imageUrl = media.url else {
                 return
             }
-            imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder.png"))
+            imageView.sd_setImage(with: imageUrl, placeholderImage: Images.imagePlaceHolder)
         default:
             break
         }

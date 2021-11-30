@@ -1,23 +1,41 @@
-//
-//  AppDelegate.swift
-//  Messenger
-//
-//  Created by Артем on 27.09.2021.
-//
-
 import UIKit
 import Firebase
 import FBSDKCoreKit
 import GoogleSignIn
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    public var signInConfig: GIDConfiguration?
-    
+    // MARK: - Properties
     var window: UIWindow?
+    public var signInConfig: GIDConfiguration?
 
+    // MARK: - App Lifecycle
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setupStartScreen()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
+            if let user = user, error == nil {
+                self?.handleSessionRestore(user: user)
+            }
+        }
+        if let clientId = FirebaseApp.app()?.options.clientID {
+            signInConfig = GIDConfiguration.init(clientID: clientId)
+        }
+        return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        var handled: Bool
+        handled = GIDSignIn.sharedInstance.handle(url)
+        if handled {
+            return true
+        }
+        return false
+    }
+
+    // MARK: - Functions
+    private func setupStartScreen() {
         window = UIWindow(frame: UIScreen.main.bounds)
         FirebaseApp.configure()
         // проверяет, есть ли пользователь в системе и переходит на соответствующий экран (если есть то при запуске приложения вход сразу в экран списка диалогов ConversationsViewController, в остальном случае переходит на экран входа LoginViewController)
@@ -40,34 +58,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = LoginViewController()
             window?.makeKeyAndVisible()
         }
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        GIDSignIn.sharedInstance.restorePreviousSignIn { [weak self] user, error in
-            if let user = user, error == nil {
-                self?.handleSessionRestore(user: user)
-            }
-        }
-        if let clientId = FirebaseApp.app()?.options.clientID {
-            signInConfig = GIDConfiguration.init(clientID: clientId)
-        }
-        return true
     }
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        var handled: Bool
-        handled = GIDSignIn.sharedInstance.handle(url)
-        if handled {
-            return true
-        }
-        return false
-    }
-
-    func handleSessionRestore(user: GIDGoogleUser) {
+    
+    public func handleSessionRestore(user: GIDGoogleUser) {
         guard let email = user.profile?.email,
             let firstName = user.profile?.givenName,
             let lastName = user.profile?.familyName else {
                 return
         }
-        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set("\(email)", forKey: "email")
         UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
         DatabaseManager.shared.userExists(with: email, completion: { exists in
             if !exists {
@@ -85,9 +84,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                                 return
                             }
                             URLSession.shared.dataTask(with: url, completionHandler: { data, _, _ in
-                                guard let data = data else {
-                                    return
-                                }
+                                guard let data = data else { return }
                                 let filename = chatUser.profilePictureFileName
                                 StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                     switch result {
@@ -105,9 +102,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         let authentication = user.authentication
-        guard let idToken = authentication.idToken else {
-            return
-        }
+        guard let idToken = authentication.idToken else { return }
         let credential = GoogleAuthProvider.credential(
             withIDToken: idToken,
             accessToken: authentication.accessToken

@@ -20,7 +20,7 @@ final class ConversationsViewController: UIViewController {
         let table = UITableView()
         table.isHidden = true
         table.tableFooterView = UIView(frame: .zero)
-        table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
+        table.register(ConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.conversationTableViewCell)
         return table
     }()
 
@@ -167,7 +167,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = conversations[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier, for: indexPath) as! ConversationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.conversationTableViewCell, for: indexPath) as! ConversationTableViewCell
         cell.configure(with: model)
         return cell
     }

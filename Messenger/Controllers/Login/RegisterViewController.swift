@@ -21,7 +21,7 @@ final class RegisterViewController: UIViewController {
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.crop.circle.badge.plus")
+        imageView.image = ImagesSystem.profileRegister
         imageView.tintColor = UIColor(named: "ColorLogo")
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -91,7 +91,7 @@ final class RegisterViewController: UIViewController {
     
     private let passwordSecureButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.setImage(ImagesSystem.eye, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
         button.tintColor = UIColor.lightGray
         return button
@@ -172,10 +172,10 @@ final class RegisterViewController: UIViewController {
         switch passwordField.isSecureTextEntry {
         case true:
             passwordField.isSecureTextEntry = false
-            passwordSecureButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+            passwordSecureButton.setImage(ImagesSystem.eyeSlash, for: .normal)
         case false:
             passwordField.isSecureTextEntry = true
-            passwordSecureButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            passwordSecureButton.setImage(ImagesSystem.eye, for: .normal)
         }
     }
 
@@ -227,10 +227,8 @@ final class RegisterViewController: UIViewController {
                                            emailAddress: email)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                     if success {
-                        if self?.imageView.image != UIImage(systemName: "person.crop.circle.badge.plus") {
-                            guard let image = strongSelf.imageView.image, let data = image.pngData() else {
-                                return
-                            }
+                        if self?.imageView.image != ImagesSystem.profileRegister {
+                            guard let data = strongSelf.imageView.image?.pngData() else { return }
                             let filename = chatUser.profilePictureFileName
                             StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                 switch result {
@@ -242,9 +240,7 @@ final class RegisterViewController: UIViewController {
                                 }
                             })
                         } else {
-                            guard let image = UIImage(named: "profile_picture"), let data = image.pngData() else {
-                                return
-                            }
+                            guard let data = Images.profilePicture.pngData() else { return }
                             let filename = chatUser.profilePictureFileName
                             StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                 switch result {
@@ -264,16 +260,22 @@ final class RegisterViewController: UIViewController {
         })
     }
 
-    func alertUserLoginError(message: String = "Пожалуйста, заполните все поля") {
-        let alert = UIAlertController(title: "Упс!", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
-        present(alert, animated: true)
+    func alertUserLoginError(message: String  = "Пожалуйста, заполните все поля") {
+        let alertController = UIAlertController(title: "Упс!",
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК", style: .cancel)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 
-    func alertPasswordLoginError(message: String = "Ваш пароль должен состоять как минимум из 8 символов") {
-        let alert = UIAlertController(title: "Упс!", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
-        present(alert, animated: true)
+    func alertPasswordLoginError() {
+        let alertController = UIAlertController(title: "Упс!",
+                                                message: "Ваш пароль должен состоять как минимум из 8 символов",
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК", style: .cancel)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
     
     private func goToChat() {
@@ -329,9 +331,12 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
             picker.allowsEditing = true
             present(picker, animated: true)
         } else {
-            let alert = UIAlertController(title: "Внимание!", message: "Камера отсутствует", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
-            present(alert, animated: true)
+            let alertController = UIAlertController(title: "Внимание!",
+                                                    message: "Камера отсутствует",
+                                                    preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ОК", style: .cancel)
+            alertController.addAction(okAction)
+            present(alertController, animated: true)
         }
     }
 

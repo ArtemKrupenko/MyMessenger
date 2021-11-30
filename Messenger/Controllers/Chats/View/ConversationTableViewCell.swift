@@ -10,8 +10,6 @@ import SDWebImage
 
 final class ConversationTableViewCell: UITableViewCell {
 
-    static let identifier = "ConversationTableViewCell"
-
     private let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill

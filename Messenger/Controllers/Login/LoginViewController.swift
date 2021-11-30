@@ -28,7 +28,7 @@ final class LoginViewController: UIViewController {
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "Logo")
+        imageView.image = Images.logo
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -67,7 +67,7 @@ final class LoginViewController: UIViewController {
     
     private let passwordSecureButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        button.setImage(ImagesSystem.eye, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
         button.tintColor = UIColor.lightGray
         return button
@@ -121,7 +121,14 @@ final class LoginViewController: UIViewController {
     }()
 
     private var loginObserver: NSObjectProtocol?
-
+  
+    //TODO: - Remove all your view inside LogivView and uncomment code
+//    private let mainView = LoginView()
+//
+//    override func loadView() {
+//        view = mainView
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -148,7 +155,7 @@ final class LoginViewController: UIViewController {
         scrollView.addSubview(loginButtonFacebook)
         scrollView.addSubview(googleLogInButton)
         googleLogInButton.addTarget(self, action: #selector(googleSignInButtonTapped), for: .touchUpInside)
-        // скрывает экран клавиатуры при касании
+//        // скрывает экран клавиатуры при касании
 //        let gesture = UITapGestureRecognizer(target: scrollView, action: #selector(UIScrollView.endEditing(_:)))
 //        scrollView.addGestureRecognizer(gesture)
     }
@@ -163,7 +170,7 @@ final class LoginViewController: UIViewController {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         registrationButton.frame = CGRect(x: 250,
-                                          y: 20,
+                                          y: 40,
                                           width: scrollView.frame.size.width / 3,
                                           height: 52)
         imageView.frame = CGRect(x: (scrollView.frame.size.width - (scrollView.frame.size.width / 3)) / 2,
@@ -220,10 +227,10 @@ final class LoginViewController: UIViewController {
         switch passwordField.isSecureTextEntry {
         case true:
             passwordField.isSecureTextEntry = false
-            passwordSecureButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+            passwordSecureButton.setImage(ImagesSystem.eyeSlash, for: .normal)
         case false:
             passwordField.isSecureTextEntry = true
-            passwordSecureButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+            passwordSecureButton.setImage(ImagesSystem.eye, for: .normal)
         }
     }
 
@@ -282,9 +289,12 @@ final class LoginViewController: UIViewController {
     }
 
     private func alertUserLoginError() {
-        let alert = UIAlertController(title: "Ошибка", message: "Пожалуйста, введите корректные данные для входа в систему", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
-        present(alert, animated: true)
+        let alertController = UIAlertController(title: "Ошибка",
+                                                message: "Пожалуйста, введите корректные данные для входа в систему",
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК", style: .cancel)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 
     /// Переход на экран регистрации (RegisterViewController)
