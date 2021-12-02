@@ -13,11 +13,6 @@ final class SettingsViewController: UIViewController {
         return view
     }()
     
-//    lazy var profileSettingsView: ProfileSettingsView = {
-//        let view = ProfileSettingsView()
-//        return view
-//    }()
-    
     public var data = [Section]()
     
     // MARK: - VC Lifecycle
@@ -38,8 +33,8 @@ final class SettingsViewController: UIViewController {
         settingsView.tableView.delegate = self
         settingsView.tableView.dataSource = self
         settingsView.tableView.tableHeaderView = ProfileSettingsView()
-        settingsSections()
         settingsView.tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: Identifiers.settingsTableViewCell)
+        settingsSections()
 //        addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
 

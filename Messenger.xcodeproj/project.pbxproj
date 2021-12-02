@@ -150,7 +150,6 @@
 			children = (
 				AC28AC5927024E7300FEF75C /* Login */,
 				ACB18293274FDB9700FCDCEC /* Chats */,
-				ACB18292274FD51500FCDCEC /* Settings */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -180,14 +179,6 @@
 				AC28AC4D2702479700FEF75C /* RegisterViewController.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		ACB18292274FD51500FCDCEC /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				AC28AC56270248F800FEF75C /* SettingsViewController.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		ACB18293274FDB9700FCDCEC /* Chats */ = {
@@ -315,6 +306,7 @@
 		ACB182A82752C52400FCDCEC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AC28AC56270248F800FEF75C /* SettingsViewController.swift */,
 				ACB182A92753652100FCDCEC /* SettingsViewControllerDelegates.swift */,
 			);
 			path = Controller;

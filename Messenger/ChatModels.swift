@@ -1,10 +1,3 @@
-//
-//  ChatModels.swift
-//  Messenger
-//
-//  Created by Артем on 12.11.2021.
-//
-
 import Foundation
 import CoreLocation
 import MessageKit

@@ -1,10 +1,3 @@
-//
-//  Extensions.swift
-//  Messenger
-//
-//  Created by Артем on 28.09.2021.
-//
-
 import UIKit
 
 extension String {

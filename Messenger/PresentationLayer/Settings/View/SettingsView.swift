@@ -5,7 +5,7 @@ class SettingsView: UIView {
     // MARK: - UI
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-//        tableView.tableFooterView = UIView()
+        tableView.tableHeaderView = UIView()
         return tableView
     }()
 
@@ -21,6 +21,7 @@ class SettingsView: UIView {
 
     func setupUIElements() {
         addSubview(tableView)
+//        tableView.tableHeaderView = ProfileSettingsView()
         setupTableViewConstraints()
     }
 

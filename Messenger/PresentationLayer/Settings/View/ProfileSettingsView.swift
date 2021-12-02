@@ -12,8 +12,6 @@ final class ProfileSettingsView: UIView {
     
     lazy var imageView: UIImageView = {
         let view = UIImageView()
-//        view.backgroundColor = .blue
-//        view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 60
         view.layer.masksToBounds = true
         view.layer.borderColor = UIColor.lightGray.cgColor

@@ -36,9 +36,6 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     private func setupUIElements() {
-//        accessoryType = .disclosureIndicator
-//        selectionStyle = .none
-//        backgroundColor = .clear
         contentView.addSubview(label)
         contentView.addSubview(iconContainer)
         iconContainer.addSubview(iconImageView)
@@ -48,6 +45,7 @@ class SettingsTableViewCell: UITableViewCell {
     // уточнить зачем нужна функция ниже
     override func prepareForReuse() {
         super.prepareForReuse()
+        accessoryType = .none
         label.text = nil
         iconContainer.backgroundColor = nil
         iconImageView.image = nil
