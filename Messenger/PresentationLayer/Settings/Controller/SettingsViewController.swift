@@ -33,10 +33,8 @@ final class SettingsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         settingsView.tableView.delegate = self
         settingsView.tableView.dataSource = self
-//        settingsView.tableView.tableHeaderView = SettingsView()
         settingsView.tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: Identifiers.settingsTableViewCell)
         settingsSections()
-//        addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
 
     public func settingsSections() {
@@ -58,7 +56,7 @@ final class SettingsViewController: UIViewController {
     }
 
 //     сделать objc  метод в профайл вьюхе и в этой же вьюхе сделать экземпляр вьюконтроллера и из этого контроллера в objc  метод передавать функцию логаут
-    @objc public func logout() {
+    public func logout() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Выход из учетной записи", style: .destructive, handler: { [weak self] _ in
             guard let strongSelf = self else {

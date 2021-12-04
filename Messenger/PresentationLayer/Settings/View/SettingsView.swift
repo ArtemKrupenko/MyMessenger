@@ -16,7 +16,7 @@ class SettingsView: UIView {
     
     lazy var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .systemGroupedBackground
         return view
     }()
     
@@ -57,6 +57,11 @@ class SettingsView: UIView {
         return button
     }()
     
+    lazy var settingsViewController: SettingsViewController = {
+        let view = SettingsViewController()
+        return view
+    }()
+    
     // MARK: - Dependencies
 
     init() {
@@ -69,25 +74,19 @@ class SettingsView: UIView {
     }
 
     func setupUIElements() {
-        addSubview(tableView)
-        tableView.addSubview(headerView)
+        addSubview(headerView)
         headerView.addSubview(imageView)
         headerView.addSubview(userNameLabel)
         headerView.addSubview(userEmailLabel)
         headerView.addSubview(buttonOut)
-//        addSubview(headerView)
-//        headerView.addSubview(imageView)
-//        headerView.addSubview(userNameLabel)
-//        headerView.addSubview(userEmailLabel)
-//        headerView.addSubview(buttonOut)
-//        addSubview(tableView)
+        addSubview(tableView)
         setupHeaderViewConstraints()
         setupTableViewConstraints()
         setupImageViewConstraints()
         setupUserNameLabelConstraints()
         setupUserEmailLabelConstraints()
         setupButtonOutConstraints()
-        buttonOut.addTarget(self, action: #selector(SettingsViewController.logout), for: .touchUpInside)
+        buttonOut.addTarget(self, action: #selector(logout), for: .touchUpInside)
         setupTableHeader()
     }
     
@@ -109,27 +108,29 @@ class SettingsView: UIView {
         })
     }
     
+    @objc public func logout() {
+        settingsViewController.logout()
+    }
+    
     // MARK: - Constraints
     private func setupHeaderViewConstraints() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            headerView.heightAnchor.constraint(equalToConstant: 200),
-            headerView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
-            headerView.topAnchor.constraint(equalTo: tableView.topAnchor),
-            headerView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
+            headerView.heightAnchor.constraint(equalToConstant: 240),
+            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            headerView.topAnchor.constraint(equalTo: topAnchor)
         ])
     }
     
     private func setupTableViewConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            tableView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-
-//            tableView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-//            tableView.heightAnchor.constraint(equalToConstant: 2000)
+            tableView.topAnchor.constraint(equalTo: topAnchor, constant: 240),
+            tableView.bottomAnchor.constraint(equalTo: headerView.topAnchor)
         ])
     }
     
