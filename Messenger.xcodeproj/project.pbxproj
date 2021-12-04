@@ -26,8 +26,7 @@
 		ACB1829C2752B25C00FCDCEC /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB1829B2752B25C00FCDCEC /* Identifiers.swift */; };
 		ACB182A22752C36500FCDCEC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182A12752C36500FCDCEC /* LocationManager.swift */; };
 		ACB182AA2753652100FCDCEC /* SettingsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182A92753652100FCDCEC /* SettingsViewControllerDelegates.swift */; };
-		ACB182AC2753683100FCDCEC /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182AB2753683100FCDCEC /* ProfileSettingsView.swift */; };
-		ACB182AE27566FD600FCDCEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182AD27566FD600FCDCEC /* SettingsView.swift */; };
+		ACB182AC2753683100FCDCEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182AB2753683100FCDCEC /* SettingsView.swift */; };
 		ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC05110271F4A8D002AA9B3 /* StorageManager.swift */; };
 		ACC051132727F387002AA9B3 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */; };
 		ACE31EE22735994700245B9E /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE12735994700245B9E /* NewConversationCell.swift */; };
@@ -63,8 +62,7 @@
 		ACB1829B2752B25C00FCDCEC /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		ACB182A12752C36500FCDCEC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		ACB182A92753652100FCDCEC /* SettingsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerDelegates.swift; sourceTree = "<group>"; };
-		ACB182AB2753683100FCDCEC /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
-		ACB182AD27566FD600FCDCEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		ACB182AB2753683100FCDCEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ACC05110271F4A8D002AA9B3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		ACE31EE12735994700245B9E /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
@@ -296,9 +294,8 @@
 		ACB182A72752C51E00FCDCEC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ACB182AB2753683100FCDCEC /* ProfileSettingsView.swift */,
+				ACB182AB2753683100FCDCEC /* SettingsView.swift */,
 				ACB18290274FD49300FCDCEC /* SettingsTableViewCell.swift */,
-				ACB182AD27566FD600FCDCEC /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -472,7 +469,6 @@
 				AC28AC55270248B000FEF75C /* NewConversationViewController.swift in Sources */,
 				AC28AC362702403200FEF75C /* ConversationsViewController.swift in Sources */,
 				ACB182A22752C36500FCDCEC /* LocationManager.swift in Sources */,
-				ACB182AE27566FD600FCDCEC /* SettingsView.swift in Sources */,
 				ACB1829A2752A7F200FCDCEC /* Images.swift in Sources */,
 				AC28AC5B2703405200FEF75C /* Extensions.swift in Sources */,
 				ACB182AA2753652100FCDCEC /* SettingsViewControllerDelegates.swift in Sources */,
@@ -488,7 +484,7 @@
 				ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */,
 				ACE31EE7273E7C5600245B9E /* ConversationsModels.swift in Sources */,
 				ACE31EE4273C048B00245B9E /* LocationPickerViewController.swift in Sources */,
-				ACB182AC2753683100FCDCEC /* ProfileSettingsView.swift in Sources */,
+				ACB182AC2753683100FCDCEC /* SettingsView.swift in Sources */,
 				ACE31EEF273EE41B00245B9E /* ChatAppUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

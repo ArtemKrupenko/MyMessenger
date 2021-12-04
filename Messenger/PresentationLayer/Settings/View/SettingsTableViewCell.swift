@@ -43,17 +43,18 @@ class SettingsTableViewCell: UITableViewCell {
     }
 
     // уточнить зачем нужна функция ниже
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        accessoryType = .none
-        label.text = nil
-        iconContainer.backgroundColor = nil
-        iconImageView.image = nil
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        accessoryType = .none
+//        label.text = nil
+//        iconContainer.backgroundColor = nil
+//        iconImageView.image = nil
+//    }
 
     public func configure(with model: SettingViewModel) {
         switch model.viewModelType {
         case .info:
+            // 1 - переделать на констреинты
             label.text = model.title
             iconImageView.image = model.icon
             iconContainer.backgroundColor = model.iconBackgroundColor

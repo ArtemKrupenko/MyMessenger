@@ -22,5 +22,6 @@ pod 'JGProgressHUD'
 pod 'SDWebImage'
 pod 'InputBarAccessoryView'
 pod 'SwiftLint'
+pod 'SnapKit'
 
 end
