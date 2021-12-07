@@ -42,14 +42,13 @@ class SettingsTableViewCell: UITableViewCell {
         contentView.clipsToBounds = true
     }
 
-    // уточнить зачем нужна функция ниже
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        accessoryType = .none
-//        label.text = nil
-//        iconContainer.backgroundColor = nil
-//        iconImageView.image = nil
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        accessoryType = .none
+        label.text = nil
+        iconContainer.backgroundColor = nil
+        iconImageView.image = nil
+    }
 
     public func configure(with model: SettingViewModel) {
         switch model.viewModelType {
