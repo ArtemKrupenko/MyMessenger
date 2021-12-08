@@ -40,34 +40,50 @@ class SettingsTableViewCell: UITableViewCell {
         contentView.addSubview(iconContainer)
         iconContainer.addSubview(iconImageView)
         contentView.clipsToBounds = true
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        accessoryType = .none
-        label.text = nil
-        iconContainer.backgroundColor = nil
-        iconImageView.image = nil
+        setupIconContainer()
+        setupIconImageView()
+        setupLabel()
     }
 
     public func configure(with model: SettingViewModel) {
         switch model.viewModelType {
         case .info:
-            // 1 - переделать на констреинты
             label.text = model.title
             iconImageView.image = model.icon
             iconContainer.backgroundColor = model.iconBackgroundColor
-            let size: CGFloat = contentView.frame.size.height - 12
-            iconContainer.frame = CGRect(x: 15, y: 6, width: size, height: size)
-            let imageSize: CGFloat = size / 1.5
-            iconImageView.frame = CGRect(x: (size - imageSize) / 2, y: (size - imageSize) / 2, width: imageSize, height: imageSize)
-            label.frame = CGRect(x: 25 + iconContainer.frame.size.width,
-                                 y: 0,
-                                 width: contentView.frame.size.width - 20 - iconContainer.frame.size.width - 10,
-                                 height: contentView.frame.size.height)
             accessoryType = .disclosureIndicator
         case .logout:
             accessoryType = .none
         }
+    }
+    
+    private func setupIconContainer() {
+        iconContainer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            iconContainer.widthAnchor.constraint(equalToConstant: 30),
+            iconContainer.heightAnchor.constraint(equalToConstant: 30),
+            iconContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            iconContainer.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0)
+        ])
+    }
+    
+    private func setupIconImageView() {
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            iconImageView.widthAnchor.constraint(equalToConstant: 20),
+            iconImageView.heightAnchor.constraint(equalToConstant: 20),
+            iconImageView.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
+            iconImageView.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor)
+        ])
+    }
+    
+    private func setupLabel() {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            label.heightAnchor.constraint(equalToConstant: 30),
+            label.bottomAnchor.constraint(equalTo: iconContainer.topAnchor, constant: 30),
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 50)
+        ])
     }
 }

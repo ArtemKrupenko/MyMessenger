@@ -98,6 +98,7 @@ final class SettingsViewController: UIViewController {
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
     }
     
+    // SwiftUI PreviewProvider
     struct ViewControllerProvider: PreviewProvider {
         static var previews: some View {
             Group {

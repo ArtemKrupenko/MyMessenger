@@ -28,7 +28,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let viewModel = data[indexPath.section].options[indexPath.row]
-        // проверить без хендлера
+        // TODO: - Проверить без handler
         viewModel.handler?()
     }
 }
