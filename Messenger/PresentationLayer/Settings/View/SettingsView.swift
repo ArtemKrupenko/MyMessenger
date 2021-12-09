@@ -4,7 +4,6 @@ import FirebaseAuth
 import FirebaseDatabase
 import FBSDKLoginKit
 import GoogleSignIn
-import SnapKit
 
 class SettingsView: UIView {
     

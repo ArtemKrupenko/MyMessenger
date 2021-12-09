@@ -4,8 +4,8 @@ import FirebaseDatabase
 import FBSDKLoginKit
 import GoogleSignIn
 import SDWebImage
-import SwiftUI
 
+/// Контроллер, отображающий список настроек
 final class SettingsViewController: UIViewController {
     
     // MARK: - Properties
@@ -55,7 +55,7 @@ final class SettingsViewController: UIViewController {
         ]))
     }
 
-//     сделать objc  метод в профайл вьюхе и в этой же вьюхе сделать экземпляр вьюконтроллера и из этого контроллера в objc  метод передавать функцию логаут
+// TODO: - Cделать objc  метод в профайл вьюхе и в этой же вьюхе сделать экземпляр вьюконтроллера и из этого контроллера в objc  метод передавать функцию логаут
     public func logout() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Выход из учетной записи", style: .destructive, handler: { [weak self] _ in
@@ -96,26 +96,5 @@ final class SettingsViewController: UIViewController {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-    }
-    
-    // SwiftUI PreviewProvider
-    struct ViewControllerProvider: PreviewProvider {
-        static var previews: some View {
-            Group {
-                ContainerView().edgesIgnoringSafeArea(.all)
-                
-            }
-        }
-        
-        struct ContainerView: UIViewControllerRepresentable {
-            let viewController = SettingsViewController()
-            
-            func makeUIViewController(context: Context) -> some UIViewController {
-                return viewController
-            }
-            
-            func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            }
-        }
     }
 }

@@ -57,6 +57,7 @@ class SettingsTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Constraints
     private func setupIconContainer() {
         iconContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

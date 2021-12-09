@@ -33,7 +33,7 @@ final class NewConversationCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) не был выполнен")
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func layoutSubviews() {

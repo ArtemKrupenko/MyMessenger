@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		69BBE714DF043931652E65DE /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF9E8B6E990EE05465D32D0 /* Pods_Messenger.framework */; };
+		AC012ECF2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012ECE2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift */; };
+		AC012ED12761EB340054E8AB /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012ED02761EB340054E8AB /* ConversationsView.swift */; };
 		AC28AC322702403200FEF75C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC312702403200FEF75C /* AppDelegate.swift */; };
 		AC28AC362702403200FEF75C /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC352702403200FEF75C /* ConversationsViewController.swift */; };
 		AC28AC3B2702403A00FEF75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28AC3A2702403A00FEF75C /* Assets.xcassets */; };
@@ -34,7 +36,7 @@
 		ACE31EE7273E7C5600245B9E /* ConversationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */; };
 		ACE31EE9273E7CE500245B9E /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE8273E7CE500245B9E /* ChatModels.swift */; };
 		ACE31EEB273E7D7900245B9E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EEA273E7D7900245B9E /* SearchResult.swift */; };
-		ACE31EED273E7E4E00245B9E /* SettingsViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EEC273E7E4E00245B9E /* SettingsViewModels.swift */; };
+		ACE31EED273E7E4E00245B9E /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EEC273E7E4E00245B9E /* SettingsModels.swift */; };
 		ACE31EEF273EE41B00245B9E /* ChatAppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EEE273EE41B00245B9E /* ChatAppUser.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		06F327A746BE10952B1AE000 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 		4CF9E8B6E990EE05465D32D0 /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6963F6345499A75C9176279 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
+		AC012ECE2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewControllerDelegates.swift; sourceTree = "<group>"; };
+		AC012ED02761EB340054E8AB /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsView.swift; sourceTree = "<group>"; };
 		AC28AC2E2702403200FEF75C /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28AC312702403200FEF75C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC28AC352702403200FEF75C /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsModels.swift; sourceTree = "<group>"; };
 		ACE31EE8273E7CE500245B9E /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		ACE31EEA273E7D7900245B9E /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
-		ACE31EEC273E7E4E00245B9E /* SettingsViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModels.swift; sourceTree = "<group>"; };
+		ACE31EEC273E7E4E00245B9E /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		ACE31EEE273EE41B00245B9E /* ChatAppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAppUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +107,43 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AC012ECA2760B1740054E8AB /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				AC012ECB2760B1AC0054E8AB /* Model */,
+				AC012ECC2760B1B30054E8AB /* View */,
+				AC012ECD2760B1B80054E8AB /* Controller */,
+			);
+			path = Conversations;
+			sourceTree = "<group>";
+		};
+		AC012ECB2760B1AC0054E8AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ACE31EEA273E7D7900245B9E /* SearchResult.swift */,
+				ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC012ECC2760B1B30054E8AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC012ED02761EB340054E8AB /* ConversationsView.swift */,
+				ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC012ECD2760B1B80054E8AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AC28AC352702403200FEF75C /* ConversationsViewController.swift */,
+				AC012ECE2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		AC28AC252702403200FEF75C = {
 			isa = PBXGroup;
 			children = (
@@ -126,9 +167,7 @@
 			children = (
 				AC28AC45270243A500FEF75C /* Controllers */,
 				ACE31EEE273EE41B00245B9E /* ChatAppUser.swift */,
-				ACE31EEA273E7D7900245B9E /* SearchResult.swift */,
 				ACE31EE8273E7CE500245B9E /* ChatModels.swift */,
-				ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */,
 				AC28AC5A2703405200FEF75C /* Extensions.swift */,
 				AC3A10F62708D872000B01ED /* DatabaseManager.swift */,
 				ACB1829E2752BABF00FCDCEC /* PresentationLayer */,
@@ -182,7 +221,6 @@
 		ACB18293274FDB9700FCDCEC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				AC28AC352702403200FEF75C /* ConversationsViewController.swift */,
 				ACB182952752184900FCDCEC /* View */,
 				ACB18294274FDBAF00FCDCEC /* NewConversation */,
 			);
@@ -201,7 +239,6 @@
 		ACB182952752184900FCDCEC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */,
 				AC3A10FA2719C437000B01ED /* ChatViewController.swift */,
 			);
 			path = View;
@@ -234,6 +271,7 @@
 		ACB1829E2752BABF00FCDCEC /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				AC012ECA2760B1740054E8AB /* Conversations */,
 				ACB182A52752C4FE00FCDCEC /* Settings */,
 			);
 			path = PresentationLayer;
@@ -286,7 +324,7 @@
 		ACB182A62752C51000FCDCEC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ACE31EEC273E7E4E00245B9E /* SettingsViewModels.swift */,
+				ACE31EEC273E7E4E00245B9E /* SettingsModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -479,13 +517,15 @@
 				ACB18291274FD49300FCDCEC /* SettingsTableViewCell.swift in Sources */,
 				ACC051132727F387002AA9B3 /* ConversationTableViewCell.swift in Sources */,
 				AC3A10FB2719C437000B01ED /* ChatViewController.swift in Sources */,
-				ACE31EED273E7E4E00245B9E /* SettingsViewModels.swift in Sources */,
+				ACE31EED273E7E4E00245B9E /* SettingsModels.swift in Sources */,
 				AC28AC502702480600FEF75C /* PhotoViewerViewController.swift in Sources */,
 				ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */,
 				ACE31EE7273E7C5600245B9E /* ConversationsModels.swift in Sources */,
+				AC012ECF2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift in Sources */,
 				ACE31EE4273C048B00245B9E /* LocationPickerViewController.swift in Sources */,
 				ACB182AC2753683100FCDCEC /* SettingsView.swift in Sources */,
 				ACE31EEF273EE41B00245B9E /* ChatAppUser.swift in Sources */,
+				AC012ED12761EB340054E8AB /* ConversationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
