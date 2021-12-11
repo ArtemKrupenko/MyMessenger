@@ -122,7 +122,7 @@ final class LoginViewController: UIViewController {
 
     private var loginObserver: NSObjectProtocol?
   
-    //TODO: - Remove all your view inside LogivView and uncomment code
+    //TODO: - Remove all your view inside LoginView and uncomment code
 //    private let mainView = LoginView()
 //
 //    override func loadView() {

@@ -3,14 +3,14 @@ import UIKit
 class ConversationsView: UIView {
     
     // MARK: - UI
-    lazy var tableView: UITableView = {
+    public let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
         table.tableFooterView = UIView(frame: .zero)
         return table
     }()
 
-    lazy var noConversationsLabel: UILabel = {
+    public let noConversationsLabel: UILabel = {
         let label = UILabel()
         label.text = "Нет диалогов"
         label.textAlignment = .center
@@ -34,12 +34,12 @@ class ConversationsView: UIView {
     func setupUIElements() {
         addSubview(tableView)
         addSubview(noConversationsLabel)
-        setupTableViewConstraints()
-        setupNoConversationsLabel()
+        setupConstraints()
     }
     
     // MARK: - Constraints
-    private func setupTableViewConstraints() {
+    private func setupConstraints() {
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -47,9 +47,7 @@ class ConversationsView: UIView {
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-
-    private func setupNoConversationsLabel() {
+        
         noConversationsLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             noConversationsLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

@@ -6,10 +6,7 @@ import JGProgressHUD
 final class ConversationsViewController: UIViewController {
     
     // MARK: - Properties
-    lazy var conversationsView: ConversationsView = {
-        let view = ConversationsView()
-        return view
-    }()
+    private let conversationsView = ConversationsView()
 
     public var conversations = [Conversation]()
 

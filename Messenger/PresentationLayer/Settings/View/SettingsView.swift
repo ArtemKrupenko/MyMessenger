@@ -8,18 +8,15 @@ import GoogleSignIn
 class SettingsView: UIView {
     
     // MARK: - UI
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        return tableView
-    }()
-    
-    lazy var headerView: UIView = {
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+
+    private let headerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGroupedBackground
         return view
     }()
     
-    lazy var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 60
         view.layer.masksToBounds = true
@@ -28,7 +25,7 @@ class SettingsView: UIView {
         return view
     }()
 
-    lazy var userNameLabel: UILabel = {
+    private let userNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
         label.text = "\(UserDefaults.standard.value(forKey: "name") as? String ?? "Нет имени пользователя")"
@@ -36,7 +33,7 @@ class SettingsView: UIView {
         return label
     }()
 
-    lazy var userEmailLabel: UILabel = {
+    private let userEmailLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .thin)
         label.text = "\(UserDefaults.standard.value(forKey: "email") as? String ?? "Нет email-адреса")"
@@ -44,7 +41,7 @@ class SettingsView: UIView {
         return label
     }()
 
-    lazy var buttonOut: UIButton = {
+    public let buttonOut: UIButton = {
         let button = UIButton()
         button.setTitle("Выйти", for: .normal)
         button.backgroundColor = .systemGroupedBackground
@@ -56,10 +53,7 @@ class SettingsView: UIView {
         return button
     }()
     
-    lazy var settingsViewController: SettingsViewController = {
-        let view = SettingsViewController()
-        return view
-    }()
+//    private let settingsViewController = SettingsViewController()
     
     // MARK: - Dependencies
 
@@ -79,14 +73,9 @@ class SettingsView: UIView {
         headerView.addSubview(userEmailLabel)
         headerView.addSubview(buttonOut)
         addSubview(tableView)
-        setupHeaderViewConstraints()
-        setupTableViewConstraints()
-        setupImageViewConstraints()
-        setupUserNameLabelConstraints()
-        setupUserEmailLabelConstraints()
-        setupButtonOutConstraints()
-        buttonOut.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        setupConstraints()
         setupTableHeader()
+//        buttonOut.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
     
     func setupTableHeader() {
@@ -107,12 +96,13 @@ class SettingsView: UIView {
         })
     }
     
-    @objc public func logout() {
-        settingsViewController.logout()
-    }
+//    @objc public func logout() {
+//        settingsViewController.logout()
+//    }
     
     // MARK: - Constraints
-    private func setupHeaderViewConstraints() {
+    private func setupConstraints() {
+        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerView.heightAnchor.constraint(equalToConstant: 240),
@@ -120,9 +110,7 @@ class SettingsView: UIView {
             headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             headerView.topAnchor.constraint(equalTo: topAnchor)
         ])
-    }
-    
-    private func setupTableViewConstraints() {
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor),
@@ -131,9 +119,7 @@ class SettingsView: UIView {
             tableView.topAnchor.constraint(equalTo: topAnchor, constant: 240),
             tableView.bottomAnchor.constraint(equalTo: headerView.topAnchor)
         ])
-    }
-    
-    private func setupImageViewConstraints() {
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: 120),
@@ -141,9 +127,7 @@ class SettingsView: UIView {
             imageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor)
         ])
-    }
-    
-    private func setupUserNameLabelConstraints() {
+        
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             userNameLabel.widthAnchor.constraint(equalTo: headerView.widthAnchor),
@@ -151,9 +135,7 @@ class SettingsView: UIView {
             userNameLabel.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: 150),
             userNameLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor)
         ])
-    }
-    
-    private func setupUserEmailLabelConstraints() {
+        
         userEmailLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             userEmailLabel.widthAnchor.constraint(equalTo: headerView.widthAnchor),
@@ -161,9 +143,7 @@ class SettingsView: UIView {
             userEmailLabel.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: 180),
             userEmailLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor)
         ])
-    }
-    
-    private func setupButtonOutConstraints() {
+        
         buttonOut.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonOut.heightAnchor.constraint(equalToConstant: 52),

@@ -4,17 +4,15 @@ import FirebaseDatabase
 import FBSDKLoginKit
 import GoogleSignIn
 import SDWebImage
+import SwiftUI
 
 /// Контроллер, отображающий список настроек
 final class SettingsViewController: UIViewController {
     
     // MARK: - Properties
-    lazy var settingsView: SettingsView = {
-        let view = SettingsView()
-        return view
-    }()
+    private let settingsView = SettingsView()
     
-    public var data = [Section]()
+    var data = [Section]()
     
     // MARK: - VC Lifecycle
     override func loadView() {
@@ -35,6 +33,7 @@ final class SettingsViewController: UIViewController {
         settingsView.tableView.dataSource = self
         settingsView.tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: Identifiers.settingsTableViewCell)
         settingsSections()
+        settingsView.buttonOut.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
 
     public func settingsSections() {
@@ -55,10 +54,11 @@ final class SettingsViewController: UIViewController {
         ]))
     }
 
-// TODO: - Cделать objc  метод в профайл вьюхе и в этой же вьюхе сделать экземпляр вьюконтроллера и из этого контроллера в objc  метод передавать функцию логаут
-    public func logout() {
+    @objc func logout() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Выход из учетной записи", style: .destructive, handler: { [weak self] _ in
+        actionSheet.addAction(UIAlertAction(title: "Выход из учетной записи",
+                                            style: .destructive,
+                                            handler: { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }
@@ -96,5 +96,22 @@ final class SettingsViewController: UIViewController {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+    }
+    
+    struct ViewControllerProvider: PreviewProvider {
+        static var previews: some View {
+            ContainerView().edgesIgnoringSafeArea(.all)
+        }
+        
+        struct ContainerView: UIViewControllerRepresentable {
+            let viewController = SettingsViewController()
+            // заменить ViewController() на свой ViewController
+            func makeUIViewController(context: Context) -> some UIViewController {
+                return viewController
+            }
+            
+            func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+            }
+        }
     }
 }

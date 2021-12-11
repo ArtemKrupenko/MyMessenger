@@ -4,13 +4,13 @@ import SDWebImage
 class SettingsTableViewCell: UITableViewCell {
 
     // MARK: - UI
-    lazy var label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
         return label
     }()
     
-    lazy var iconContainer: UIView = {
+    private let iconContainer: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
@@ -18,7 +18,7 @@ class SettingsTableViewCell: UITableViewCell {
         return view
     }()
 
-    lazy var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
@@ -40,9 +40,7 @@ class SettingsTableViewCell: UITableViewCell {
         contentView.addSubview(iconContainer)
         iconContainer.addSubview(iconImageView)
         contentView.clipsToBounds = true
-        setupIconContainer()
-        setupIconImageView()
-        setupLabel()
+        setupConstraints()
     }
 
     public func configure(with model: SettingViewModel) {
@@ -58,7 +56,8 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     // MARK: - Constraints
-    private func setupIconContainer() {
+    private func setupConstraints() {
+        
         iconContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             iconContainer.widthAnchor.constraint(equalToConstant: 30),
@@ -66,9 +65,7 @@ class SettingsTableViewCell: UITableViewCell {
             iconContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             iconContainer.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0)
         ])
-    }
-    
-    private func setupIconImageView() {
+        
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             iconImageView.widthAnchor.constraint(equalToConstant: 20),
@@ -76,9 +73,7 @@ class SettingsTableViewCell: UITableViewCell {
             iconImageView.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
             iconImageView.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor)
         ])
-    }
-    
-    private func setupLabel() {
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.widthAnchor.constraint(equalTo: contentView.widthAnchor),

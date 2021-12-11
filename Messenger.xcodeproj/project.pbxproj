@@ -120,7 +120,6 @@
 		AC012ECB2760B1AC0054E8AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ACE31EEA273E7D7900245B9E /* SearchResult.swift */,
 				ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */,
 			);
 			path = Model;
@@ -165,11 +164,11 @@
 		AC28AC302702403200FEF75C /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
-				AC28AC45270243A500FEF75C /* Controllers */,
+				AC28AC4B2702476900FEF75C /* LoginViewController.swift */,
+				AC28AC4D2702479700FEF75C /* RegisterViewController.swift */,
+				ACB18293274FDB9700FCDCEC /* Chats */,
 				ACE31EEE273EE41B00245B9E /* ChatAppUser.swift */,
 				ACE31EE8273E7CE500245B9E /* ChatModels.swift */,
-				AC28AC5A2703405200FEF75C /* Extensions.swift */,
-				AC3A10F62708D872000B01ED /* DatabaseManager.swift */,
 				ACB1829E2752BABF00FCDCEC /* PresentationLayer */,
 				ACB1829F2752BAE700FCDCEC /* ServiceLayer */,
 				ACB182A02752BAF200FCDCEC /* CoreLayer */,
@@ -180,15 +179,6 @@
 				ACB182972752963E00FCDCEC /* Supporting files */,
 			);
 			path = Messenger;
-			sourceTree = "<group>";
-		};
-		AC28AC45270243A500FEF75C /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				AC28AC5927024E7300FEF75C /* Login */,
-				ACB18293274FDB9700FCDCEC /* Chats */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		AC28AC49270243F300FEF75C /* Resources */ = {
@@ -209,15 +199,6 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		AC28AC5927024E7300FEF75C /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				AC28AC4B2702476900FEF75C /* LoginViewController.swift */,
-				AC28AC4D2702479700FEF75C /* RegisterViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		ACB18293274FDB9700FCDCEC /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +211,7 @@
 		ACB18294274FDBAF00FCDCEC /* NewConversation */ = {
 			isa = PBXGroup;
 			children = (
+				ACE31EEA273E7D7900245B9E /* SearchResult.swift */,
 				ACE31EE12735994700245B9E /* NewConversationCell.swift */,
 				AC28AC54270248B000FEF75C /* NewConversationViewController.swift */,
 			);
@@ -257,6 +239,7 @@
 		ACB1829827529E9A00FCDCEC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AC28AC5A2703405200FEF75C /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -290,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				ACC05110271F4A8D002AA9B3 /* StorageManager.swift */,
+				AC3A10F62708D872000B01ED /* DatabaseManager.swift */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
