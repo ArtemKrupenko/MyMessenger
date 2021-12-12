@@ -4,7 +4,6 @@ import FirebaseDatabase
 import FBSDKLoginKit
 import GoogleSignIn
 import SDWebImage
-import SwiftUI
 
 /// Контроллер, отображающий список настроек
 final class SettingsViewController: UIViewController {
@@ -96,22 +95,5 @@ final class SettingsViewController: UIViewController {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-    }
-    
-    struct ViewControllerProvider: PreviewProvider {
-        static var previews: some View {
-            ContainerView().edgesIgnoringSafeArea(.all)
-        }
-        
-        struct ContainerView: UIViewControllerRepresentable {
-            let viewController = SettingsViewController()
-            // заменить ViewController() на свой ViewController
-            func makeUIViewController(context: Context) -> some UIViewController {
-                return viewController
-            }
-            
-            func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            }
-        }
     }
 }
