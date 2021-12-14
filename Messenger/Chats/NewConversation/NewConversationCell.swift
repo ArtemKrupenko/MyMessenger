@@ -1,10 +1,3 @@
-//
-//  NewConversationCell.swift
-//  Messenger
-//
-//  Created by Артем on 05.11.2021.
-//
-
 import Foundation
 import SDWebImage
 
