@@ -53,8 +53,6 @@ class SettingsView: UIView {
         return button
     }()
     
-//    private let settingsViewController = SettingsViewController()
-    
     // MARK: - Dependencies
 
     init() {
@@ -75,7 +73,6 @@ class SettingsView: UIView {
         addSubview(tableView)
         setupConstraints()
         setupTableHeader()
-//        buttonOut.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
     
     func setupTableHeader() {
@@ -96,13 +93,9 @@ class SettingsView: UIView {
         })
     }
     
-//    @objc public func logout() {
-//        settingsViewController.logout()
-//    }
-    
     // MARK: - Constraints
     private func setupConstraints() {
-        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+//        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerView.heightAnchor.constraint(equalToConstant: 240),

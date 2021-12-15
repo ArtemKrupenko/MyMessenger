@@ -2,7 +2,7 @@ import UIKit
 
 enum Identifiers {
     static let conversationTableViewCell = "ConversationTableViewCell"
-    static let newConversationCell = "NewConversationCell"
+    static let newConversationTableViewCell = "NewConversationTableViewCell"
     static let settingsTableViewCell = "SettingsTableViewCell"
     static let settingsView = "SettingsView"
 }

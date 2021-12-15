@@ -1,91 +1,57 @@
 import UIKit
 import JGProgressHUD
 
+/// Контроллер, отображающий поиск и создание нового диалога
 final class NewConversationViewController: UIViewController {
 
+    // MARK: - Properties
     public var completion: ((SearchResult) -> Void)?
     private let spinner = JGProgressHUD(style: .dark)
     private var users = [[String: String]]()
-    private var results = [SearchResult]()
+    public var results = [SearchResult]()
     private var hasFetched = false
-
+    private let newConversationView = NewConversationView()
+    
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Поиск"
         return searchBar
     }()
 
-    private let tableView: UITableView = {
-        let table = UITableView()
-        table.isHidden = true
-        table.register(NewConversationCell.self, forCellReuseIdentifier: Identifiers.newConversationCell)
-        return table
-    }()
+    // MARK: - VC Lifecycle
 
-    private let noResultLabel: UILabel = {
-        let label = UILabel()
-        label.isHidden = true
-        label.text = "Нет результатов"
-        label.textAlignment = .center
-        label.textColor = UIColor.gray
-        label.font = .systemFont(ofSize: 18, weight: .medium)
-        return label
-    }()
-
+    override func loadView() {
+        view = newConversationView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(noResultLabel)
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
+        setupView()
+        setupNavigationBar()
+    }
+    
+    // MARK: - Functions
+    private func setupView() {
+        newConversationView.setupUIElements()
+        newConversationView.backgroundColor = .systemBackground
+        newConversationView.tableView.delegate = self
+        newConversationView.tableView.dataSource = self
         searchBar.delegate = self
-        view.backgroundColor = .systemBackground
+        searchBar.becomeFirstResponder()
+        newConversationView.tableView.register(NewConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.newConversationTableViewCell)
+        newConversationView.tableView.frame = view.bounds
+    }
+    
+    private func setupNavigationBar() {
         navigationController?.navigationBar.topItem?.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Отмена",
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(dismissSelf))
-        searchBar.becomeFirstResponder()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-        noResultLabel.frame = CGRect(x: view.frame.size.width / 4,
-                                     y: (view.frame.size.height - 200) / 2,
-                                     width: view.frame.size.width / 2,
-                                     height: 200)
     }
 
     @objc private func dismissSelf() {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension NewConversationViewController: UITableViewDelegate, UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = results[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.newConversationCell, for: indexPath) as! NewConversationCell
-        cell.configure(with: model)
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        // Начинаем беседу
-        let targetUserData = results[indexPath.row]
-        dismiss(animated: true, completion: { [weak self] in
-            self?.completion?(targetUserData)
-        })
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
     }
 }
 
@@ -147,12 +113,12 @@ extension NewConversationViewController: UISearchBarDelegate {
 
     func updateUI() {
         if results.isEmpty {
-            noResultLabel.isHidden = false
-            tableView.isHidden = true
+            newConversationView.noResultLabel.isHidden = false
+            newConversationView.tableView.isHidden = true
         } else {
-            noResultLabel.isHidden = true
-            tableView.isHidden = false
-            tableView.reloadData()
+            newConversationView.noResultLabel.isHidden = true
+            newConversationView.tableView.isHidden = false
+            newConversationView.tableView.reloadData()
         }
     }
 }

@@ -1,10 +1,3 @@
-//
-//  ChatViewController.swift
-//  Messenger
-//
-//  Created by Артем on 15.10.2021.
-//
-
 import UIKit
 import MessageKit
 import InputBarAccessoryView
