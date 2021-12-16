@@ -3,7 +3,6 @@ import UIKit
 class NewConversationView: UIView {
     
     // MARK: - UI
-
     public let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
@@ -21,7 +20,6 @@ class NewConversationView: UIView {
     }()
     
     // MARK: - Dependencies
-
     init() {
         super.init(frame: UIScreen.main.bounds)
         setupUIElements()
@@ -35,11 +33,11 @@ class NewConversationView: UIView {
         addSubview(noResultLabel)
         addSubview(tableView)
         setupConstraints()
+        backgroundColor = .systemBackground
     }
     
     // MARK: - Constraints
     private func setupConstraints() {
-
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

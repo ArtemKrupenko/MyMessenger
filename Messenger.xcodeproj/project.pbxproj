@@ -12,6 +12,8 @@
 		AC012ED12761EB340054E8AB /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012ED02761EB340054E8AB /* ConversationsView.swift */; };
 		AC012ED7276A0A870054E8AB /* NewConversationViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012ED6276A0A870054E8AB /* NewConversationViewControllerDelegates.swift */; };
 		AC012ED9276A0CA80054E8AB /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012ED8276A0CA80054E8AB /* NewConversationView.swift */; };
+		AC012EE3276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE2276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift */; };
+		AC012EE5276BCA020054E8AB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE4276BCA020054E8AB /* RegisterView.swift */; };
 		AC28AC322702403200FEF75C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC312702403200FEF75C /* AppDelegate.swift */; };
 		AC28AC362702403200FEF75C /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC352702403200FEF75C /* ConversationsViewController.swift */; };
 		AC28AC3B2702403A00FEF75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28AC3A2702403A00FEF75C /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		AC012ED02761EB340054E8AB /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsView.swift; sourceTree = "<group>"; };
 		AC012ED6276A0A870054E8AB /* NewConversationViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewControllerDelegates.swift; sourceTree = "<group>"; };
 		AC012ED8276A0CA80054E8AB /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
+		AC012EE2276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerDelegates.swift; sourceTree = "<group>"; };
+		AC012EE4276BCA020054E8AB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		AC28AC2E2702403200FEF75C /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28AC312702403200FEF75C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC28AC352702403200FEF75C /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,40 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AC012EDE276BC3760054E8AB /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EE1276BC3A70054E8AB /* Model */,
+				AC012EE0276BC3A20054E8AB /* View */,
+				AC012EDF276BC3990054E8AB /* Controller */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		AC012EDF276BC3990054E8AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AC28AC4D2702479700FEF75C /* RegisterViewController.swift */,
+				AC012EE2276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AC012EE0276BC3A20054E8AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EE4276BCA020054E8AB /* RegisterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC012EE1276BC3A70054E8AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		AC28AC252702403200FEF75C = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				AC28AC4B2702476900FEF75C /* LoginViewController.swift */,
-				AC28AC4D2702479700FEF75C /* RegisterViewController.swift */,
+				AC012EDA276A31CF0054E8AB /* Chat */,
 				ACB1829E2752BABF00FCDCEC /* PresentationLayer */,
 				ACB1829F2752BAE700FCDCEC /* ServiceLayer */,
 				ACB182A02752BAF200FCDCEC /* CoreLayer */,
@@ -298,7 +336,7 @@
 		ACB1829E2752BABF00FCDCEC /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				AC012EDA276A31CF0054E8AB /* Chat */,
+				AC012EDE276BC3760054E8AB /* Register */,
 				AC012ED2276A0A160054E8AB /* NewConversation */,
 				AC012ECA2760B1740054E8AB /* Conversations */,
 				ACB182A52752C4FE00FCDCEC /* Settings */,
@@ -531,6 +569,8 @@
 			files = (
 				AC28AC4C2702476900FEF75C /* LoginViewController.swift in Sources */,
 				ACE31EE22735994700245B9E /* NewConversationTableViewCell.swift in Sources */,
+				AC012EE5276BCA020054E8AB /* RegisterView.swift in Sources */,
+				AC012EE3276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift in Sources */,
 				AC3A10F72708D872000B01ED /* DatabaseManager.swift in Sources */,
 				ACE31EE9273E7CE500245B9E /* ChatModels.swift in Sources */,
 				AC28AC4E2702479700FEF75C /* RegisterViewController.swift in Sources */,

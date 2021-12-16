@@ -52,9 +52,7 @@ class NewConversationTableViewCell: UITableViewCell {
     }
     
     // MARK: - Constraints
-    
     private func setupConstraints() {
-        
         userImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             userImageView.widthAnchor.constraint(equalToConstant: 70),

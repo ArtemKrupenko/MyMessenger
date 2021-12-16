@@ -54,7 +54,6 @@ class SettingsView: UIView {
     }()
     
     // MARK: - Dependencies
-
     init() {
         super.init(frame: .zero)
         setupUIElements()
@@ -95,7 +94,6 @@ class SettingsView: UIView {
     
     // MARK: - Constraints
     private func setupConstraints() {
-//        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerView.heightAnchor.constraint(equalToConstant: 240),

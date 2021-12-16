@@ -7,9 +7,7 @@ final class ConversationsViewController: UIViewController {
     
     // MARK: - Properties
     private let conversationsView = ConversationsView()
-
     public var conversations = [Conversation]()
-
     private var loginObserver: NSObjectProtocol?
     
     // MARK: - VC Lifecycle
@@ -56,7 +54,6 @@ final class ConversationsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
     public func startListeningForConversations() {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return

@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-// определение локации пользователя
+/// Определение локации пользователя
 class LocationManager: NSObject, CLLocationManagerDelegate {
 
     // MARK: - Properties

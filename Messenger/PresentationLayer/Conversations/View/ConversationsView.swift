@@ -21,7 +21,6 @@ class ConversationsView: UIView {
     }()
     
     // MARK: - Dependencies
-
     init() {
         super.init(frame: UIScreen.main.bounds)
         setupUIElements()
@@ -39,7 +38,6 @@ class ConversationsView: UIView {
     
     // MARK: - Constraints
     private func setupConstraints() {
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
