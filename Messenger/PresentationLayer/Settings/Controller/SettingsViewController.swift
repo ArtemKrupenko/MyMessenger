@@ -68,7 +68,6 @@ final class SettingsViewController: UIViewController {
             self?.loginButtonDidLogOut(FBLoginButton.init())
             // Выход из Google
             GIDSignIn.sharedInstance.signOut()
-            
             // TODO: - Код в разработке (при выходе из учетной записи не удаляет данные предыдущего пользователя)
             guard let user = FirebaseAuth.Auth.auth().currentUser else { return }
             let onlineRef = Database.database().reference(withPath: "\(user.uid)")

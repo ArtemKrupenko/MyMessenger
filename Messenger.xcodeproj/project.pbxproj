@@ -14,6 +14,10 @@
 		AC012ED9276A0CA80054E8AB /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012ED8276A0CA80054E8AB /* NewConversationView.swift */; };
 		AC012EE3276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE2276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift */; };
 		AC012EE5276BCA020054E8AB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE4276BCA020054E8AB /* RegisterView.swift */; };
+		AC012EE7276CA1530054E8AB /* ChatViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE6276CA1530054E8AB /* ChatViewControllerDelegates.swift */; };
+		AC012EE9276CA52E0054E8AB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE8276CA52E0054E8AB /* ChatView.swift */; };
+		AC012EEF276D078E0054E8AB /* LoginViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EEE276D078E0054E8AB /* LoginViewControllerDelegates.swift */; };
+		AC012EF1276D09110054E8AB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EF0276D09110054E8AB /* LoginView.swift */; };
 		AC28AC322702403200FEF75C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC312702403200FEF75C /* AppDelegate.swift */; };
 		AC28AC362702403200FEF75C /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC352702403200FEF75C /* ConversationsViewController.swift */; };
 		AC28AC3B2702403A00FEF75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28AC3A2702403A00FEF75C /* Assets.xcassets */; };
@@ -54,6 +58,10 @@
 		AC012ED8276A0CA80054E8AB /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
 		AC012EE2276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerDelegates.swift; sourceTree = "<group>"; };
 		AC012EE4276BCA020054E8AB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		AC012EE6276CA1530054E8AB /* ChatViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerDelegates.swift; sourceTree = "<group>"; };
+		AC012EE8276CA52E0054E8AB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		AC012EEE276D078E0054E8AB /* LoginViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegates.swift; sourceTree = "<group>"; };
+		AC012EF0276D09110054E8AB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AC28AC2E2702403200FEF75C /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28AC312702403200FEF75C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC28AC352702403200FEF75C /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3A10FA2719C437000B01ED /* ChatViewController.swift */,
+				AC012EE6276CA1530054E8AB /* ChatViewControllerDelegates.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -208,6 +217,7 @@
 		AC012EDC276A31E70054E8AB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC012EE8276CA52E0054E8AB /* ChatView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +265,40 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AC012EEA276D073B0054E8AB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EED276D07650054E8AB /* Model */,
+				AC012EEC276D075E0054E8AB /* View */,
+				AC012EEB276D074A0054E8AB /* Controller */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AC012EEB276D074A0054E8AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AC28AC4B2702476900FEF75C /* LoginViewController.swift */,
+				AC012EEE276D078E0054E8AB /* LoginViewControllerDelegates.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AC012EEC276D075E0054E8AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EF0276D09110054E8AB /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC012EED276D07650054E8AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		AC28AC252702403200FEF75C = {
 			isa = PBXGroup;
 			children = (
@@ -276,8 +320,6 @@
 		AC28AC302702403200FEF75C /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
-				AC28AC4B2702476900FEF75C /* LoginViewController.swift */,
-				AC012EDA276A31CF0054E8AB /* Chat */,
 				ACB1829E2752BABF00FCDCEC /* PresentationLayer */,
 				ACB1829F2752BAE700FCDCEC /* ServiceLayer */,
 				ACB182A02752BAF200FCDCEC /* CoreLayer */,
@@ -336,7 +378,9 @@
 		ACB1829E2752BABF00FCDCEC /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				AC012EEA276D073B0054E8AB /* Login */,
 				AC012EDE276BC3760054E8AB /* Register */,
+				AC012EDA276A31CF0054E8AB /* Chat */,
 				AC012ED2276A0A160054E8AB /* NewConversation */,
 				AC012ECA2760B1740054E8AB /* Conversations */,
 				ACB182A52752C4FE00FCDCEC /* Settings */,
@@ -571,12 +615,15 @@
 				ACE31EE22735994700245B9E /* NewConversationTableViewCell.swift in Sources */,
 				AC012EE5276BCA020054E8AB /* RegisterView.swift in Sources */,
 				AC012EE3276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift in Sources */,
+				AC012EE9276CA52E0054E8AB /* ChatView.swift in Sources */,
 				AC3A10F72708D872000B01ED /* DatabaseManager.swift in Sources */,
 				ACE31EE9273E7CE500245B9E /* ChatModels.swift in Sources */,
 				AC28AC4E2702479700FEF75C /* RegisterViewController.swift in Sources */,
+				AC012EF1276D09110054E8AB /* LoginView.swift in Sources */,
 				AC28AC55270248B000FEF75C /* NewConversationViewController.swift in Sources */,
 				AC28AC362702403200FEF75C /* ConversationsViewController.swift in Sources */,
 				ACB182A22752C36500FCDCEC /* LocationManager.swift in Sources */,
+				AC012EEF276D078E0054E8AB /* LoginViewControllerDelegates.swift in Sources */,
 				ACB1829A2752A7F200FCDCEC /* Images.swift in Sources */,
 				AC012ED7276A0A870054E8AB /* NewConversationViewControllerDelegates.swift in Sources */,
 				AC28AC5B2703405200FEF75C /* Extensions.swift in Sources */,
@@ -594,6 +641,7 @@
 				ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */,
 				ACE31EE7273E7C5600245B9E /* ConversationsModels.swift in Sources */,
 				AC012ECF2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift in Sources */,
+				AC012EE7276CA1530054E8AB /* ChatViewControllerDelegates.swift in Sources */,
 				ACE31EE4273C048B00245B9E /* LocationPickerViewController.swift in Sources */,
 				ACB182AC2753683100FCDCEC /* SettingsView.swift in Sources */,
 				ACE31EEF273EE41B00245B9E /* ChatAppUser.swift in Sources */,

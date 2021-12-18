@@ -16,16 +16,16 @@ final class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupNavigationBar()
     }
     
     // MARK: - Functions
     private func setupView() {
-        title = "Создание учетной записи"
-        view.backgroundColor = .systemBackground
+        registerView.setupUIElements()
+        registerView.backgroundColor = .systemBackground
         registerView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         registerView.emailField.delegate = self
         registerView.passwordField.delegate = self
-        registerView.setupUIElements()
         registerView.scrollView.frame = view.bounds
         registerView.passwordField.rightView = registerView.passwordSecureButton
         registerView.passwordSecureButton.addTarget(self, action: #selector(togglePassword), for: .touchUpInside)
@@ -33,10 +33,15 @@ final class RegisterViewController: UIViewController {
         registerView.scrollView.isUserInteractionEnabled = true
         registerView.imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTabChangeProfilePic)))
         // скрывает экран клавиатуры при касании
-        let gesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
-        view.addGestureRecognizer(gesture)
+        let gesture = UITapGestureRecognizer(target: registerView, action: #selector(UIView.endEditing(_:)))
+        registerView.addGestureRecognizer(gesture)
     }
     
+    private func setupNavigationBar() {
+        navigationItem.title = "Создание учетной записи"
+    }
+    
+    // MARK: - Actions
     /// Отображение "глазика" в поле ввода пароля
     @objc private func togglePassword(sender: UIButton) {
         switch registerView.passwordField.isSecureTextEntry {

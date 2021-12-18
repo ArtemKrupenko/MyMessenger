@@ -47,7 +47,8 @@ final class NewConversationViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(dismissSelf))
     }
-
+    
+    // MARK: - Actions
     @objc private func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }

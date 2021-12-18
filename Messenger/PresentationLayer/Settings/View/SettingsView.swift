@@ -63,6 +63,7 @@ class SettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Functions
     func setupUIElements() {
         addSubview(headerView)
         headerView.addSubview(imageView)

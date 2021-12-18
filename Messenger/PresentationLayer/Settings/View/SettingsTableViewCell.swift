@@ -35,6 +35,7 @@ class SettingsTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
+    // MARK: - Functions
     private func setupUIElements() {
         contentView.addSubview(label)
         contentView.addSubview(iconContainer)
