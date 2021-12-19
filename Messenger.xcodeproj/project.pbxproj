@@ -18,6 +18,8 @@
 		AC012EE9276CA52E0054E8AB /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EE8276CA52E0054E8AB /* ChatView.swift */; };
 		AC012EEF276D078E0054E8AB /* LoginViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EEE276D078E0054E8AB /* LoginViewControllerDelegates.swift */; };
 		AC012EF1276D09110054E8AB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EF0276D09110054E8AB /* LoginView.swift */; };
+		AC012EF7276E6F690054E8AB /* WelcomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EF6276E6F690054E8AB /* WelcomeScreenController.swift */; };
+		AC012EF9276E6FD10054E8AB /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC012EF8276E6FD10054E8AB /* WelcomeScreenView.swift */; };
 		AC28AC322702403200FEF75C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC312702403200FEF75C /* AppDelegate.swift */; };
 		AC28AC362702403200FEF75C /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC28AC352702403200FEF75C /* ConversationsViewController.swift */; };
 		AC28AC3B2702403A00FEF75C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC28AC3A2702403A00FEF75C /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 		ACB182AC2753683100FCDCEC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182AB2753683100FCDCEC /* SettingsView.swift */; };
 		ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC05110271F4A8D002AA9B3 /* StorageManager.swift */; };
 		ACC051132727F387002AA9B3 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */; };
+		ACCB155C276F0AD7004CA6A9 /* DevelopmentScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCB155B276F0AD7004CA6A9 /* DevelopmentScreenController.swift */; };
+		ACCB155E276F0B30004CA6A9 /* DevelopmentScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCB155D276F0B30004CA6A9 /* DevelopmentScreenView.swift */; };
 		ACE31EE22735994700245B9E /* NewConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE12735994700245B9E /* NewConversationTableViewCell.swift */; };
 		ACE31EE4273C048B00245B9E /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE3273C048A00245B9E /* LocationPickerViewController.swift */; };
 		ACE31EE7273E7C5600245B9E /* ConversationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */; };
@@ -62,7 +66,9 @@
 		AC012EE8276CA52E0054E8AB /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		AC012EEE276D078E0054E8AB /* LoginViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegates.swift; sourceTree = "<group>"; };
 		AC012EF0276D09110054E8AB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		AC28AC2E2702403200FEF75C /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC012EF6276E6F690054E8AB /* WelcomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenController.swift; sourceTree = "<group>"; };
+		AC012EF8276E6FD10054E8AB /* WelcomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
+		AC28AC2E2702403200FEF75C /* PepeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PepeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28AC312702403200FEF75C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC28AC352702403200FEF75C /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		AC28AC3A2702403A00FEF75C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 		ACB182AB2753683100FCDCEC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ACC05110271F4A8D002AA9B3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		ACC051122727F387002AA9B3 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		ACCB155B276F0AD7004CA6A9 /* DevelopmentScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentScreenController.swift; sourceTree = "<group>"; };
+		ACCB155D276F0B30004CA6A9 /* DevelopmentScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentScreenView.swift; sourceTree = "<group>"; };
 		ACE31EE12735994700245B9E /* NewConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationTableViewCell.swift; sourceTree = "<group>"; };
 		ACE31EE3273C048A00245B9E /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		ACE31EE6273E7C5600245B9E /* ConversationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsModels.swift; sourceTree = "<group>"; };
@@ -299,6 +307,39 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AC012EF2276E6E4C0054E8AB /* WelcomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EF3276E6E8A0054E8AB /* Model */,
+				AC012EF5276E6EAF0054E8AB /* View */,
+				AC012EF4276E6E920054E8AB /* Controller */,
+			);
+			path = WelcomeScreen;
+			sourceTree = "<group>";
+		};
+		AC012EF3276E6E8A0054E8AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC012EF4276E6E920054E8AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EF6276E6F690054E8AB /* WelcomeScreenController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AC012EF5276E6EAF0054E8AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC012EF8276E6FD10054E8AB /* WelcomeScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AC28AC252702403200FEF75C = {
 			isa = PBXGroup;
 			children = (
@@ -312,7 +353,7 @@
 		AC28AC2F2702403200FEF75C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC28AC2E2702403200FEF75C /* Messenger.app */,
+				AC28AC2E2702403200FEF75C /* PepeChat.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -378,12 +419,14 @@
 		ACB1829E2752BABF00FCDCEC /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				AC012EF2276E6E4C0054E8AB /* WelcomeScreen */,
 				AC012EEA276D073B0054E8AB /* Login */,
 				AC012EDE276BC3760054E8AB /* Register */,
 				AC012EDA276A31CF0054E8AB /* Chat */,
 				AC012ED2276A0A160054E8AB /* NewConversation */,
 				AC012ECA2760B1740054E8AB /* Conversations */,
 				ACB182A52752C4FE00FCDCEC /* Settings */,
+				ACCB1557276F0A81004CA6A9 /* DevelopmentScreen */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -459,6 +502,39 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		ACCB1557276F0A81004CA6A9 /* DevelopmentScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ACCB155A276F0AB4004CA6A9 /* Model */,
+				ACCB1559276F0AAD004CA6A9 /* View */,
+				ACCB1558276F0AA6004CA6A9 /* Controller */,
+			);
+			path = DevelopmentScreen;
+			sourceTree = "<group>";
+		};
+		ACCB1558276F0AA6004CA6A9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ACCB155B276F0AD7004CA6A9 /* DevelopmentScreenController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ACCB1559276F0AAD004CA6A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ACCB155D276F0B30004CA6A9 /* DevelopmentScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ACCB155A276F0AB4004CA6A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -480,7 +556,7 @@
 			);
 			name = Messenger;
 			productName = Messenger;
-			productReference = AC28AC2E2702403200FEF75C /* Messenger.app */;
+			productReference = AC28AC2E2702403200FEF75C /* PepeChat.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -613,11 +689,13 @@
 			files = (
 				AC28AC4C2702476900FEF75C /* LoginViewController.swift in Sources */,
 				ACE31EE22735994700245B9E /* NewConversationTableViewCell.swift in Sources */,
+				AC012EF9276E6FD10054E8AB /* WelcomeScreenView.swift in Sources */,
 				AC012EE5276BCA020054E8AB /* RegisterView.swift in Sources */,
 				AC012EE3276BC3FF0054E8AB /* RegisterViewControllerDelegates.swift in Sources */,
 				AC012EE9276CA52E0054E8AB /* ChatView.swift in Sources */,
 				AC3A10F72708D872000B01ED /* DatabaseManager.swift in Sources */,
 				ACE31EE9273E7CE500245B9E /* ChatModels.swift in Sources */,
+				ACCB155E276F0B30004CA6A9 /* DevelopmentScreenView.swift in Sources */,
 				AC28AC4E2702479700FEF75C /* RegisterViewController.swift in Sources */,
 				AC012EF1276D09110054E8AB /* LoginView.swift in Sources */,
 				AC28AC55270248B000FEF75C /* NewConversationViewController.swift in Sources */,
@@ -627,6 +705,7 @@
 				ACB1829A2752A7F200FCDCEC /* Images.swift in Sources */,
 				AC012ED7276A0A870054E8AB /* NewConversationViewControllerDelegates.swift in Sources */,
 				AC28AC5B2703405200FEF75C /* Extensions.swift in Sources */,
+				ACCB155C276F0AD7004CA6A9 /* DevelopmentScreenController.swift in Sources */,
 				ACB182AA2753652100FCDCEC /* SettingsViewControllerDelegates.swift in Sources */,
 				ACE31EEB273E7D7900245B9E /* SearchResult.swift in Sources */,
 				ACB1829C2752B25C00FCDCEC /* Identifiers.swift in Sources */,
@@ -639,6 +718,7 @@
 				ACE31EED273E7E4E00245B9E /* SettingsModels.swift in Sources */,
 				AC28AC502702480600FEF75C /* PhotoViewerViewController.swift in Sources */,
 				ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */,
+				AC012EF7276E6F690054E8AB /* WelcomeScreenController.swift in Sources */,
 				ACE31EE7273E7C5600245B9E /* ConversationsModels.swift in Sources */,
 				AC012ECF2760B3FA0054E8AB /* ConversationsViewControllerDelegates.swift in Sources */,
 				AC012EE7276CA1530054E8AB /* ChatViewControllerDelegates.swift in Sources */,
@@ -718,6 +798,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = PepeChat;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -772,6 +853,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = PepeChat;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -794,7 +876,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.krupenko.Messenger;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PepeChat;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -815,7 +897,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.krupenko.Messenger;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PepeChat;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

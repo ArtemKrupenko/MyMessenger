@@ -37,20 +37,27 @@ final class SettingsViewController: UIViewController {
 
     public func settingsSections() {
         data.append(Section(title: "", options: [
-            SettingViewModel(viewModelType: .info, title: "Учетная запись", icon: ImagesSystem.key, iconBackgroundColor: .systemBlue, handler: nil),
-            SettingViewModel(viewModelType: .info, title: "Избранное", icon: ImagesSystem.star, iconBackgroundColor: .systemPink, handler: nil),
-            SettingViewModel(viewModelType: .info, title: "Чаты", icon: ImagesSystem.ellipsis, iconBackgroundColor: .systemTeal, handler: nil)
+            SettingViewModel(viewModelType: .info, title: "Учетная запись", icon: ImagesSystem.key, iconBackgroundColor: .systemBlue, handler: moveToDevelopmentScreen),
+            SettingViewModel(viewModelType: .info, title: "Избранное", icon: ImagesSystem.star, iconBackgroundColor: .systemPink, handler: moveToDevelopmentScreen),
+            SettingViewModel(viewModelType: .info, title: "Чаты", icon: ImagesSystem.ellipsis, iconBackgroundColor: .systemTeal, handler: moveToDevelopmentScreen)
         ]))
         data.append(Section(title: "", options: [
-            SettingViewModel(viewModelType: .info, title: "Уведомления и звуки", icon: ImagesSystem.bell, iconBackgroundColor: .systemRed, handler: nil),
-            SettingViewModel(viewModelType: .info, title: "Данные и память", icon: ImagesSystem.folder, iconBackgroundColor: .systemGreen, handler: nil),
-            SettingViewModel(viewModelType: .info, title: "Оформление", icon: ImagesSystem.paintpalette, iconBackgroundColor: .systemIndigo, handler: nil),
-            SettingViewModel(viewModelType: .info, title: "Стикеры", icon: ImagesSystem.smile, iconBackgroundColor: .systemYellow, handler: nil)
+            SettingViewModel(viewModelType: .info, title: "Уведомления и звуки", icon: ImagesSystem.bell, iconBackgroundColor: .systemRed, handler: moveToDevelopmentScreen),
+            SettingViewModel(viewModelType: .info, title: "Данные и память", icon: ImagesSystem.folder, iconBackgroundColor: .systemGreen, handler: moveToDevelopmentScreen),
+            SettingViewModel(viewModelType: .info, title: "Оформление", icon: ImagesSystem.paintpalette, iconBackgroundColor: .systemIndigo, handler: moveToDevelopmentScreen),
+            SettingViewModel(viewModelType: .info, title: "Стикеры", icon: ImagesSystem.smile, iconBackgroundColor: .systemYellow, handler: moveToDevelopmentScreen)
         ]))
         data.append(Section(title: "", options: [
-            SettingViewModel(viewModelType: .info, title: "Помощь", icon: ImagesSystem.help, iconBackgroundColor: .systemOrange, handler: nil),
-            SettingViewModel(viewModelType: .info, title: "О программе", icon: ImagesSystem.info, iconBackgroundColor: .systemGray2, handler: nil)
+            SettingViewModel(viewModelType: .info, title: "Помощь", icon: ImagesSystem.help, iconBackgroundColor: .systemOrange, handler: moveToDevelopmentScreen),
+            SettingViewModel(viewModelType: .info, title: "О программе", icon: ImagesSystem.info, iconBackgroundColor: .systemGray2, handler: moveToDevelopmentScreen)
         ]))
+    }
+    
+    func moveToDevelopmentScreen() {
+        let viewController = DevelopmentScreenController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 
     @objc func logout() {

@@ -16,7 +16,7 @@ class LoginView: UIView {
 
     public let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Images.logo
+        imageView.image = Images.login
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -26,7 +26,7 @@ class LoginView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
-        field.layer.cornerRadius = 12
+        field.layer.cornerRadius = 25
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Email"
@@ -41,7 +41,7 @@ class LoginView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .done
-        field.layer.cornerRadius = 12
+        field.layer.cornerRadius = 25
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Пароль"
@@ -66,7 +66,7 @@ class LoginView: UIView {
         button.setTitle("Войти", for: .normal)
         button.backgroundColor = UIColor(named: "ColorLogo")
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
         button.contentMode = .scaleAspectFit
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
@@ -79,7 +79,7 @@ class LoginView: UIView {
         button.setTitle("Войти с помощью Facebook", for: .normal)
         button.backgroundColor = UIColor(named: "ColorLogo")
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
         button.contentMode = .scaleAspectFit
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
@@ -89,7 +89,7 @@ class LoginView: UIView {
     public let googleLogInButton: GIDSignInButton = {
         let button = GIDSignInButton()
         button.backgroundColor = UIColor(named: "ColorLogo")
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
         button.contentMode = .scaleAspectFit
         button.contentHorizontalAlignment = .center
@@ -101,7 +101,7 @@ class LoginView: UIView {
         button.setTitle("Регистрация", for: .normal)
         button.backgroundColor = .systemBackground
         button.setTitleColor(UIColor(named: "ColorLogo"), for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
         button.contentMode = .scaleAspectFit
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
@@ -136,16 +136,16 @@ class LoginView: UIView {
         registrationButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             registrationButton.heightAnchor.constraint(equalToConstant: 52),
-            registrationButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 270),
-            registrationButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
-            registrationButton.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -320)
+            registrationButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 250),
+            registrationButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10),
+            registrationButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
         ])
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             imageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.4),
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 70),
+            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 90),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         

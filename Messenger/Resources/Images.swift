@@ -1,7 +1,9 @@
 import UIKit
 
 enum Images {
-    static let logo = UIImage(named: "Logo")!
+    static let welcome = UIImage(named: "PepeIsCool")!
+    static let login = UIImage(named: "PepeThinks")!
+    static let development = UIImage(named: "PepeSad")!
     static let profilePicture = UIImage(named: "profile_picture")!
     static let imagePlaceHolder = UIImage(named: "ImagePlaceholder")!
     //    static let send = UIImage(named: "Send")!

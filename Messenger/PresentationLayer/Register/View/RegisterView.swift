@@ -22,7 +22,7 @@ class RegisterView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
-        field.layer.cornerRadius = 12
+        field.layer.cornerRadius = 25
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Имя"
@@ -37,7 +37,7 @@ class RegisterView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
-        field.layer.cornerRadius = 12
+        field.layer.cornerRadius = 25
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Фамилия"
@@ -52,7 +52,7 @@ class RegisterView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
-        field.layer.cornerRadius = 12
+        field.layer.cornerRadius = 25
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Email"
@@ -67,7 +67,7 @@ class RegisterView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .done
-        field.layer.cornerRadius = 12
+        field.layer.cornerRadius = 25
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Пароль"
@@ -92,7 +92,7 @@ class RegisterView: UIView {
         button.setTitle("Регистрация", for: .normal)
         button.backgroundColor = UIColor(named: "ColorLogo")
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button

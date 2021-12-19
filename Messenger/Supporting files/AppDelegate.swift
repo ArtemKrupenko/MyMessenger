@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = tabBarViewController
             window?.makeKeyAndVisible()
         } else if FirebaseAuth.Auth.auth().currentUser == nil {
-            window?.rootViewController = LoginViewController()
+            window?.rootViewController = WelcomeScreenController()
             window?.makeKeyAndVisible()
         }
     }
