@@ -6,10 +6,10 @@ enum Images {
     static let development = UIImage(named: "PepeSad")!
     static let profilePicture = UIImage(named: "profile_picture")!
     static let imagePlaceHolder = UIImage(named: "ImagePlaceholder")!
-    //    static let send = UIImage(named: "Send")!
-    //    static let classicTheme = UIImage(named: "Classic")!
-    //    static let dayTheme = UIImage(named: "Day")!
-    //    static let nightTheme = UIImage(named: "Night")!
+//    static let send = UIImage(named: "Send")!
+//    static let classicTheme = UIImage(named: "Classic")!
+//    static let dayTheme = UIImage(named: "Day")!
+//    static let nightTheme = UIImage(named: "Night")!
 }
 
 enum ImagesSystem {
