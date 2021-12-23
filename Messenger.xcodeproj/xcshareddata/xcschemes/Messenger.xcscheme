@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AC28AC2D2702403200FEF75C"
-               BuildableName = "Messenger.app"
+               BuildableName = "PepeChat.app"
                BlueprintName = "Messenger"
                ReferencedContainer = "container:Messenger.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC28AC2D2702403200FEF75C"
-            BuildableName = "Messenger.app"
+            BuildableName = "PepeChat.app"
             BlueprintName = "Messenger"
             ReferencedContainer = "container:Messenger.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC28AC2D2702403200FEF75C"
-            BuildableName = "Messenger.app"
+            BuildableName = "PepeChat.app"
             BlueprintName = "Messenger"
             ReferencedContainer = "container:Messenger.xcodeproj">
          </BuildableReference>
