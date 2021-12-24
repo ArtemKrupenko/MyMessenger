@@ -24,33 +24,24 @@ final class BrowserViewController: UIViewController {
         browserView.backgroundColor = .systemBackground
         browserView.urlTextField.delegate = self
         browserView.webView.navigationDelegate = self
-//        browserView.backButton.action = #selector(didTapBackButton)
-//        browserView.forwardButton.action = #selector(didTapForwardButton)
-//        browserView.refreshButton.action = #selector(refreshAction)
         loadRequest()
     }
     
     public func setupNavigationBar() {
-        let backButton = UIBarButtonItem(barButtonSystemItem: .rewind,
+        navigationController?.navigationBar.topItem?.titleView = browserView.urlTextField
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                         style: .done,
                                          target: self,
                                          action: #selector(didTapBackButton))
-        let forwardButton = UIBarButtonItem(barButtonSystemItem: .fastForward,
+        let forwardButton = UIBarButtonItem(image: UIImage(systemName: "chevron.forward"),
+                                         style: .done,
                                          target: self,
                                          action: #selector(didTapForwardButton))
-        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
-        navigationItem.leftBarButtonItems = [backButton, forwardButton, spacer]
+        navigationItem.leftBarButtonItems = [backButton, forwardButton]
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh,
                                             target: self,
                                             action: #selector(refreshAction))
         navigationItem.rightBarButtonItem = refreshButton
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад",
-//                                                            style: .plain,
-//                                                            target: self,
-//                                                            action: #selector(didTapBackButton))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Вперед",
-//                                                            style: .plain,
-//                                                            target: self,
-//                                                            action: #selector(didTapForwardButton))
     }
     
     private func loadRequest() {
@@ -68,12 +59,14 @@ final class BrowserViewController: UIViewController {
     @objc private func didTapBackButton() {
         if browserView.webView.canGoBack {
             browserView.webView.goBack()
+            browserView.urlTextField.text = browserView.webView.url?.absoluteString
         }
     }
     
     @objc private func didTapForwardButton() {
         if browserView.webView.canGoForward {
             browserView.webView.goForward()
+            browserView.urlTextField.text = browserView.webView.url?.absoluteString
         }
     }
     

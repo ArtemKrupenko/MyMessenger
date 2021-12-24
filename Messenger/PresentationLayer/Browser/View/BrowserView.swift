@@ -6,35 +6,19 @@ class BrowserView: UIView {
     // MARK: - UI
     public let webView = WKWebView()
     
-    let navigationBar = UINavigationBar()
-//    public let backButton = UIBarButtonItem(systemItem: .rewind)
-//    public let forwardButton = UIBarButtonItem(systemItem: .fastForward)
-//    public let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
-//    public let refreshButton = UIBarButtonItem(systemItem: .refresh)
-    
-//    public let backButton: UIButton = {
-//        let button = UIButton()
-//        return button
-//    }()
-//
-//    public let forwardButton: UIButton = {
-//        let button = UIButton()
-//        return button
-//    }()
-//
-//    public let spacer: UIButton = {
-//        let button = UIButton()
-//        return button
-//    }()
-//
-//    public let refreshButton: UIButton = {
-//        let button = UIButton()
-//        return button
-//    }()
-    
     public let urlTextField: UITextField = {
         let field = UITextField()
         field.autocorrectionType = .no
+        field.autocapitalizationType = .none
+        field.returnKeyType = .continue
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "Введите имя сайта"
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        field.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        field.leftViewMode = .always
+        field.backgroundColor = .secondarySystemBackground
         return field
     }()
     
@@ -50,7 +34,6 @@ class BrowserView: UIView {
 
     func setupUIElements() {
         addSubview(webView)
-//        addSubview(navigationBar)
         setupConstraints()
     }
     
@@ -60,16 +43,14 @@ class BrowserView: UIView {
         NSLayoutConstraint.activate([
             webView.leadingAnchor.constraint(equalTo: leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            webView.topAnchor.constraint(equalTo: topAnchor)
-//            webView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            webView.topAnchor.constraint(equalTo: topAnchor),
+            webView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-//        navigationBar.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            navigationBar.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            navigationBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            navigationBar.topAnchor.constraint(equalTo: webView.bottomAnchor),
-//            navigationBar.bottomAnchor.constraint(equalTo: bottomAnchor)
-//        ])
+        urlTextField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            urlTextField.heightAnchor.constraint(equalToConstant: 25),
+            urlTextField.widthAnchor.constraint(equalToConstant: 250)
+        ])
     }
 }
