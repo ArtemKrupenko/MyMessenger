@@ -60,13 +60,15 @@ final class LoginViewController: UIViewController {
         let tabBarViewController = UITabBarController()
         let viewController1 = UINavigationController(rootViewController: ConversationsViewController())
         viewController1.title = "Чаты"
-        let viewController2 = UINavigationController(rootViewController: SettingsViewController())
-        viewController2.title = "Настройки"
-        tabBarViewController.setViewControllers([viewController1, viewController2], animated: false)
+        let viewController2 = UINavigationController(rootViewController: BrowserViewController())
+        viewController2.title = "Браузер"
+        let viewController3 = UINavigationController(rootViewController: SettingsViewController())
+        viewController3.title = "Настройки"
+        tabBarViewController.setViewControllers([viewController1, viewController2, viewController3], animated: false)
         guard let items = tabBarViewController.tabBar.items else {
             return
         }
-        let images = ["message", "gearshape.2"]
+        let images = ["message", "globe", "gearshape.2"]
         for x in 0..<items.count {
             items[x].image = UIImage(systemName: images[x])
         }
