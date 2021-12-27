@@ -18,7 +18,7 @@ class BrowserView: UIView {
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .secondarySystemBackground
+//        field.backgroundColor = .secondarySystemBackground
         return field
     }()
     
