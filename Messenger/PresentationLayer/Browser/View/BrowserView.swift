@@ -17,8 +17,8 @@ class BrowserView: UIView {
         field.placeholder = "Введите имя сайта"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        field.leftViewMode = .always
-//        field.backgroundColor = .secondarySystemBackground
+//        field.leftViewMode = .always
+        field.backgroundColor = .secondarySystemBackground
         return field
     }()
     
