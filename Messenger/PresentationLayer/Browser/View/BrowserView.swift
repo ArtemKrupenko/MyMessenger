@@ -11,13 +11,13 @@ class BrowserView: UIView {
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.returnKeyType = .continue
-        field.layer.cornerRadius = 12
+//        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Введите имя сайта"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-//        field.leftViewMode = .always
+        field.leftViewMode = .always
         field.backgroundColor = .secondarySystemBackground
         return field
     }()
