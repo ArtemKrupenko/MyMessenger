@@ -10,8 +10,8 @@ class BrowserView: UIView {
         let field = UITextField()
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
-        field.returnKeyType = .continue
-//        field.layer.cornerRadius = 12
+//        field.returnKeyType = .continue
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Введите имя сайта"
