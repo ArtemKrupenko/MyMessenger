@@ -52,7 +52,7 @@ class ConversationTableViewCell: UITableViewCell {
         StorageManager.shared.downloadURL(for: path, completion: { [weak self] result in
             switch result {
             case let .success(url):
-                DispatchQueue.main.async(group: DispatchGroup()) {
+                DispatchQueue.main.async {
                     self?.userImageView.sd_setImage(with: url, completed: nil)
                 }
             case let .failure(error):
