@@ -8,7 +8,7 @@ class BrowserView: UIView {
     
     public let urlTextField: UITextField = {
         let field = UITextField()
-//        field.autocorrectionType = .no
+        field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.returnKeyType = .continue
         field.layer.cornerRadius = 12
