@@ -19,7 +19,7 @@ final class DevelopmentScreenController: UIViewController {
     // MARK: - Functions
     private func setupView() {
         developmentScreen.setupUIElements()
-//        developmentScreen.backgroundColor = UIColor(named: "ColorBackgroundColor")
+        developmentScreen.backgroundColor = UIColor(named: "ColorBackgroundColor")
     }
     
     private func setupNavigationBar() {
