@@ -160,13 +160,13 @@ class RegisterView: UIView {
 //            passwordField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 20),
 //            passwordField.heightAnchor.constraint(equalToConstant: 52)
 //        ])
-        
-        registerButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            registerButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            registerButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            registerButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 20),
-            registerButton.heightAnchor.constraint(equalToConstant: 52)
-        ])
-    }
+//        
+//        registerButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            registerButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
+//            registerButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30),
+//            registerButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 20),
+//            registerButton.heightAnchor.constraint(equalToConstant: 52)
+//        ])
+//    }
 }
