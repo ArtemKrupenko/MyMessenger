@@ -68,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let lastName = user.profile?.familyName else {
                 return
         }
-        UserDefaults.standard.set("\(email)", forKey: "email")
-        UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+        UserDefaults.standard.set("\(email)", forKey: UserDefaultsKeys.email.rawValue)
+        UserDefaults.standard.set("\(firstName) \(lastName)", forKey: UserDefaultsKeys.name.rawValue)
         DatabaseManager.shared.userExists(with: email, completion: { exists in
             if !exists {
                 // добавление в базу данных
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                     switch result {
                                     case let .success(downloadUrl):
-                                        UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                        UserDefaults.standard.set(downloadUrl, forKey: UserDefaultsKeys.profile_picture_url.rawValue)
                                         print(downloadUrl)
                                     case let .failure(error):
                                         print("Ошибка StorageManager: \(error)")

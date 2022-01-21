@@ -28,7 +28,7 @@ class SettingsView: UIView {
     private let userNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
-        label.text = "\(UserDefaults.standard.value(forKey: "name") as? String ?? "Нет имени пользователя")"
+        label.text = "\(UserDefaults.standard.value(forKey: UserDefaultsKeys.name.rawValue) as? String ?? "Нет имени пользователя")"
         label.textAlignment = .center
         return label
     }()
@@ -36,7 +36,7 @@ class SettingsView: UIView {
     private let userEmailLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .thin)
-        label.text = "\(UserDefaults.standard.value(forKey: "email") as? String ?? "Нет email-адреса")"
+        label.text = "\(UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String ?? "Нет email-адреса")"
         label.textAlignment = .center
         return label
     }()
@@ -76,8 +76,8 @@ class SettingsView: UIView {
     }
     
     func setupTableHeader() {
-        guard let email = UserDefaults.standard.value(forKey: "email") as? String,
-              (UserDefaults.standard.value(forKey: "name") as? String) != nil else {
+        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String,
+              (UserDefaults.standard.value(forKey: UserDefaultsKeys.name.rawValue) as? String) != nil else {
             return
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)

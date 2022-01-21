@@ -36,6 +36,7 @@
 		ACA66D9A277644BB0027E8FD /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA66D99277644BB0027E8FD /* BrowserViewController.swift */; };
 		ACA66D9C277644D40027E8FD /* BrowserViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA66D9B277644D40027E8FD /* BrowserViewControllerDelegates.swift */; };
 		ACA66D9E277645B30027E8FD /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA66D9D277645B30027E8FD /* BrowserView.swift */; };
+		ACA71594279B436A00914AF2 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA71593279B436A00914AF2 /* UserDefaultsKeys.swift */; };
 		ACB18291274FD49300FCDCEC /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB18290274FD49300FCDCEC /* SettingsTableViewCell.swift */; };
 		ACB1829A2752A7F200FCDCEC /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB182992752A7F200FCDCEC /* Images.swift */; };
 		ACB1829C2752B25C00FCDCEC /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB1829B2752B25C00FCDCEC /* Identifiers.swift */; };
@@ -89,6 +90,7 @@
 		ACA66D99277644BB0027E8FD /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		ACA66D9B277644D40027E8FD /* BrowserViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewControllerDelegates.swift; sourceTree = "<group>"; };
 		ACA66D9D277645B30027E8FD /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
+		ACA71593279B436A00914AF2 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		ACB18290274FD49300FCDCEC /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		ACB182992752A7F200FCDCEC /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		ACB1829B2752B25C00FCDCEC /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				AC28AC3A2702403A00FEF75C /* Assets.xcassets */,
 				ACB182992752A7F200FCDCEC /* Images.swift */,
 				ACB1829B2752B25C00FCDCEC /* Identifiers.swift */,
+				ACA71593279B436A00914AF2 /* UserDefaultsKeys.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				ACC051132727F387002AA9B3 /* ConversationTableViewCell.swift in Sources */,
 				AC3A10FB2719C437000B01ED /* ChatViewController.swift in Sources */,
 				ACE31EED273E7E4E00245B9E /* SettingsModels.swift in Sources */,
+				ACA71594279B436A00914AF2 /* UserDefaultsKeys.swift in Sources */,
 				AC28AC502702480600FEF75C /* PhotoViewerViewController.swift in Sources */,
 				ACC05111271F4A8D002AA9B3 /* StorageManager.swift in Sources */,
 				AC012EF7276E6F690054E8AB /* WelcomeScreenController.swift in Sources */,

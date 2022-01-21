@@ -95,8 +95,8 @@ final class RegisterViewController: UIViewController {
                     print("Ошибка при создании пользователя")
                     return
                 }
-                UserDefaults.standard.setValue(email, forKey: "email")
-                UserDefaults.standard.setValue("\(firstName) \(lastName)", forKey: "name")
+                UserDefaults.standard.setValue(email, forKey: UserDefaultsKeys.email.rawValue)
+                UserDefaults.standard.setValue("\(firstName) \(lastName)", forKey: UserDefaultsKeys.name.rawValue)
                 let chatUser = ChatAppUser(firstName: firstName,
                                            lastName: lastName,
                                            emailAddress: email)
@@ -108,7 +108,7 @@ final class RegisterViewController: UIViewController {
                             StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                 switch result {
                                 case let .success(downloadUrl):
-                                    UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                    UserDefaults.standard.set(downloadUrl, forKey: UserDefaultsKeys.profile_picture_url.rawValue)
                                     print(downloadUrl)
                                 case let .failure(error):
                                     print("Ошибка StorageManager: \(error)")
@@ -120,7 +120,7 @@ final class RegisterViewController: UIViewController {
                             StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                 switch result {
                                 case let .success(downloadUrl):
-                                    UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                    UserDefaults.standard.set(downloadUrl, forKey: UserDefaultsKeys.profile_picture_url.rawValue)
                                     print(downloadUrl)
                                 case let .failure(error):
                                     print("Ошибка StorageManager: \(error)")

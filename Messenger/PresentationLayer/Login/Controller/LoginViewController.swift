@@ -130,12 +130,12 @@ final class LoginViewController: UIViewController {
                           let lastName = userData["last_name"] as? String else {
                         return
                     }
-                    UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+                    UserDefaults.standard.set("\(firstName) \(lastName)", forKey: UserDefaultsKeys.name.rawValue)
                 case let .failure(error):
                     print("Ошибка при чтении данных: \(error)")
                 }
             })
-            UserDefaults.standard.set(email, forKey: "email")
+            UserDefaults.standard.set(email, forKey: UserDefaultsKeys.email.rawValue)
             print("Зарегистрированный пользователь: \(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             strongSelf.goToChat()
