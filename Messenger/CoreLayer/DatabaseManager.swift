@@ -114,8 +114,8 @@ extension DatabaseManager {
     
     /// Создает новую беседу с электронной почтой выбранного пользователя и первым отправленным сообщением
     public func createNewConversation(with otherUserEmail: String, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
-        guard let currentEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String,
-              let currentName = UserDefaults.standard.value(forKey: UserDefaultsKeys.name.rawValue) as? String else {
+        guard let currentEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String,
+              let currentName = UserDefaults.standard.value(forKey: UserDefaultsKeys.name) as? String else {
             return
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: currentEmail)
@@ -201,7 +201,7 @@ extension DatabaseManager {
         case .attributedText, .photo, .video, .location, .emoji, .audio, .contact, .linkPreview, .custom:
             break
         }
-        guard let myEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let myEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             completion(false)
             return
         }
@@ -323,7 +323,7 @@ extension DatabaseManager {
         // Добавление нового сообщения в диалоги
         // Обновление последнего сообщения отправителя
         // Обновление последнего сообщения получателя
-        guard let myEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let myEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             completion(false)
             return
         }
@@ -352,7 +352,7 @@ extension DatabaseManager {
             case .attributedText, .emoji, .audio, .contact, .linkPreview, .custom:
                 message = ""
             }
-            guard let myEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+            guard let myEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
                 completion(false)
                 return
             }
@@ -415,7 +415,7 @@ extension DatabaseManager {
                         strongSelf.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value, with: { snapshot in
                             let updatedValue: [String: Any] = ["date": dateString, "is_read": false, "message": message]
                             var databaseEntryConversations = [[String: Any]]()
-                            guard let currentName = UserDefaults.standard.value(forKey: UserDefaultsKeys.name.rawValue) as? String else {
+                            guard let currentName = UserDefaults.standard.value(forKey: UserDefaultsKeys.name) as? String else {
                                 return
                             }
                             if var otherUserConversations = snapshot.value as? [[String: Any]] {
@@ -469,7 +469,7 @@ extension DatabaseManager {
     
     /// Удаление диалога
     public func deleteConversation(conversationId: String, completion: @escaping (Bool) -> Void) {
-        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             return
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
@@ -505,7 +505,7 @@ extension DatabaseManager {
     /// Появление (обновление) диалога после первого созданного сообщения
     public func conversationExists(with targetRecipientEmail: String, completion: @escaping (Result<String, Error>) -> Void) {
         let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)
-        guard let senderEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let senderEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             return
         }
         let safeSenderEmail = DatabaseManager.safeEmail(emailAddress: senderEmail)

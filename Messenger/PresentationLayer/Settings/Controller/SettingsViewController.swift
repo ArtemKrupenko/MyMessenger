@@ -68,8 +68,8 @@ final class SettingsViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
-            UserDefaults.standard.setValue(nil, forKey: UserDefaultsKeys.email.rawValue)
-            UserDefaults.standard.setValue(nil, forKey: UserDefaultsKeys.name.rawValue)
+            UserDefaults.standard.setValue(nil, forKey: UserDefaultsKeys.email)
+            UserDefaults.standard.setValue(nil, forKey: UserDefaultsKeys.name)
             // Выход из Facebook
             FBSDKLoginKit.LoginManager().logOut()
             self?.loginButtonDidLogOut(FBLoginButton.init())
@@ -83,8 +83,8 @@ final class SettingsViewController: UIViewController {
                     try FirebaseAuth.Auth.auth().signOut()
                     onlineRef.onDisconnectRemoveValue()
                     let defaults = UserDefaults.standard
-                    defaults.removeObject(forKey: UserDefaultsKeys.email.rawValue)
-                    defaults.removeObject(forKey: UserDefaultsKeys.name.rawValue)
+                    defaults.removeObject(forKey: UserDefaultsKeys.email)
+                    defaults.removeObject(forKey: UserDefaultsKeys.name)
                     let viewController = LoginViewController()
                     let navigationController = UINavigationController(rootViewController: viewController)
                     // удаление NavigationBar в LoginViewController

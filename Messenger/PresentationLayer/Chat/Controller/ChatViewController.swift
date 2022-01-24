@@ -21,7 +21,7 @@ final class ChatViewController: MessagesViewController {
     }()
     
     public var selfSender: Sender? {
-        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             return nil
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)

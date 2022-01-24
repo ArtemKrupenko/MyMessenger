@@ -48,8 +48,8 @@ extension LoginViewController: LoginButtonDelegate {
                     print("Не удалось получить электронный адрес и имя из Facebook")
                     return
             }
-            UserDefaults.standard.set(email, forKey: UserDefaultsKeys.email.rawValue)
-            UserDefaults.standard.set("\(firstName) \(lastName)", forKey: UserDefaultsKeys.name.rawValue)
+            UserDefaults.standard.set(email, forKey: UserDefaultsKeys.email)
+            UserDefaults.standard.set("\(firstName) \(lastName)", forKey: UserDefaultsKeys.name)
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {
                     // Добавление в базу данных
@@ -70,7 +70,7 @@ extension LoginViewController: LoginButtonDelegate {
                                 StorageManager.shared.uploadProfilePicture(with: data, fileName: filename, completion: { result in
                                     switch result {
                                     case let .success(downloadUrl):
-                                        UserDefaults.standard.set(downloadUrl, forKey: UserDefaultsKeys.profile_picture_url.rawValue)
+                                        UserDefaults.standard.set(downloadUrl, forKey: UserDefaultsKeys.profilePictureUrl)
                                         print(downloadUrl)
                                     case let .failure(error):
                                         print("Ошибка StorageManager: \(error)")

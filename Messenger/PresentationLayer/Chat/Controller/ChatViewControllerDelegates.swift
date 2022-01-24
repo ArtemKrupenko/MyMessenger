@@ -136,7 +136,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
     public func createMessageId() -> String? {
         // date, otherUserEmail, senderEmail, randomInt
-        guard let currentUserEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             return nil
         }
         let safeCurrentEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
@@ -205,7 +205,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             if let currentUserImageURL = self.senderPhotoURL {
                 avatarView.sd_setImage(with: currentUserImageURL, completed: nil)
             } else {
-                guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+                guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
                     return
                 }
                 let safeEmail = DatabaseManager.safeEmail(emailAddress: email)

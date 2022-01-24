@@ -62,7 +62,7 @@ extension NewConversationViewController: UISearchBarDelegate {
     }
 
     func filterUsers(with term: String) {
-        guard let currentUserEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String, hasFetched else {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String, hasFetched else {
             return
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)

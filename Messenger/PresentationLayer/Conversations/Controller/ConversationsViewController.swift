@@ -55,7 +55,7 @@ final class ConversationsViewController: UIViewController {
     
     // MARK: - Actions
     public func startListeningForConversations() {
-        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email.rawValue) as? String else {
+        guard let email = UserDefaults.standard.value(forKey: UserDefaultsKeys.email) as? String else {
             return
         }
         if let observer = loginObserver {

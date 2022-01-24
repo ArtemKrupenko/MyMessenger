@@ -1,7 +1,7 @@
 import UIKit
 
-enum UserDefaultsKeys: String {
-    case name
-    case email
-    case profile_picture_url
+enum UserDefaultsKeys {
+    static let name = "name"
+    static let email = "email"
+    static let profilePictureUrl = "profile_picture_url"
 }
