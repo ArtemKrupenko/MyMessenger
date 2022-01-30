@@ -69,7 +69,7 @@ class WelcomeScreenView: UIView {
         NSLayoutConstraint.activate([
             welcomeButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 60),
             welcomeButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -60),
-            welcomeButton.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 120),
+            welcomeButton.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 100),
             welcomeButton.heightAnchor.constraint(equalToConstant: 52)
         ])
     }

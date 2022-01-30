@@ -14,6 +14,8 @@ class RegisterView: UIView {
         imageView.image = ImagesSystem.profileRegister
         imageView.tintColor = UIColor(named: "ColorLogo")
         imageView.contentMode = .scaleAspectFit
+//        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 75
         return imageView
     }()
 
@@ -123,8 +125,8 @@ class RegisterView: UIView {
     private func setupConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
-            imageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.3),
+            imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+            imageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.4),
             imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])

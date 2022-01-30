@@ -50,7 +50,8 @@ class ConversationsView: UIView {
         NSLayoutConstraint.activate([
             noConversationsLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             noConversationsLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            noConversationsLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            noConversationsLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            noConversationsLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

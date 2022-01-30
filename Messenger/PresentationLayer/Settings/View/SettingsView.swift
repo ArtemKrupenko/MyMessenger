@@ -139,7 +139,7 @@ class SettingsView: UIView {
         buttonOut.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonOut.heightAnchor.constraint(equalToConstant: 52),
-            buttonOut.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 320),
+            buttonOut.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 300),
             buttonOut.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -10),
             buttonOut.centerYAnchor.constraint(equalTo: headerView.centerYAnchor, constant: -70)
         ])

@@ -136,16 +136,16 @@ class LoginView: UIView {
         registrationButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             registrationButton.heightAnchor.constraint(equalToConstant: 52),
-            registrationButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 250),
-            registrationButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10),
-            registrationButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
+            registrationButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 230),
+            registrationButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20),
+            registrationButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10)
         ])
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             imageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.4),
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 90),
+            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         
@@ -153,7 +153,7 @@ class LoginView: UIView {
         NSLayoutConstraint.activate([
             emailField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
             emailField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            emailField.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 50),
+            emailField.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
             emailField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
