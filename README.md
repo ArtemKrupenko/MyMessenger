@@ -20,7 +20,7 @@ ___
 
 ## <a id="Presentation"></a>Презентация
 ### Экран приветствия
-![Экран приветствия](<img width="748" alt="Снимок экрана 2022-01-30 в 21 44 43" src="https://user-images.githubusercontent.com/87443364/151718035-f49885f0-533d-4acb-bae7-89a55f943f3e.png">)
+![Экран приветствия](https://user-images.githubusercontent.com/87443364/151718035-f49885f0-533d-4acb-bae7-89a55f943f3e.png)
 ### Экран входа
 ![Экран входа](<img width="752" alt="Снимок экрана 2022-01-30 в 22 12 49" src="https://user-images.githubusercontent.com/87443364/151718093-f7aa5390-33bb-40ab-81ba-8cc69602391f.png">)
 ### Экран регистрации
