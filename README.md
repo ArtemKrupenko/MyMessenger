@@ -20,7 +20,7 @@ ___
 
 ## <a id="Presentation"></a>Презентация
 ### Экран приветствия
-![Экран приветствия](<img width="259" alt="1" src="https://user-images.githubusercontent.com/87443364/152023301-bb9f1ad8-b611-46c0-9c84-d23c8f94d158.png">)
+![Экран приветствия](https://user-images.githubusercontent.com/87443364/152023301-bb9f1ad8-b611-46c0-9c84-d23c8f94d158.png)
 ### Экран входа
 ![Экран входа](https://user-images.githubusercontent.com/87443364/151718093-f7aa5390-33bb-40ab-81ba-8cc69602391f.png)
 ### Экран регистрации
