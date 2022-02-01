@@ -22,15 +22,15 @@ ___
 ### Экран приветствия
 ![Экран приветствия](https://user-images.githubusercontent.com/87443364/152023301-bb9f1ad8-b611-46c0-9c84-d23c8f94d158.png)
 ### Экран входа
-![Экран входа](https://user-images.githubusercontent.com/87443364/151718093-f7aa5390-33bb-40ab-81ba-8cc69602391f.png)
+![Экран входа](https://user-images.githubusercontent.com/87443364/152023927-d08f2aac-d132-4f6d-af4d-750169da341c.png)
 ### Экран регистрации
-![Экран регистрации1](https://user-images.githubusercontent.com/87443364/151718099-66a5ef27-73b3-4b3e-a698-1fdf01ca2cf2.png)
-![Экран регистрации2](https://user-images.githubusercontent.com/87443364/151718152-c1439c1d-4cc7-4eb5-99bb-73c2bcc87097.png)
+![Экран регистрации1](https://user-images.githubusercontent.com/87443364/152023955-4f805d44-86e0-468e-9b42-336c42860f7c.png)
+![Экран регистрации2](https://user-images.githubusercontent.com/87443364/152036530-2e02fb29-f0f3-444b-90ad-f03367dc9adf.png)
 ### Вход пользователя по зарегистрированному email-адресу и через Facebook
-![5](https://user-images.githubusercontent.com/87443364/151718567-38d68b92-794e-46e0-8ad7-febda971d9fc.gif)
+![5](https://user-images.githubusercontent.com/87443364/152038096-27d3b769-8b32-4a03-be25-e370a616c880.gif)
 ### Создание диалога и общение между пользователями 
-![6](https://user-images.githubusercontent.com/87443364/151718662-a53e16c4-3b97-47cf-8540-564b1d4c9022.gif)
-![Диалог](https://user-images.githubusercontent.com/87443364/151718679-ca47b7a5-cd8a-4581-8df4-76713eeeaa55.png)
+![6](https://user-images.githubusercontent.com/87443364/152038058-43ef5802-f668-45ba-9b33-a9012de00fb1.gif)
+![Диалог](https://user-images.githubusercontent.com/87443364/152037315-3391b562-ef16-4370-bdc6-3040dd94d744.png)
 ### Отправка фотоизображения
 Также реализована отправка видео. Подключена камера, с помощью которой можно сделать фото/видео и отправить их пользователю (проверено на реальном устройстве)
 ![8](https://user-images.githubusercontent.com/87443364/151719227-7ba0099b-2780-4c40-b4ca-f85c793f7a1b.gif)
@@ -42,10 +42,10 @@ ___
 ### Экран списков диалогов
 ![11](https://user-images.githubusercontent.com/87443364/151719408-56b35eba-239a-40d6-980e-9805930e7bfb.png)
 ### Экран встроенного браузер
-![12](https://user-images.githubusercontent.com/87443364/151719491-77b6a7ee-34a0-40f0-87fe-c74ada0fe462.gif)
+![12](https://user-images.githubusercontent.com/87443364/152038749-2a7cb9e3-fdba-41f5-a9e5-38383ecb1867.gif)
 ![12](https://user-images.githubusercontent.com/87443364/151719499-79bb29b5-ce34-4b5f-9d9b-0364fbdb317e.png)
 ### Экран профиля пользователя и настроек
-![13](https://user-images.githubusercontent.com/87443364/151719592-54f05b76-6f51-4885-bf9e-289f7b5bab88.png)
+![13](https://user-images.githubusercontent.com/87443364/152038806-4669e553-4ca9-4d6b-9e88-78b06e03912f.png)
 ### Переход на экран профиля пользователя и настроек, а также выход из учетной записи
 Настройки не реализованы, сделана временный экран-заглушка по нажатию на них
 ![14](https://user-images.githubusercontent.com/87443364/151719689-b84d06dc-847d-46f8-97ee-89809a25f512.gif)
