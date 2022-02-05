@@ -37,7 +37,7 @@ ___
 ![9](https://user-images.githubusercontent.com/87443364/151719229-5f6a22a8-8ac9-4197-b967-d5ef03944e01.gif)
 ### Переход на экран отправленного фото и местоположения
 ![10](https://user-images.githubusercontent.com/87443364/151719370-a1ebbe4e-5617-40e9-aef4-9d92e3ea8e8e.gif)
-### Экран встроенного браузер
+### Экран встроенного браузера
 ![12](https://user-images.githubusercontent.com/87443364/152038749-2a7cb9e3-fdba-41f5-a9e5-38383ecb1867.gif)
 ### Экран профиля пользователя и настроек
 ![13](https://user-images.githubusercontent.com/87443364/152038806-4669e553-4ca9-4d6b-9e88-78b06e03912f.png)
